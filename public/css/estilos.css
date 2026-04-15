@@ -1,0 +1,32 @@
+        body {
+        font-family: Arial;
+        background-color: #22c244;
+        margin: 40px;
+        }
+        .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        }
+        h1 {
+        color: #e40a0a;
+        }
+        p {
+        line-height: 1.6;
+        }
+        
+        .navbar {
+        background-color: #9b6363;
+        padding: 10px;
+        }
+        .navbar a {
+        color: white;
+        text-decoration: none;
+        margin-right: 15px;
+        font-weight: bold;
+        }
+        .navbar a:hover {
+        text-decoration: underline;
+        }
+
