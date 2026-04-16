@@ -16,10 +16,13 @@
             </div>
             </div>
         </nav>
+        <div class="container mt-3">
 
+            <div class="card">
+
+            </div>
 
             <div class="card mt-3">
-
 
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -45,10 +48,6 @@
                 </button>
             </div>
 
-
-
-        <a href="#" class="btn btn-primary mt-3">Descargar CV</a>
-        <a href="#" class="btn btn-secondary mt-3">Contactar</a>
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
