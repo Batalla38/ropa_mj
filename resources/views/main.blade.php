@@ -30,7 +30,7 @@
                         <img src="jeans.jpg"  width="400" class="rounded mx-auto d-block" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
                     </div>
                     <div class="carousel-item">
-                        <img src="mario fuck yu.webp" class="rounded mx-auto d-block" width="400" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
+                        <img src="" class="rounded mx-auto d-block" width="400" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
                     </div>
 
                     <div class="carousel-item">
