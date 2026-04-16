@@ -1,28 +1,21 @@
 <!DOCTYPE html>
     <html>
         <head>
-<title>Sobre mí</title>
+<title>Ropa MJ</title>
 
 </head>
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
 
         <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-            <a class="navbar-brand" href="#">Mi Sitio</a>
-            <div class="navbar-nav">
-            <a class="nav-link" href="/">Inicio</a>
-            <a class="nav-link active" href="/sobremi">Sobre mí</a>
-            </div>
-            </div>
-        </nav>
-        <div class="container mt-3">
 
-            <div class="card">
+            <div class="container mt-4">
+
+            @include('header')
 
             </div>
 
-            <div class="card mt-3">
+
+            <div class="container mt-5"> <div class="card p-4">
 
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
