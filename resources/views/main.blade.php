@@ -13,6 +13,7 @@
         </head>
 
         <body>
+            //header
             <div class="container mt-3">
                 @include('header')
             </div>
@@ -21,13 +22,13 @@
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="jeans.jpg"  width="400" class="rounded mx-auto d-block" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
+                            <img src="jeans.jpg"  width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
                         </div>
                         <div class="carousel-item">
-                            <img src="" class="rounded mx-auto d-block" width="400" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
+                            <img src="" class="rounded mx-auto d-block" width="400" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
                         </div>
                         <div class="carousel-item">
-                            <img src="remerA.jpg" width="400" class="rounded mx-auto d-block" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
+                            <img src="remerA.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
                         </div>
                     </div>
 
@@ -108,6 +109,8 @@
             </div>
 
             <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+            //footer
             <div class="container mt-4">
                 @include('footer')
             </div>

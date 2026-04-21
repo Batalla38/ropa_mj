@@ -8,16 +8,22 @@
 <body>
         <ul class="nav justify-content-end bg-white p-3 shadow-sm mb-3">
             <li class="nav-item">
-                <a class="nav-link active text-dark" aria-current="page" href="#">Active</a>
+                <a class="nav-link active text-dark" aria-current="page" href="#">Terminos y Usos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Link</a>
+                <a class="nav-link text-dark" href="#">Quienes Somos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Link</a>
+                <a class="nav-link text-dark" href="#">Contacto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled text-muted" aria-disabled="true">Disabled</a>
+                <a class="nav-link text-dark" href="#">Metodos de Pago (Comercializacion)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Consultas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled text-muted" aria-disabled="true"></a>
             </li>
         </ul>
 
