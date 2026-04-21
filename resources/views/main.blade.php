@@ -39,11 +39,79 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+
+                </div>
+            </div>
+
+            //bloque
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 1: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="remerA.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 2: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="pngtree-white-t-shirt-mockup-realistic-t-shirt-png-image_9906363.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 3: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            //bloque2
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 1: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 2: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 3: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
+            <div class="container mt-4">
+                @include('footer')
+            </div>
         </body>
+
 </html>
 
