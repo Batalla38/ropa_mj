@@ -1,20 +1,20 @@
 <!DOCTYPE html>
     <html>
         <head>
-<title>Ropa MJ</title>
-    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
-    <style>
-        body {
-        background-color: #a39898; /* Gris claro neutro */
-        color: #9f9393;            /* Texto oscuro para contraste */
-        }
-    </style>
-</head>
-
+            <title>Ropa MJ</title>
+            <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+            <style>
+                /* Estilos globales aplicados al cuerpo del documento */
+                body {
+                    background-color: #a39898; /* Color de fondo definido por el usuario */
+                    color: #9f9393;           /* Color de fuente definido por el usuario */
+                }
+            </style>
+        </head>
 
         <body>
             <div class="container mt-3">
-            @include('header')
+                @include('header')
             </div>
 
             <div class="container mt-5"> <div class="card p-4">
@@ -26,10 +26,8 @@
                         <div class="carousel-item">
                             <img src="" class="rounded mx-auto d-block" width="400" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
                         </div>
-
                         <div class="carousel-item">
                             <img src="remerA.jpg" width="400" class="rounded mx-auto d-block" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
-
                         </div>
                     </div>
 
@@ -41,15 +39,11 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
-
+                </div>
             </div>
 
-
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
+            <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
         </body>
 </html>
-
-
 
