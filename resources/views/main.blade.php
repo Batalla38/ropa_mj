@@ -1,52 +1,120 @@
 <!DOCTYPE html>
     <html>
         <head>
-<title>Ropa MJ</title>
-
-</head>
-    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+            <title>Ropa MJ</title>
+            <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+            <style>
+                /* Estilos globales aplicados al cuerpo del documento */
+                body {
+                    background-color: #a39898; /* Color de fondo definido por el usuario */
+                    color: #9f9393;           /* Color de fuente definido por el usuario */
+                }
+            </style>
+        </head>
 
         <body>
-
-            <div class="container mt-4">
-
-            @include('header')
-
+            //header
+            <div class="container mt-3">
+                @include('header')
             </div>
-
 
             <div class="container mt-5"> <div class="card p-4">
-
-            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="jeans.jpg"  width="400" class="rounded mx-auto d-block" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="jeans.jpg"  width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="" class="rounded mx-auto d-block" width="400" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="remerA.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="" class="rounded mx-auto d-block" width="400" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
-                    </div>
 
-                    <div class="carousel-item">
-                        <img src="remerA.jpg" width="400" class="rounded mx-auto d-block" style="height: 450px; object-fit: cover;" class="d-block w-80" alt="20">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
 
-                    </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
 
+            //bloque
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 1: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
 
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="remerA.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 2: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="pngtree-white-t-shirt-mockup-realistic-t-shirt-png-image_9906363.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 3: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            //bloque2
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 1: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 2: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Tarjeta 3: Contenido de ejemplo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+            //footer
+            <div class="container mt-4">
+                @include('footer')
+            </div>
         </body>
+
 </html>
-
-
 
