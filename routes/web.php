@@ -15,4 +15,8 @@ Route::get('/catalogo', function () {
     return view('catalogo');
 });
 
-Route::post('/contacto', [ContactoController::class, 'procesar']);
+Route::get('/quienesSomos', function () {
+    return view('quienesSomos');
+})->name('quienes.somos');
+
+
