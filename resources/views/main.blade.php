@@ -46,6 +46,8 @@
                 @include('header')
             </div>
 
+
+
             <div class="container mt-5"> <div class="card p-4">
                 <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -72,6 +74,14 @@
                 </div>
             </div>
 
+                    <div class="container-fluid bg-light py-5 text-center mt-4">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-3">LEVIS</div>
+                                <div class="col-sm-6 col-md-3">KEVINGSTON</div>
+                                <div class="col-sm-6 col-md-3">SHEIN</div>
+                                <div class="col-sm-6 col-md-3">TEMU</div>
+                            </div>
+                        </div>
 
 
                     <div class="container mt-4">
@@ -137,15 +147,17 @@
                 </div>
             </div>
 
+
+
             <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 
 
 
 
-            <div class="container mt-5"  >
+
                 @include('footer')
-            </div>
+
 
 
         </body>

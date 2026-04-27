@@ -75,9 +75,7 @@
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 
-       <footer class="mt-4">
-            <div class="container mt-4"  >
+
                 @include('footer')
-            </div>
-        </footer>
+
 </html>
