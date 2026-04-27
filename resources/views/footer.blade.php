@@ -47,10 +47,10 @@
                 <a class="nav-link text-dark" href="#"><p class="fs-4">Terminos y Usos</p></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark fs-4" href="quienesSomos">Quiénes Somos</a>
+                <a class="nav-link text-dark fs-4" href="/quienesSomos">Quiénes Somos</a>
              </li>
             <li class="nav-item">
-                <a class="nav-link text-dark " href=""><p class="fs-4">Consultas</p></a>
+                <a class="nav-link text-dark " href="/consultas"><p class="fs-4">Consultas</p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" href="/metodosDePago"><p class="fs-4">Metodos de Pago (Comercializacion)</p></a>
