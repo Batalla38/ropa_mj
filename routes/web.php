@@ -15,8 +15,8 @@ Route::get('/catalogo', function () {
     return view('catalogo');
 });
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 Route::get('/quienesSomos', function () {
     return view('quienesSomos');
 });
@@ -25,16 +25,16 @@ Route::get('/metodosDePago', function () {
     return view('metodosDePago');
 });
 
->>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9
+//>>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9
 Route::get('/producto', function () {
     return view('producto');
 });
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 Route::post('/contacto', [ContactoController::class, 'procesar']);
-=======
+//=======
 Route::get('/catalogo', function () {
     return view('catalogo');
 });
 
->>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9
+//>>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9
