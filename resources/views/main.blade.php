@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            //bloque
+
 
                     <div class="container">
                 <div class="row">
