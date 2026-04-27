@@ -76,7 +76,7 @@
 
 
         <footer class="mt-4">
-            <div class="container mt-4"  >
+            <div class="container mt-5"  >
                 @include('footer')
             </div>
         </footer>

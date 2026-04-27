@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html>
         <head>
-            <title>Ropa MJ</title>
+            <title>Terminos y Condiciones</title>
             <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
         <style>
         /* Estilos globales aplicados al cuerpo del documento */
@@ -23,10 +23,9 @@
 
 
 
-       <div class="container mt-5"  >
+            <div class="container mt-5"  >
                 @include('footer')
             </div>
-
 
         </body>
 
