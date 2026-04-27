@@ -9,17 +9,45 @@
                     background-color: #a39898; /* Color de fondo definido por el usuario */
                     color: #9f9393;           /* Color de fuente definido por el usuario */
                 }
+.card,
+        .carousel {
+            border: none; /* Quitamos el borde predeterminado */
+            border-radius: 25px !important; /* Bordes muy redondeados (efecto circular) */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Sombra suave para dar profundidad */
+            overflow: hidden; /* Asegura que el contenido interno respete el borde redondeado */
+            background-color: #fff; /* Fondo blanco para las tarjetas */
+            transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
+        }
+
+        /* Efecto sutil al pasar el mouse sobre las tarjetas de productos */
+        .col-md-4 .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Redondeado específico para las imágenes dentro de las tarjetas */
+        .card-img-top {
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            object-fit: cover; /* Asegura que la imagen no se deforme */
+            height: 250px; /* Altura uniforme para las imágenes de tarjetas */
+        }
+
+        /* Ajuste para el borde del carrusel */
+        .carousel-item img {
+            border-radius: 20px; /* Ligeramente menos redondeado que la tarjeta padre */
+        }
             </style>
         </head>
 
         <body>
             //header
-            <div class="container mt-3">
+            <div class="container mt-3 mb-4" >
                 @include('header')
             </div>
 
             <div class="container mt-5"> <div class="card p-4">
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="jeans.jpg"  width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
@@ -111,10 +139,15 @@
 
             <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-            //footer
-            <div class="container mt-4">
+
+
+
+
+            <div class="container mt-5"  >
                 @include('footer')
             </div>
+
+
         </body>
 
 </html>

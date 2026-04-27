@@ -6,12 +6,25 @@
 /* Ajuste de la flecha (caret) */
 .dropdown-toggle::after {
     display: inline-block;
-    margin-left: 0.4em; /* Espacio pequeño constante al lado del texto */
+    macontent: "";
+  rgin-left: 0.4em; /* Espacio pequeño constante al lado del texto */
     vertical-align: middle; /* Centrado vertical con el texto */
-    content: "";
-    /* Usamos unidades 'em' para que si subes a fs-3 o fs-2, la flecha crezca sola */
+      /* Usamos unidades 'em' para que si subes a fs-3 o fs-2, la flecha crezca sola */
     border-top: 0.35em solid;
     border-right: 0.35em solid transparent;
     border-bottom: 0;
     border-left: 0.35em solid transparent;
+}
+
+/* Esto asegura que el footer se vaya al fondo sin flotar */
+.footer-fijo-abajo {
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Opcional: Si el body no tiene estas clases en HTML, ponlas aquí */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }

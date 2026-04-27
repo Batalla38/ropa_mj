@@ -17,6 +17,17 @@ Route::get('/catalogo', function () {
 
 Route::get('/quienesSomos', function () {
     return view('quienesSomos');
-})->name('quienes.somos');
+});
 
+Route::get('/metodosDePago', function () {
+    return view('metodosDePago');
+});
+
+Route::get('/producto', function () {
+    return view('producto');
+});
+
+Route::get('/catalogo', function () {
+    return view('catalogo');
+});
 
