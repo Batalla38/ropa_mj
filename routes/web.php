@@ -15,4 +15,8 @@ Route::get('/catalogo', function () {
     return view('catalogo');
 });
 
+Route::get('/producto', function () {
+    return view('producto');
+});
+
 Route::post('/contacto', [ContactoController::class, 'procesar']);

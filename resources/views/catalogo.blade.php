@@ -2,13 +2,16 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Productos </title>
+        <title>Catalogo </title>
         <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
 
 
         <h1></h1>   
     </head>
     <body>
+        <div class="container mt-3">
+                @include('header')
+            </div>
 
         <div class="container mt-5"> <div class="card p-4">
             
@@ -54,7 +57,7 @@
                 <div class="container mt-5">
                     <div class="row">
                         
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-12">
                             <div id="carouselCol1" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -78,7 +81,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-12">
                             <div id="carouselCol2" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -102,7 +105,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-12">
                             <div id="carouselCol3" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -213,5 +216,9 @@
                 
 
             <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+            <div class="container mt-4">
+                @include('footer')
+            </div>
     </body>
 <html>
