@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <title>Catalogo </title>
         <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
-=======
+
     <html>
         <head>
             <title>Ropa MJ</title>
@@ -81,7 +81,7 @@
 <<<<<<< HEAD
                 <div class="container mt-5">
                     <div class="row">
-                        
+
                         <div class="col-md-4 col-sm-12">
                             <div id="carouselCol1" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="carousel-item">
                                     <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Hombre">
->>>>>>> 6bdf3c7e09334c13d146b87e275d43d2b207cfd4
+>>>>>>> 6bdf3c7e093313d146b87e275d43d2b207cfd4
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
@@ -162,7 +162,7 @@
                             <div class="mt-3 text-center">
                                 <h5 class="text-dark fw-bold">Remera Niñ@s</h5>
                                 <p class="text-muted small">Remeras Nike/Adidas Niñ@@section('')
-                                    
+
                                 @show.</p>
                                 <p class="text-black fw-bold fs-5">$80.900</p>
                             </div>
@@ -407,6 +407,6 @@
         <div class="container mt-5"  >
             @include('footer')
         </div>
->>>>>>> 6bdf3c7e09334c13d146b87e275d43d2b207cfd4
+>>>>>>> 6bdf3c7e09334c13d1
     </body>
 <html>
