@@ -42,23 +42,29 @@
 
 </head>
 <body class="d-flex flex-column min-vh-100">
-        <ul class="nav justify-content-end bg-white p-3 shadow-sm w-100 m-10 border-top ">
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#"><p class="fs-4">Terminos y Usos</p></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fs-4" href="/quienesSomos">Quiénes Somos</a>
-             </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark " href="/consultas"><p class="fs-4">Consultas</p></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="/metodosDePago"><p class="fs-4">Metodos de Pago (Comercializacion)</p></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#"><p class="fs-4"></p></a>
-            </li>
-        </ul>
+    <ul class="nav justify-content-center bg-white p-3 shadow-sm w-100 border-top">
+        <li class="nav-item">
+            <a class="nav-link text-dark mx-2" href="#">
+                <p class="fs-4 border-bottom border-dark">Terminos y Usos</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark mx-2" href="/quienesSomos">
+                <p class="fs-4 border-bottom border-dark">Quiénes Somos</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark mx-2" href="/consultas">
+                <p class="fs-4 border-bottom border-dark">Consultas</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark mx-2" href="/metodosDePago">
+                <p class="fs-4 border-bottom border-dark">Metodos de Pago (Comercializacion)</p>
+            </a>
+        </li>
+    </ul>
+</body>
 
 </body>
 </html>
