@@ -4,21 +4,15 @@
         <meta charset="UTF-8">
         <title>Producto Especifico</title>
         <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
-            <style>
-        /* Estilos globales aplicados al cuerpo del documento */
-            body {
-            background-color: #a39898; /* Color de fondo definido por el usuario */
-            color: #9f9393;           /* Color de fuente definido por el usuario */
-            }
-        </style>
 
-        <h1></h1>
+
+        <h1></h1>   
     </head>
 
     <body>
-
+         
                 @include('header')
-
+            
                 <div class="container mt-5">
                     <h2 class="text-center">Hombre</h2>
                     <div class="row">
@@ -37,10 +31,10 @@
                         </div>
                     </div>
 
-                </div>
-
+                </div>            
+        
                 @include('footer')
-
+         
     </body>
-
+    
 <html>

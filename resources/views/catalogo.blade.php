@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>Catalogo </title>
-        <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
-
     <html>
         <head>
             <title>Ropa MJ</title>
@@ -25,7 +18,6 @@
             background-color: #fff; /* Fondo blanco para las tarjetas */
             transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
         }
->>>>>>> 6bdf3c7e09334c13d146b87e275d43d2b207cfd4
 
         /* Efecto sutil al pasar el mouse sobre las tarjetas de productos */
         .col-md-4 .card:hover {
@@ -50,9 +42,6 @@
     </head>
 
     <body>
-        <div class="container mt-3">
-                @include('header')
-            </div>
 
         <div class="container mt-3 mb-4" >
             @include('header')
@@ -62,61 +51,57 @@
 
 
         <div class="container-fluid mt-5 py-4">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="sticky-top" style="top: 20px; z-index: 1000;">
-                <div class="p-4 bg-white shadow-sm border rounded">
-                    <h5 class="fw-bold mb-3">Filtros</h5>
-                    <label class="form-label text-muted small">Categoría</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Todos los productos</option>
-                        <option value="1">Hombre</option>
-                        <option value="2">Mujer</option>
-                        <option value="3">Niños</option>
-                    </select>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sticky-top" style="top: 20px; z-index: 1000;">
+                        <div class="p-4 bg-white shadow-sm border rounded">
+                            <h5 class="fw-bold mb-3">Filtros</h5>
+                            <label class="form-label text-muted small">Genero</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Todos los productos</option>
+                                <option value="1">Hombre</option>
+                                <option value="2">Mujer</option>
+                                <option value="3">Niños</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+            <div class="p-3 bg-white border rounded shadow-sm mb-3">
+                <h6 class="fw-bold mb-3">Seleccionar Talles</h6>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">X</label>
                 </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">XL</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">XXL</label>
+                </div>
+
+
+
             </div>
-        </div>
-
-<<<<<<< HEAD
-                <div class="container mt-5">
-                    <div class="row">
-
-                        <div class="col-md-4 col-sm-12">
-                            <div id="carouselCol1" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="{{ asset('jeans.jpg') }}" class="d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="{{ asset('remerA.jpg') }}" class="d-block w-100" alt="...">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselCol1" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                                </button>
-                            </div>
-                            <div class="mt-3 text-center">
-                                <h5 class="text-dark fw-bold">Outfit Hombre</h5>
-                                <p class="text-muted small">Outfit Adidas Masculino.</p>
-                                <p class="text-black fw-bold fs-5">$150.000</p>
-                            </div>
+                        <div class="p-4 bg-white shadow-sm border rounded">
+                            <h5 class="fw-bold mb-1">Filtros</h5>
+                            <label class="form-label text-muted small">Genero</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Todos los productos</option>
+                                <option value="1">Hombre</option>
+                                <option value="2">Mujer</option>
+                                <option value="3">Niños</option>
+                            </select>
                         </div>
 
-                        <div class="col-md-4 col-sm-12">
-                            <div id="carouselCol2" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="{{ asset('remerA.jpg') }}" class="d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="{{ asset('jeans.jpg') }}" class="d-block w-100" alt="...">
-                                    </div>
-=======
 
+
+
+        </div>
 
         <div class="col-md-9">
 
@@ -130,7 +115,6 @@
                                 </div>
                                 <div class="carousel-item">
                                     <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Hombre">
->>>>>>> 6bdf3c7e093313d146b87e275d43d2b207cfd4
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
@@ -140,38 +124,10 @@
                                 <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
                             </button>
                         </div>
-<<<<<<< HEAD
-
-                        <div class="col-md-4 col-sm-12">
-                            <div id="carouselCol3" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="{{ asset('ropaNiños.jfif') }}" class="d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="{{ asset('remerA.jpg') }}" class="d-block w-100" alt="...">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol3" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselCol3" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                                </button>
-                            </div>
-                            <div class="mt-3 text-center">
-                                <h5 class="text-dark fw-bold">Remera Niñ@s</h5>
-                                <p class="text-muted small">Remeras Nike/Adidas Niñ@@section('')
-
-                                @show.</p>
-                                <p class="text-black fw-bold fs-5">$80.900</p>
-                            </div>
-=======
                         <div class="card-body text-center mt-2">
                             <h5 class="text-dark fw-bold">Outfit Hombre</h5>
                             <p class="text-muted small">Outfit Adidas Masculino.</p>
                             <p class="text-black fw-bold fs-5">$150.000</p>
->>>>>>> 6bdf3c7e09334c13d146b87e275d43d2b207cfd4
                         </div>
                     </div>
                 </div>
@@ -202,13 +158,6 @@
                     </div>
                 </div>
 
-<<<<<<< HEAD
-            <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-            <div class="container mt-4">
-                @include('footer')
-            </div>
-=======
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm border-0">
                         <div id="carouselCol3" class="carousel slide" data-bs-ride="false">
@@ -407,6 +356,5 @@
         <div class="container mt-5"  >
             @include('footer')
         </div>
->>>>>>> 6bdf3c7e09334c13d1
     </body>
 <html>
