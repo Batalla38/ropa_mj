@@ -6,9 +6,17 @@
             <style>
                 /* Estilos globales aplicados al cuerpo del documento */
                 body {
-                    background-color: #a39898; /* Color de fondo definido por el usuario */
+                    background-color: #c1a391; /* Color de fondo definido por el usuario */
                     color: #9f9393;           /* Color de fuente definido por el usuario */
                 }
+                body {
+    background-image: url(https://images.vexels.com/media/users/3/142647/isolated/preview/7975c8713e6cd70ff26097efbbebdbd1-ropa-de-camiseta.png);
+    background-repeat: repeat;
+    background-size: 80px; /* Aquí controlas el tamaño */
+}
+
+
+
 .card,
         .carousel {
             border: none; /* Quitamos el borde predeterminado */
