@@ -19,27 +19,47 @@
 
 
                 <div class="container mt-5"><div class="card p-4">
-                    <p class="h1">¿Quienes Somos?</p>
-                        <hr> <p class= "fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
-                    <p class="h2">Misión: </p>
-                        <hr> <p class= "fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
-                    <p class="h2">Misión: </p>
-                        <hr> <p class= "fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
+<p class="h1">Quiénes Somos</p>
+<hr>
+
+<p class="fs-4">
+    En <strong>Ropa MJ</strong>, no solo distribuimos prendas; conectamos marcas con personas.
+    Somos una distribuidora líder comprometida con la excelencia operativa y la vanguardia
+    en el sector textil, facilitando el acceso a moda de alta calidad para negocios y emprendedores.
+</p>
+
+<div class="mt-5">
+    <p class="h2">Nuestra Misión</p>
+    <p class="fs-5 text-muted">
+        Nuestra misión es simplificar la cadena de suministro de moda, ofreciendo un catálogo
+        curado y un servicio de logística eficiente que garantice que cada prenda llegue a su
+        destino en perfectas condiciones y en el tiempo acordado.
+    </p>
+</div>
+
+<hr>
+
+<div class="mt-4">
+    <p class="h2">¿Por qué elegirnos?</p>
+    <ul class="fs-5 text-muted">
+        <li class="mb-2"><strong>Calidad Garantizada:</strong> Seleccionamos cuidadosamente cada textil y diseño.</li>
+        <li class="mb-2"><strong>Compromiso Logístico:</strong> Contamos con una red de distribución optimizada para entregas rápidas.</li>
+        <li class="mb-2"><strong>Atención Personalizada:</strong> Brindamos soporte directo para ayudar a crecer a nuestros aliados comerciales.</li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="mt-4">
+    <p class="h2">Nuestra Visión</p>
+    <p class="fs-5 text-muted">
+        Para el año 2030, buscamos ser el referente principal en la distribución mayorista de la región,
+        impulsando la innovación tecnológica en nuestros procesos y promoviendo prácticas sostenibles
+        dentro de la industria de la moda.
+    </p>
+</div>
+
+
                 </div></div>
 
                 <div class="container mt-5">
@@ -47,12 +67,14 @@
                     <div class="row align-items-center"> <div class="col-md-7">
                             <p class="h1">¿Donde estamos?</p>
                             <hr>
-                            <p class="fs-4">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                                optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                                rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <p class="fs-5">
+
+                                Avenida San Martín S/N,<br>
+                                <strong>Barranqueras, Chaco</strong>.<br>
+                                Código Postal H3503, Argentina.
                             </p>
+                            <p class="fs-5">Contactanos al 3794-123456
+                                </p>
                         </div>
 
                         <div class="col-md-5">
@@ -67,17 +89,18 @@
                             </div>
                         </div>
 
-                    </div> </div>
+                    </div>
+                </div>
 
                 </div>
+
 
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 
-       <footer class="mt-4">
-            <div class="container mt-4"  >
-                @include('footer')
-            </div>
-        </footer>
+        <div class=" mt-3">
+            @include('footer')
+        </div>
+</body>
 </html>

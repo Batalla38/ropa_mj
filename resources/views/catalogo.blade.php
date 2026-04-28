@@ -89,17 +89,15 @@
             </div>
                         <div class="p-4 bg-white shadow-sm border rounded">
                             <h5 class="fw-bold mb-1">Filtros</h5>
-                            <label class="form-label text-muted small">Genero</label>
+                            <label class="form-label text-muted small">Categoria</label>
                             <select class="form-select" aria-label="Default select example">
                                 <option selected>Todos los productos</option>
-                                <option value="1">Hombre</option>
-                                <option value="2">Mujer</option>
-                                <option value="3">Niños</option>
+                                <option value="1">Verano</option>
+                                <option value="2">Invierno</option>
+                                <option value="3">Otoño</option>
+                                <option value="3">Primavera</option>
                             </select>
                         </div>
-
-
-
 
         </div>
 
@@ -111,10 +109,10 @@
                         <div id="carouselCol1" class="carousel slide" data-bs-ride="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ asset('jeans.jpg') }}" class="card-img-top" alt="Jeans Hombre">
+                                    <img src="ropa Hombre/JeanH.jpg" class="card-img-top" alt="Jeans Hombre">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Hombre">
+                                    <img src="ropa Hombre/JeanH2.jpg" class="card-img-top" alt="Remera Hombre">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
@@ -137,10 +135,10 @@
                         <div id="carouselCol2" class="carousel slide" data-bs-ride="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Mujer">
+                                    <img src="ropa Hombre/ConjuntoVeranoH2.jpg" class="card-img-top" alt="Jeans Hombre">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="{{ asset('jeans.jpg') }}" class="card-img-top" alt="Jeans Mujer">
+                                    <img src="ropa Hombre/ConjuntoVeranoH.jpg" class="card-img-top" alt="Remera Hombre">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol2" data-bs-slide="prev">
@@ -151,7 +149,7 @@
                             </button>
                         </div>
                         <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Outfit Mujer</h5>
+                            <h5 class="text-dark fw-bold">Outfit Masculino</h5>
                             <p class="text-muted small">Outfit de Dama Nike.</p>
                             <p class="text-black fw-bold fs-5">$200.500</p>
                         </div>
@@ -163,10 +161,10 @@
                         <div id="carouselCol3" class="carousel slide" data-bs-ride="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ asset('ropaNiños.jfif') }}" class="card-img-top" alt="Ropa Niños">
+                                    <img src="ropa Hombre/ConjuntoRayasH2.jpg" class="card-img-top" alt="Jeans Hombre">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Niños">
+                                    <img src="ropa Hombre/ConjuntoRayasH.jpg" class="card-img-top" alt="Remera Hombre">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol3" data-bs-slide="prev">
@@ -177,8 +175,8 @@
                             </button>
                         </div>
                         <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Remera Niñ@s</h5>
-                            <p class="text-muted small">Remeras Nike/Adidas Niñ@s.</p>
+                            <h5 class="text-dark fw-bold">Conjunto Masculino</h5>
+                            <p class="text-muted small">Remeras/Short Nike </p>
                             <p class="text-black fw-bold fs-5">$80.900</p>
                         </div>
                     </div>
@@ -191,10 +189,10 @@
                         <div id="carouselCol4" class="carousel slide" data-bs-ride="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ asset('jeans.jpg') }}" class="card-img-top" alt="Jeans Hombre">
+                                    <img src="ropa Hombre/PuloverH1.jpg" class="card-img-top" alt="Jeans Hombre">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Hombre">
+                                    <img src="ropa Hombre/PuloverH.jpg" class="card-img-top" alt="Remera Hombre">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol4" data-bs-slide="prev">
@@ -206,7 +204,7 @@
                         </div>
                         <div class="card-body text-center mt-2">
                             <h5 class="text-dark fw-bold">Outfit Hombre</h5>
-                            <p class="text-muted small">Outfit Adidas Masculino.</p>
+                            <p class="text-muted small">Pulover Masculino</p>
                             <p class="text-black fw-bold fs-5">$150.000</p>
                         </div>
                     </div>
@@ -217,10 +215,10 @@
                         <div id="carouselCol5" class="carousel slide" data-bs-ride="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Mujer">
+                                    <img src="ropa Hombre/PuloverH2.jpg" class="card-img-top" alt="Jeans Hombre">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="{{ asset('jeans.jpg') }}" class="card-img-top" alt="Jeans Mujer">
+                                    <img src="ropa Hombre/PuloverH3.jpg" class="card-img-top" alt="Remera Hombre">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol5" data-bs-slide="prev">
@@ -231,7 +229,7 @@
                             </button>
                         </div>
                         <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Outfit Mujer</h5>
+                            <h5 class="text-dark fw-bold">Outfit Hombre</h5>
                             <p class="text-muted small">Outfit de Dama Nike.</p>
                             <p class="text-black fw-bold fs-5">$200.500</p>
                         </div>
@@ -243,10 +241,10 @@
                         <div id="carouselCol6" class="carousel slide" data-bs-ride="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ asset('ropaNiños.jfif') }}" class="card-img-top" alt="Ropa Niños">
+                                    <img src="ropa Hombre/SueterPolarH.jpg" class="card-img-top" alt="Ropa Niños">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Niños">
+                                    <img src="ropa Hombre/SueterPolarH2.jpg" class="card-img-top" alt="Remera Niños">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol6" data-bs-slide="prev">
@@ -257,104 +255,28 @@
                             </button>
                         </div>
                         <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Remera Niñ@s</h5>
-                            <p class="text-muted small">Remeras Nike/Adidas Niñ@s.</p>
+                            <h5 class="text-dark fw-bold">Outfit Hombre</h5>
+                            <p class="text-muted small">Suerter Nike/</p>
                             <p class="text-black fw-bold fs-5">$80.900</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div id="carouselCol6" class="carousel slide" data-bs-ride="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="{{ asset('ropaNiños.jfif') }}" class="card-img-top" alt="Ropa Niños">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Niños">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol6" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCol6" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                            </button>
-                        </div>
-                        <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Remera Niñ@s</h5>
-                            <p class="text-muted small">Remeras Nike/Adidas Niñ@s.</p>
-                            <p class="text-black fw-bold fs-5">$80.900</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div id="carouselCol6" class="carousel slide" data-bs-ride="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="{{ asset('ropaNiños.jfif') }}" class="card-img-top" alt="Ropa Niños">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Niños">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol6" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCol6" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                            </button>
-                        </div>
-                        <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Remera Niñ@s</h5>
-                            <p class="text-muted small">Remeras Nike/Adidas Niñ@s.</p>
-                            <p class="text-black fw-bold fs-5">$80.900</p>
-                        </div>
-                    </div>
-                </div>
-                <d<div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div id="carouselCol2" class="carousel slide" data-bs-ride="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="{{ asset('remerA.jpg') }}" class="card-img-top" alt="Remera Mujer">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{ asset('jeans.jpg') }}" class="card-img-top" alt="Jeans Mujer">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol2" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCol2" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                            </button>
-                        </div>
-                        <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Outfit Mujer</h5>
-                            <p class="text-muted small">Outfit de Dama Nike.</p>
-                            <p class="text-black fw-bold fs-5">$200.500</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
 
-        </div> </div> </div>
+
+        </div>
+    </div>
+
+</div>
 
 
 
-1.  **`sticky-top`**: Esta es la clave. Al poner el contenedor del filtro dentro de un `div` con `sticky-top`, el filtro "flotará" y te seguirá mientras haces scroll hacia abajo por los productos.
-2.  **Estructura de Columnas**: He separado claramente la columna del filtro (`col-md-3`) de la del catálogo (`col-md-9`). Esto garantiza que los cuadros de ropa nunca se muevan de su lugar ni se mezclen con el filtro.
-3.  **Corrección de IDs de Carrusel**: En la segunda sección, cambié los IDs de `carouselCol1` a `carouselCol4` (y así sucesivamente). Si dejas el mismo nombre, cuando alguien haga clic en la flecha de la segunda fila, se movería la imagen de la primera fila. ¡Ahora cada uno es independiente!
-
-
-
+</div> </div> </div>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <div class="container mt-5"  >
-            @include('footer')
+
+        <div class= " mt-3">
+                @include('footer')
         </div>
     </body>
 <html>

@@ -76,7 +76,7 @@
                         <li><a class="dropdown-item" href="/producto">Femenino</a></li>
                         <li><a class="dropdown-item" href="/producto">Niños</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/producto">Otros</a></li>
+                        <li><a class="dropdown-item" href="/catalogo">Otros</a></li>
                     </ul>
                 </li>
             </ul>

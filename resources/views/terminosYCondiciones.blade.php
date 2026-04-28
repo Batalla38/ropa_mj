@@ -18,15 +18,60 @@
             @include('header')
         </div>
 
+            <div class="container mt-5"><div class="card p-4">
+                    <p class="h1">Terminos Y Condiciones</p>
+                        <hr> <p class= "fs-4">Bienvenido a Ropa MJ.
+                            Al acceder y utilizar nuestro sitio web, usted acepta cumplir y estar sujeto a
+                            los siguientes términos y condiciones. Si no está de acuerdo con alguna parte de estos términos,
+                            le rogamos que no utilice nuestros servicios.</p>
+                    <p class="h2 mt-4">1. Uso del Sitio</p>
 
+<p class="fs-5 text-muted">
+    El contenido de este sitio es para su información general y uso personal.
+    Queda prohibida la reproducción total o parcial de los diseños, logotipos y material gráfico
+    de <strong>Ropa MJ</strong> sin previa autorización.
+</p>
 
+<hr>
 
+<p class="h2 mt-4">2. Productos y Precios</p>
+<p class="fs-5 text-muted">
+    Nos esforzamos por mostrar con la mayor precisión posible los colores y detalles de nuestras prendas.
+    Sin embargo, no podemos garantizar que el monitor de su dispositivo refleje exactamente el tono real.
+    Los precios están sujetos a cambios sin previo aviso.
+</p>
 
+<hr>
 
-            <div class="container mt-5"  >
+<p class="h2 mt-4">3. Cambios y Devoluciones</p>
+<p class="fs-5 text-muted">
+    En <strong>Ropa MJ</strong>, queremos que ames lo que compras. Si la talla no es la correcta o el producto
+    presenta fallas de fábrica, dispones de 30 días naturales tras la recepción del pedido para
+    solicitar un cambio, siempre que la prenda conserve sus etiquetas originales y no presente signos de uso.
+</p>
+
+<hr>
+
+<p class="h2 mt-4">4. Envíos y Entregas</p>
+<p class="fs-5 text-muted">
+    Los tiempos de entrega pueden variar según la ubicación y la logística de la transportadora.
+    No nos hacemos responsables por retrasos ajenos a nuestra operación, pero te brindaremos
+    todo el soporte necesario para rastrear tu paquete.
+</p>
+
+<hr>
+
+<p class="h2 mt-4">5. Protección de Datos</p>
+<p class="fs-5 text-muted">
+    Tu información personal está segura con nosotros. Los datos proporcionados para la compra
+    serán utilizados estrictamente para procesar el pedido y mejorar tu experiencia como cliente.
+</p>
+
+                </div></div>
+
+                <div class=" mt-3">
                 @include('footer')
-            </div>
-
+                </div>
         </body>
 
 </html>

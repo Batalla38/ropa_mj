@@ -44,7 +44,7 @@
 <body class="d-flex flex-column min-vh-100">
     <ul class="nav justify-content-center bg-white p-3 shadow-sm w-100 border-top">
         <li class="nav-item">
-            <a class="nav-link text-dark mx-2" href="#">
+            <a class="nav-link text-dark mx-2" href="/terminosYCondiciones">
                 <p class="fs-4 border-bottom border-dark">Terminos y Usos</p>
             </a>
         </li>
@@ -60,7 +60,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark mx-2" href="/metodosDePago">
-                <p class="fs-4 border-bottom border-dark">Metodos de Pago (Comercializacion)</p>
+                <p class="fs-4 border-bottom border-dark">Metodos de Pago</p>
             </a>
         </li>
     </ul>
