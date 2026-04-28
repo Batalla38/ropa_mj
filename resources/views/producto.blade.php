@@ -60,7 +60,7 @@
                                             <img src="visa-logo.png" alt="Visa" style="height: 40px; width: auto;">
                                             <img src="Mastercard-logo.png" alt="mastercard" style="height: 40px; width: auto;">
                                             <img src="Logo_Naranja.png" alt="naranja" style="height: 40px; width: auto;">
-                                            <img src="logo mp.png" alt="MP" style="height: 40px; width: auto;">
+                                            <img src="logo_mp.png" alt="MP" style="height: 40px; width: auto;">
 
                                         </div>
                                     </div>
