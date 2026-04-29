@@ -56,22 +56,44 @@ body {
 
         <div class="container-fluid mt-5 py-4">
             <div class="row">
+
                 <div class="col-md-3">
                     <div class="sticky-top" style="top: 20px; z-index: 1000;">
                         <div class="p-4 bg-white shadow-sm border rounded">
-                            <h5 class="fw-bold mb-3">Filtros</h5>
-                            <label class="form-label text-muted small">Genero</label>
+                            <h5 class="fw-bold mb-3">Genero</h5>
+                            <label class="form-label text-muted small"></label>
                             <select class="form-select" aria-label="Default select example">
                                 <option selected>Todos los productos</option>
                                 <option value="1">Hombre</option>
                                 <option value="2">Mujer</option>
-                                <option value="3">Niños</option>
+                                <option value="3">Unisex</option>
                             </select>
                         </div>
                     </div>
+                    <div class="p-3 bg-white border rounded  mb-0">
 
+                        <div class="card-body">
 
-            <div class="p-3 bg-white border rounded shadow-sm mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                                <label class="form-check-label text-dark" for="switchCheckDefault "><h5 class="card-title text-dark">Retiro de Sucursal</h5></label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white border rounded  mb-0">
+
+                        <div class="card-body">
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                                <label class="form-check-label text-dark" for="switchCheckDefault "><h5 class="card-title text-dark">Envio a Domicilio</h5></label>
+                            </div>
+
+                        </div>
+                    </div>
+
+            <div class="p-3 bg-white border rounded shadow-sm mb-0">
                 <h6 class="fw-bold mb-3">Seleccionar Talles</h6>
 
                 <div class="form-check form-check-inline">
@@ -87,13 +109,22 @@ body {
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
                     <label class="form-check-label" for="inlineCheckbox2">XXL</label>
                 </div>
-
-
-
             </div>
+
                         <div class="p-4 bg-white shadow-sm border rounded">
-                            <h5 class="fw-bold mb-1">Filtros</h5>
-                            <label class="form-label text-muted small">Categoria</label>
+                            <h5 class="fw-bold mb-1">Temporadas</h5>
+                            <label class="form-label text-muted small"></label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Todos los productos</option>
+                                <option value="1">Verano</option>
+                                <option value="2">Invierno</option>
+                                <option value="3">Otoño</option>
+                                <option value="3">Primavera</option>
+                            </select>
+                        </div>
+                        <div class="p-4 bg-white shadow-sm border rounded">
+                            <h5 class="fw-bold mb-1">Categoria</h5>
+                            <label class="form-label text-muted small"></label>
                             <select class="form-select" aria-label="Default select example">
                                 <option selected>Todos los productos</option>
                                 <option value="1">Verano</option>
