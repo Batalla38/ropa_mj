@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <html>
         <head>
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
             <title>Ropa MJ</title>
             <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
             <style>
@@ -10,9 +11,22 @@
                     color: #9f9393;           /* Color de fuente definido por el usuario */
                 }
                 body {
-    background-image: url(https://images.vexels.com/media/users/3/142647/isolated/preview/7975c8713e6cd70ff26097efbbebdbd1-ropa-de-camiseta.png);
-    background-repeat: repeat;
-    background-size: 80px; /* Aquí controlas el tamaño */
+                    background-image: url(bg1.png);
+                    background-repeat: repeat;
+                    background-size: 700px; /* Aquí controlas el tamaño */
+                }
+
+/* Creamos una clase personalizada para la animación */
+.card-animada {
+    transition: transform 0.3s ease-in-out, shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* Efecto al pasar el mouse (hover) */
+.card-animada:hover {
+    transform: scale(1.05); /* Crece un 5% */
+    z-index: 10; /* Asegura que la tarjeta quede por encima de las demás al crecer */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; /* Aumenta la sombra para dar efecto de elevación */
 }
 
 
@@ -23,7 +37,7 @@
             border-radius: 25px !important; /* Bordes muy redondeados (efecto circular) */
             box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Sombra suave para dar profundidad */
             overflow: hidden; /* Asegura que el contenido interno respete el borde redondeado */
-            background-color: #fff; /* Fondo blanco para las tarjetas */
+            background-color:  #c1a391ef; /* Fondo blanco para las tarjetas */
             transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
         }
 
@@ -41,10 +55,43 @@
             height: 250px; /* Altura uniforme para las imágenes de tarjetas */
         }
 
-        /* Ajuste para el borde del carrusel */
-        .carousel-item img {
-            border-radius: 20px; /* Ligeramente menos redondeado que la tarjeta padre */
-        }
+
+
+/* Contenedor principal que oculta el desbordamiento */
+.marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* El contenedor que se anima */
+.marquee-content {
+    display: flex;
+    animation: scroll-marcas 30s linear infinite; /* 30s define la velocidad (más segundos = más lento) */
+}
+
+/* Estilo para cada marca */
+.marquee-item {
+    padding: 0 50px; /* Espacio entre marcas */
+    color: #333;
+    font-weight: bold;
+    border-right: 1px solid #ccc; /* La rayita divisoria que tenías */
+}
+
+/* La animación mágica */
+@keyframes scroll-marcas {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Se mueve la mitad exacta para que no se note el salto */
+}
+
+/* Opcional: Pausar cuando el usuario pasa el mouse */
+.marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+
 
             </style>
         </head>
@@ -55,39 +102,55 @@
                 @include('header')
             </div>
 
-            <div class="container mt-5">
+<!-- BANNER SLAIDER-->
+        <div class="container mt-5">
                 <div class="card p-4">
-                <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="ropa Hombre/JeanH.jpg"  width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                    <div class="container-fluid mt-1 p-1">
+                        <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="10000">
+                        <div class="carousel-inner" >
+                            <div class="carousel-item active">
+                                <img src="{{ asset('banner slider/banner1.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1">
+                            </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="ropa Hombre/ShortRusticoH1.jpg" class="rounded mx-auto d-block" width="400" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                            <img src="{{ asset('banner slider/banner2.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner3.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner4.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="ropa Hombre/JeanH2.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
-                        </div>
+                            <img src="{{ asset('banner slider/banner5.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
                         <div class="carousel-item">
-                            <img src="ropa Hombre/ShortRusticoH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
-                        </div>
-
-
+                            <img src="{{ asset('banner slider/banner6.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
                         <div class="carousel-item">
-                            <img src="ropa Hombre/SueterPolarH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
-                        </div>
+                            <img src="{{ asset('banner slider/banner7.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
                         <div class="carousel-item">
-                            <img src="ropa Hombre/ConjuntoVeranoH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="ropa Hombre/ConjuntoVeranoH2.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="ropa Hombre/ConjuntoRayasH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="ropa Hombre/ConjuntoRayasH2.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
-                        </div>
+                            <img src="{{ asset('banner slider/banner1.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -98,47 +161,54 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            </div>
+        </div>
 
 
 
 
 
- <!-- aca empíeza el slider -->
+
+
+
+ <!-- aca empíeza el primes slaider con categorias  -->
     <!-- Añadimos data-bs-pause="hover" para pausar al pasar el ratón -->
+
 <div id="carouselRopaHombre" class="carousel slide mt-5 mb-5" data-bs-ride="carousel" data-bs-pause="hover">
     <div class="carousel-inner">
 
         <!-- SLIDE 1 -->
         <div class="carousel-item active">
-            <div class="container mt-2 mb-2">
-                <div class="row">
+            <div class="container mt-1 mb-1">
+                <div class="row g-0 p-4 rounded-4" style="background-color: #c1a391ef;">
+                    <h1 class="display-1 text-black text-center mb-4 fw-bold text-uppercase">
+                        <p class="bg-personalizado text-black p-1 text-center">
+                        <strong>Lo Mas Buscado</p></strong></h1>
                     <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="ropa Hombre/JeanH.jpg" class="card-img-top" alt="Jean" style="height: 250px; object-fit: cover;">
+                        <div class="card h-100 shadow-sm card-animada">
+                            <img src="ropa/relevante/ChalecoH.jpg" class="card-img-top" alt="Jean" style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Jean Hombre</h5>
-                                <p class="card-text">Texto de ejemplo para el jean.</p>
+                                <h5 class="card-title">Chaleco de Invierno</h5>
+                                <p class="card-text">80.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="ropa Hombre/SueterPolarH.jpg" class="card-img-top" alt="Sueter" style="height: 250px; object-fit: cover;">
+                        <div class="card h-100 shadow-sm card-animada">
+                            <img src="ropa/relevante/ChombaLargaH.jpg" class="card-img-top" alt="Sueter" style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Sueter Polar</h5>
-                                <p class="card-text">Texto de ejemplo para el sueter.</p>
+                                <h5 class="card-title">Chomba Larga</h5>
+                                <p class="card-text">90.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="ropa Hombre/ConjuntoRayasH.jpg" class="card-img-top" alt="Conjunto" style="height: 250px; object-fit: cover;">
+                        <div class="card h-100 shadow-sm card-animada">
+                            <img src="ropa/relevante/mujer4.jpeg" class="card-img-top" alt="Conjunto" style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Conjunto Rayas</h5>
-                                <p class="card-text">Texto de ejemplo para el conjunto.</p>
+                                <h5 class="card-title">Tapado Rojo</h5>
+                                <p class="card-text">120.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
@@ -150,33 +220,36 @@
         <!-- SLIDE 2 -->
         <div class="carousel-item">
             <div class="container mt-2 mb-2">
-                <div class="row">
+                <div class="row g-0 p-4 rounded-4" style="background-color: #c1a391ef;">
+                    <h1 class="display-1 text-black text-center mb-4 fw-bold text-uppercase">
+                        <p class="bg-personalizado text-black p-1 text-center">
+                        <strong>Lo Mas Buscado</p></strong></h1>
                     <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="ropa Hombre/NuevoProducto1.jpg" class="card-img-top" alt="..." style="height: 250px; object-fit: cover;">
+                        <div class="card h-100 shadow-sm card-animada">
+                            <img src="ropa/relevante/mujer8.jpeg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Nuevo Producto 1</h5>
-                                <p class="card-text">Descripción del segundo grupo.</p>
+                                <h5 class="card-title fs-2">Tapado Beish</h5>
+                                <p class="card-text fs-3">125.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="ropa Hombre/NuevoProducto2.jpg" class="card-img-top" alt="..." style="height: 250px; object-fit: cover;">
+                        <div class="card h-100 shadow-sm card-animada">
+                            <img src="ropa/relevante/PuloverH3.jpg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Nuevo Producto 2</h5>
-                                <p class="card-text">Descripción del segundo grupo.</p>
+                                <h5 class="card-title fs-2">Pulover</h5>
+                                <p class="card-text fs-3">100.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="ropa Hombre/NuevoProducto3.jpg" class="card-img-top" alt="..." style="height: 250px; object-fit: cover;">
+                        <div class="card h-100 shadow-sm card-animada">
+                            <img src="ropa/relevante/SueterPolarH.jpg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Nuevo Producto 3</h5>
-                                <p class="card-text">Descripción del segundo grupo.</p>
+                                <h5 class="card-title fs-2">Sueter Polar</h5>
+                                <p class="card-text fs-3">150.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
@@ -195,18 +268,152 @@
         <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%);"></span>
         <span class="visually-hidden">Siguiente</span>
     </button>
-</div>
-
-        <!-- ata aca elñ primer carousel -->
     </div>
 
-
+    </div>
     <!-- Controles de navegación -->
+</div>
+<!-- termina  primer carousel -->
 
+
+
+
+
+
+
+
+<!-- SEGUNDO CARRUSEL COLECCIONES -->
+
+<div id="carouselRopaLargo" class="carousel slide mt-5 mb-5 bg-transparent" data-bs-ride="carousel" data-bs-pause="hover">
+    <div class="carousel-inner bg-transparent">
+        <div class="carousel-item active bg-transparent">
+            <div class="container-fluid p-1 bg-transparent">
+                <div class="row g-0 p-4 rounded-4" style="background-color: #c1a391ef;">
+                    <h1 class="display-1 text-black text-center mb-4 fw-bold text-uppercase">
+                        <p class="bg-personalizado text-black p-1 text-center">
+                        <strong>COLECCIÓN COMPLETA </p></strong></h1>
+                    <div class="col-md-3 px-2">
+                        <div class="card h-80 border-1 rounded-2 shadow-sm card-animada">
+                            <img src="ropa/colleccion/Campera cuero.jpeg" class="card-img-top rounded-0" alt="Jean" style="height: 350px; object-fit: cover;">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Campera de Cuero</h5>
+                                <p class="card-text fs-3">120.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                   <div class="col-md-3 px-2">
+                        <div class="card h-80 border-1 rounded-2 shadow-sm card-animada">
+                            <img src="ropa/colleccion/CamperaH2.jpg" class="card-img-top rounded-0" alt="Jean" style="height: 350px; object-fit: cover;">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Sueter Deportivo</h5>
+                                <p class="card-text fs-3">120.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 px-2">
+                        <div class="card h-80 border-0 rounded-0 shadow-sm card-animada">
+                            <img src="ropa/colleccion/ChombaH1.jpg" class="card-img-top rounded-0" alt="Jean" style="height: 350px; object-fit: cover;">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Chomba B/M</h5>
+                                <p class="card-text fs-3">100.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 px-2">
+                        <div class="card h-80 border-0 rounded-0 shadow-sm card-animada">
+                            <img src="ropa/colleccion/conjunto2.jpg" class="card-img-top rounded-0" alt="Jean" style="height: 350px; object-fit: cover;">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Conjunto Casual</h5>
+                                <p class="card-text fs-3">90.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="carousel-item">
+            <div class="container-fluid p-0 bg-transparent">
+                <div class="row g-0 p-4 rounded-4" style="background-color: #c1a391ef;">
+                    <h1 class="display-1 text-black text-center mb-4 fw-bold text-uppercase">
+                        <p class="bg-personalizado text-black p-1 text-center">
+                        <strong>NUEVO INGRESO</p></strong></h1>
+                    <div class="col-md-3 px-2">
+                        <div class="card h-100 border-0 rounded-0 shadow-sm card-animada">
+                            <img src="ropa/ningreso/mujer (5).jpeg" class="card-img-top rounded-0" alt="Campera" style="height: 350px; object-fit: cover;">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Abrigos</h5>
+                                 <p class="card-text fs-3">90.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 px-2">
+                        <div class="card h-100 border-0 rounded-0 shadow-sm card-animada">
+                            <img src="ropa/colleccion/PuloverH1.jpg"  class="card-img-top rounded-0" alt="Campera" style="height: 350px; object-fit: cover;">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Pulover Beish</h5>
+                                 <p class="card-text fs-3">90.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 px-2">
+                        <div class="card h-100 border-0 rounded-0 shadow-sm card-animada">
+                        <img src="ropa/colleccion/PuloverH.jpg" class="card-img-top rounded-0" alt="Campera" style="height: 350px; object-fit: cover;">
+                        <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Pulover Negro</h5>
+                                <p class="card-text fs-3">90.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 px-2">
+                        <div class="card h-100 border-0 rounded-0 shadow-sm card-animada">
+                        <img src="ropa/ningreso/PuloverH3.jpg" class="card-img-top rounded-0" alt="Campera" style="height: 350px; object-fit: cover;">
+                        <div class="card-body text-center bg-light">
+                                <h5 class="card-title fw-bold text-black fs-2">Pulover Gris</h5>
+                                <p class="card-text fs-3">90.000$</p>
+                                <a href="#" class="btn btn-dark">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselRopaLargo" data-bs-slide="prev" style="width: 7%;">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselRopaLargo" data-bs-slide="next" style="width: 7%;">
+        <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
 </div>
 
 
-                <div class="container">
+
+
+
+<!-- Marcas -->
+                <div class="container mt-4">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card" style="height: 100%;"> <img src="ropa Hombre/PuloverH.jpg"
@@ -249,13 +456,40 @@
 
                 </div>
             </div>
-            <div class="container-fluid bg-light py-5 text-center text-dark mt-4">
 
-            <div class="row">
-                <div class="col-sm-6 col-md-3 border-end border-secondary fs-3">LEVIS</div>
-                <div class="col-sm-6 col-md-3 border-end border-secondary fs-3">KEVINGSTON</div>
-                <div class="col-sm-6 col-md-3 border-end border-secondary fs-3">NIKE</div>
-                <div class="col-sm-6 col-md-3 fs-3">LEUTTE</div> </div>
+
+
+
+           <div class="marquee-wrapper border-top border-bottom bg-light py-4 mt-4">
+                <div class="marquee-content">
+                    <div class="marquee-item fs-3">LEVIS</div>
+                    <div class="marquee-item fs-3">KEVINGSTON</div>
+                    <div class="marquee-item fs-3">NIKE</div>
+                    <div class="marquee-item fs-3">ADIDAS</div>
+                    <div class="marquee-item fs-3">PUMA</div>
+                    <div class="marquee-item fs-3">LEUTTE</div>
+
+                    <div class="marquee-item fs-3">LEVIS</div>
+                    <div class="marquee-item fs-3">KEVINGSTON</div>
+                    <div class="marquee-item fs-3">NIKE</div>
+                    <div class="marquee-item fs-3">ADIDAS</div>
+                    <div class="marquee-item fs-3">PUMA</div>
+                    <div class="marquee-item fs-3">LEUTTE</div>
+
+                    <div class="marquee-item fs-3">LEVIS</div>
+                    <div class="marquee-item fs-3">KEVINGSTON</div>
+                    <div class="marquee-item fs-3">NIKE</div>
+                    <div class="marquee-item fs-3">ADIDAS</div>
+                    <div class="marquee-item fs-3">PUMA</div>
+                    <div class="marquee-item fs-3">LEUTTE</div>
+
+                    <div class="marquee-item fs-3">LEVIS</div>
+                    <div class="marquee-item fs-3">KEVINGSTON</div>
+                    <div class="marquee-item fs-3">NIKE</div>
+                    <div class="marquee-item fs-3">ADIDAS</div>
+                    <div class="marquee-item fs-3">PUMA</div>
+                    <div class="marquee-item fs-3">LEUTTE</div>
+                </div>
             </div>
 
 
