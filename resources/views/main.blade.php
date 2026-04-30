@@ -50,14 +50,36 @@
                 <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="jeans.jpg"  width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                            <img src="ropa Hombre/JeanH.jpg"  width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
                         </div>
                         <div class="carousel-item">
-                            <img src="" class="rounded mx-auto d-block" width="400" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                            <img src="ropa Hombre/ShortRusticoH1.jpg" class="rounded mx-auto d-block" width="400" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
                         </div>
                         <div class="carousel-item">
-                            <img src="remerA.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                            <img src="ropa Hombre/JeanH2.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
                         </div>
+                        <div class="carousel-item">
+                            <img src="ropa Hombre/ShortRusticoH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+
+
+                        <div class="carousel-item">
+                            <img src="ropa Hombre/SueterPolarH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="ropa Hombre/ConjuntoVeranoH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="ropa Hombre/ConjuntoVeranoH2.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="ropa Hombre/ConjuntoRayasH.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="ropa Hombre/ConjuntoRayasH2.jpg" width="400" class="rounded mx-auto d-block" style="height: 440px; object-fit: cover;" class="d-block w-80" alt="20">
+                        </div>
+
+
                     </div>
 
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -72,83 +94,96 @@
                 </div>
             </div>
 
-
-
-                    <div class="container mt-4">
+                <div class="container mt-4">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/JeanH.jpg"
+                                class="card-img-top"
+                                alt="..."
+                                style="height: 100%; width: 100%; object-fit: cover;">
                             <div class="card-body">
-                                <p class="card-text">Tarjeta 1: Contenido de ejemplo.</p>
+                                <p class="card-text fs-3">Jean</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/SueterPolarH.jpg"
+                                class="card-img-top"
+                                alt="..."
+                                style="height: 100%; width: 100%; object-fit: cover;">
                             <div class="card-body">
-                                <p class="card-text">Tarjeta 2: Contenido de ejemplo.</p>
+                                <p class="card-text fs-3">Sueter Polar</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/ConjuntoRayasH.jpg"
+                                class="card-img-top"
+                                alt="..."
+                                style="height: 100%; width: 100%; object-fit: cover;">
                             <div class="card-body">
-                                <p class="card-text">Tarjeta 3: Contenido de ejemplo.</p>
+                                <p class="card-text fs-3">Conjunto a Rayas</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            //bloque2
+
                 <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/PuloverH.jpg"
+                                class="card-img-top"
+                                alt="..."
+                                style="height: 100%; width: 100%; object-fit: cover;">
                             <div class="card-body">
-                                <p class="card-text">Tarjeta 1: Contenido de ejemplo.</p>
+                                <p class="card-text fs-3">Pulover</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/BermudaH.jpg"
+                                class="card-img-top"
+                                alt="..."
+                                style="height: 100%; width: 100%; object-fit: cover;">
                             <div class="card-body">
-                                <p class="card-text">Tarjeta 2: Contenido de ejemplo.</p>
+                                <p class="card-text fs-3">Bermuda</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <img src="jeans.jpg" class="card-img-top" alt="...">
+                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/ShortRusticoH.jpg"
+                                class="card-img-top"
+                                alt="..."
+                                style="height: 100%; width: 100%; object-fit: cover;">
                             <div class="card-body">
-                                <p class="card-text">Tarjeta 3: Contenido de ejemplo.</p>
+                                <p class="card-text fs-3">Short Rustico</p>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+            <div class="container-fluid bg-light py-5 text-center text-dark mt-4">
 
-            <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-
-
-
-
-            <div class="container mt-5"  >
-                @include('footer')
+            <div class="row">
+                <div class="col-sm-6 col-md-3 border-end border-secondary fs-3">LEVIS</div>
+                <div class="col-sm-6 col-md-3 border-end border-secondary fs-3">KEVINGSTON</div>
+                <div class="col-sm-6 col-md-3 border-end border-secondary fs-3">NIKE</div>
+                <div class="col-sm-6 col-md-3 fs-3">LEUTTE</div> </div>
             </div>
 
 
+            <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</div></div></div>
+            <div class=" mt-3">
+                @include('footer')
+            </div>
         </body>
 
 </html>
-

@@ -41,17 +41,40 @@
 
 
 </head>
+<footer class="py-5 bg-dark text-white">
+    <div class="container text-center">
+        <div class="d-flex justify-content-center align-items-center mb-4">
+            <span class="fs-4 fw-bold">ROPA MJ</span>
+        </div>
+        <nav class="mb-4">
+            <ul class="nav justify-content-center p-3 shadow-sm w-100 border-top">
+            <a href="/terminosYCondiciones" class="text-white-50 text-decoration-none mx-3">
+                <p class="fs-5">Terminos y Usos</p></a>
+            <a href="/consultas" class="text-white-50 text-decoration-none mx-3">
+                <p class="fs-5">Consultas</p></a>
+            <a href="/metodosDePago" class="text-white-50 text-decoration-none mx-3">
+                <p class="fs-5">Metodos de Pago</p></a>
+            </ul>
+        </nav>
+        <p class="text-white-50 small">&copy; 2026 Distribuidora ROPA MJ. Creado por Batalla Juan Cruz & Teruel Laola Melanie.</p>
+    </div>
+</footer>
 <body class="d-flex flex-column min-vh-100">
     <ul class="nav justify-content-center bg-white p-3 shadow-sm w-100 border-top">
         <li class="nav-item">
-            <a class="nav-link text-dark mx-2" href="#">
+            <a class="nav-link text-dark mx-2" href="/terminosYCondiciones">
                 <p class="fs-4 border-bottom border-dark">Terminos y Usos</p>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark mx-2" href="/quienesSomos">
                 <p class="fs-4 border-bottom border-dark">Quiénes Somos</p>
+                <div class="text-secondary">
+                    <p class="mb-1"><i class="bi bi-envelope me-2"></i> mayoristamjropas@gmail.com</p>
+                    <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Barranqueras, Chaco</p>
+                </div>
             </a>
+
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark mx-2" href="/consultas">
@@ -60,7 +83,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark mx-2" href="/metodosDePago">
-                <p class="fs-4 border-bottom border-dark">Metodos de Pago (Comercializacion)</p>
+                <p class="fs-4 border-bottom border-dark">Metodos de Pago</p>
             </a>
         </li>
     </ul>

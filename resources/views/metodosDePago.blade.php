@@ -23,15 +23,10 @@
         <div class="container mt-5">
             <div class="p-4 bg-white border rounded shadow-sm">
                 <div class="d-flex position-relative">
-                <img src="jeans.jpg" class="flex-shrink-0 me-3" alt="Placeholder">
+                <img src="logo_mp.png" alt="Placeholder" style="height: 130px;" >
                 <div>
-                    <h5 class="mt-4">Mercado Pago</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                        optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                        rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                        optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                        rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
+                    <h5 class="mt-4 display-5">Mercado Pago</h5>
+                    <p class="text-dark display-6">Con compras de Mercado Pago tenes un reintegro del 15% por cada unidad comprada</p>
 
                 </div>
                 </div>
@@ -41,15 +36,11 @@
         <div class="container mt-2">
             <div class="p-4 bg-white border rounded shadow-sm">
                 <div class="d-flex position-relative">
-                <img src="jeans.jpg" class="flex-shrink-0 me-3" alt="Placeholder">
+
+                <img src="logo_Naranja.png" alt="Placeholder style="height: 190px;">
                 <div>
-                    <h5 class="mt-4">Narana X</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                        optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                        rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                        optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                        rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
+                    <h5 class="mt-4 display-5">Targeta Naranja</h5>
+                    <p class="text-dark display-6">Con compras de Mercado Pago tenes un reintegro del 10% por cada unidad comprada</p>
                 </div>
                 </div>
             </div>
@@ -58,28 +49,33 @@
         <div class="container mt-2">
             <div class="p-4 bg-white border rounded shadow-sm">
                 <div class="d-flex position-relative">
-                <img src="jeans.jpg" class="flex-shrink-0 me-3" alt="Placeholder">
+                <img src="Mastercard-logo.png" alt="mastercard" style="height: 190px; width: auto;">
                 <div>
-                    <h5 class="mt-4">Banco Corrientes</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                        optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                        rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                        optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                        rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
+                    <h5 class="mt-4 display-5">Mastercard</h5>
+                    <p class="text-dark display-6">Con compras de Mercado Pago tenes un reintegro del 5% por cada unidad comprada y hasta 3 cuotas sin intereses</p>
+
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-2">
+            <div class="p-4 bg-white border rounded shadow-sm">
+                <div class="d-flex position-relative">
+                <img src="visa-logo.png" alt="mastercard" style="height: 190px; width: auto;">
+                <div>
+                    <h5 class="mt-4 display-6">Visa</h5>
+                    <p class="text-dark display-6">Con compras de Mercado Pago tenes un reintegro del 34% por cada unidad comprada y hasta 6 cuotas sin intereses</p>
+
                 </div>
                 </div>
             </div>
         </div>
 
 
-
-
-        <footer class="mt-4">
-            <div class="container mt-5"  >
+                <div class=" mt-3">
                 @include('footer')
-            </div>
-        </footer>
+                </div>
 </body>
 
 </html>

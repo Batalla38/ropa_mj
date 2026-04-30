@@ -19,27 +19,65 @@
 
 
                 <div class="container mt-5"><div class="card p-4">
-                    <p class="h1">¿Quienes Somos?</p>
-                        <hr> <p class= "fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
-                    <p class="h2">Misión: </p>
-                        <hr> <p class= "fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
-                    <p class="h2">Misión: </p>
-                        <hr> <p class= "fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                            rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?</p>
+<p class="h1">Quiénes Somos</p>
+<hr>
+
+<p class="fs-4">
+    En <strong>Ropa MJ</strong>, no solo distribuimos prendas; conectamos marcas con personas.
+    Somos una distribuidora líder comprometida con la excelencia operativa y la vanguardia
+    en el sector textil, facilitando el acceso a moda de alta calidad para negocios y emprendedores.
+</p>
+<div class="container my-5">
+                    <div class="row justify-content-center">
+                        <!-- Definimos el ancho de la tarjeta (col-md-8 para que no sea gigante) -->
+                        <div class="col-md-8">
+                            <div class=" shadow-sm ">
+                                <div class=" text-center">
+                                    <!-- Contenedor de la imagen con proporciones controladas -->
+                                    <div class="ratio ratio-21x9 rounded overflow-hidden mx-auto">
+                                        <img 
+                                            src="local.png" 
+                                            class="img-fluid object-fit-cover" 
+                                            alt="Distribuidora Ropa MJ"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<div class="mt-5">
+    <p class="h2">Nuestra Misión</p>
+    <p class="fs-5 text-muted">
+        Nuestra misión es simplificar la cadena de suministro de moda, ofreciendo un catálogo
+        curado y un servicio de logística eficiente que garantice que cada prenda llegue a su
+        destino en perfectas condiciones y en el tiempo acordado.
+    </p>
+</div>
+
+<hr>
+
+<div class="mt-4">
+    <p class="h2">¿Por qué elegirnos?</p>
+    <ul class="fs-5 text-muted">
+        <li class="mb-2"><strong>Calidad Garantizada:</strong> Seleccionamos cuidadosamente cada textil y diseño.</li>
+        <li class="mb-2"><strong>Compromiso Logístico:</strong> Contamos con una red de distribución optimizada para entregas rápidas.</li>
+        <li class="mb-2"><strong>Atención Personalizada:</strong> Brindamos soporte directo para ayudar a crecer a nuestros aliados comerciales.</li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="mt-4">
+    <p class="h2">Nuestra Visión</p>
+    <p class="fs-5 text-muted">
+        Para el año 2030, buscamos ser el referente principal en la distribución mayorista de la región,
+        impulsando la innovación tecnológica en nuestros procesos y promoviendo prácticas sostenibles
+        dentro de la industria de la moda.
+    </p>
+</div>
+
+
                 </div></div>
 
                 <div class="container mt-5">
@@ -47,12 +85,13 @@
                     <div class="row align-items-center"> <div class="col-md-7">
                             <p class="h1">¿Donde estamos?</p>
                             <hr>
-                            <p class="fs-4">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                                optio aspernatur esse sit recusandae labore fuga natus nemo maxime
-                                rerum molestias aut dignissimos pariatur debitis expedita animi suscipit cum inventore?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <p class="fs-5">
+                                Te dejamos nuestra ubicacion para que puedas visitarnos<br> en nuestro horiario habitual de 8.00 AM a 22.00PM <br> 
+                                Avenida San Martín S/N,<br>
+                                <strong>Barranqueras, Chaco</strong>.<br>
+                                Código Postal H3503, Argentina.
                             </p>
+                            
                         </div>
 
                         <div class="col-md-5">
@@ -67,17 +106,65 @@
                             </div>
                         </div>
 
-                    </div> </div>
+                    </div>
+                </div>
 
                 </div>
+                
+                <div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0 p-4 rounded-4">
+                <h3 class="mb-4 fw-bold">Contactanos</h3>
+                
+                <div class="d-flex flex-column gap-4">
+                    
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/5493794123456" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="30" height="30" class="me-3">
+                        <span class="fs-5 fw-medium">3794-123456</span>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" width="30" height="30" class="me-3">
+                        <span class="fs-5 fw-medium">@RopaMJ_ok</span>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook" width="30" height="30" class="me-3">
+                        <span class="fs-5 fw-medium">Ropa MJ Mayorista</span>
+                    </a>
+
+                    <!-- TikTok -->
+                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" width="30" height="30" class="me-3">
+                        <span class="fs-5 fw-medium">ropamj_tiktok</span>
+                    </a>
+                    <hr class="my-4 opacity-25">
+
+                                    <div class="text-secondary">
+                                        <p class="mb-1"><i class="bi bi-envelope me-2"></i> mayoristamjropas@gmail.com</p>
+                                        <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Barranqueras, Chaco</p>
+                                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                                    
+
+                </div>
+
 
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 
-       <footer class="mt-4">
-            <div class="container mt-4"  >
-                @include('footer')
-            </div>
-        </footer>
+        <div class=" mt-3">
+            @include('footer')
+        </div>
+</body>
 </html>
