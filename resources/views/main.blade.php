@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html>
         <head>
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
+
             <title>Ropa MJ</title>
             <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
             <style>
@@ -187,8 +187,8 @@
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/ChalecoH.jpg" class="card-img-top" alt="Jean" style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Chaleco de Invierno</h5>
-                                <p class="card-text">80.000$</p>
+                                <h5 class="card-title fs-2">Chaleco de Invierno</h5>
+                                <p class="card-text fs-3">80.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
@@ -197,8 +197,8 @@
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/ChombaLargaH.jpg" class="card-img-top" alt="Sueter" style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Chomba Larga</h5>
-                                <p class="card-text">90.000$</p>
+                                <h5 class="card-title fs-2">Chomba Larga</h5>
+                                <p class="card-text fs-3">90.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
@@ -207,8 +207,8 @@
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/mujer4.jpeg" class="card-img-top" alt="Conjunto" style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Tapado Rojo</h5>
-                                <p class="card-text">120.000$</p>
+                                <h5 class="card-title fs-2">Tapado Rojo</h5>
+                                <p class="card-text fs-3">120.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
@@ -228,7 +228,7 @@
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/mujer8.jpeg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title fs-2">Tapado Beish</h5>
+                                <h5 class="card-title fs-2">Tapado Beige</h5>
                                 <p class="card-text fs-3">125.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
                             </div>
@@ -363,7 +363,7 @@
                         <div class="card h-100 border-0 rounded-0 shadow-sm card-animada">
                             <img src="ropa/colleccion/PuloverH1.jpg"  class="card-img-top rounded-0" alt="Campera" style="height: 350px; object-fit: cover;">
                             <div class="card-body text-center bg-light">
-                                <h5 class="card-title fw-bold text-black fs-2">Pulover Beish</h5>
+                                <h5 class="card-title fw-bold text-black fs-2">Pulover Beige</h5>
                                  <p class="card-text fs-3">90.000$</p>
                                 <a href="#" class="btn btn-dark">Ver más</a>
                             </div>
@@ -409,6 +409,67 @@
 </div>
 
 
+
+<!-- carrusel inferior -->
+<div class="container mt-5">
+                <div class="card p-4">
+                    <div class="container-fluid mt-1 p-1">
+                        <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="10000">
+                        <div class="carousel-inner" >
+                            <div class="carousel-item active">
+                                <img src="{{ asset('banner slider/banner1.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner2.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner3.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner4.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner5.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner6.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner7.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('banner slider/banner1.jpeg') }}"
+                                    class="d-block w-100"
+                                    style="height: auto; object-fit: contain;"
+                                    alt="Banner 1"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+        </div>
 
 
 

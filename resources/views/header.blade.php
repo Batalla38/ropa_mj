@@ -41,6 +41,23 @@
         padding: 0.30rem 0.5rem;
         font-size: 0.75rem;
     }
+    /* Esto hace que el submenú se posicione a la derecha del menú principal /
+.dropdown-menu li {
+    position: relative;
+}
+
+.dropdown-menu .submenu {
+    display: none; / Oculto por defecto /
+    position: absolute;
+    left: 100%; / Lo mueve a la derecha /
+    top: -7px;
+}
+
+/ Muestra el submenú cuando pasas el mouse por la categoría padre */
+.dropdown-menu li:hover > .submenu {
+    display: block;
+}
+
 </style>
 
 
@@ -72,9 +89,9 @@
                         Ropas
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/producto">Masculino</a></li>
-                        <li><a class="dropdown-item" href="/producto">Femenino</a></li>
-                        <li><a class="dropdown-item" href="/producto">Niños</a></li>
+                        <li><a class="dropdown-item" href="/catalogo">Masculino</a></li>
+                        <li><a class="dropdown-item" href="/catalogo">Femenino</a></li>
+                        <li><a class="dropdown-item" href="/catalogo">Niños</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/catalogo">Otros</a></li>
                     </ul>
@@ -92,3 +109,5 @@
 </body>
 
 </html>
+
+

@@ -30,38 +30,3 @@ body {
 }
 
 
-
-
-/* Contenedor principal que oculta el desbordamiento */
-.marquee-wrapper {
-    overflow: hidden;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-/* El contenedor que se anima */
-.marquee-content {
-    display: flex;
-    animation: scroll-marcas 30s linear infinite; /* 30s define la velocidad (más segundos = más lento) */
-}
-
-/* Estilo para cada marca */
-.marquee-item {
-    padding: 0 50px; /* Espacio entre marcas */
-    color: #333;
-    font-weight: bold;
-    border-right: 1px solid #ccc; /* La rayita divisoria que tenías */
-}
-
-/* La animación mágica */
-@keyframes scroll-marcas {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Se mueve la mitad exacta para que no se note el salto */
-}
-
-/* Opcional: Pausar cuando el usuario pasa el mouse */
-.marquee-wrapper:hover .marquee-content {
-    animation-play-state: paused;
-}
