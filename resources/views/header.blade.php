@@ -57,6 +57,30 @@
 .dropdown-menu li:hover > .submenu {
     display: block;
 }
+/* Posicionamiento del submenú */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%; /* Lo mueve a la derecha del menú principal */
+    margin-top: -1px;
+    display: none; /* Oculto por defecto */
+}
+
+/* Mostrar al hacer hover */
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+/* Ajuste para que la flecha apunte a la derecha en el submenú */
+.dropdown-submenu .dropdown-toggle::after {
+    transform: rotate(-90deg);
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
 
 </style>
 
@@ -84,18 +108,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/catalogo"><p class= "fs-4">Catálogo</p></a>
                 </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fs-4 d-flex align-items-center" href="/catalogo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ropas
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/catalogo">Masculino</a></li>
-                        <li><a class="dropdown-item" href="/catalogo">Femenino</a></li>
-                        <li><a class="dropdown-item" href="/catalogo">Niños</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/catalogo">Otros</a></li>
-                    </ul>
-                </li>
+    <a class="nav-link dropdown-toggle fs-4 d-flex align-items-center" href="/catalogo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Ropas
+    </a>
+    <ul class="dropdown-menu">
+        <!-- Submenú Masculino -->
+        <li class="dropdown-submenu">
+            <a class="dropdown-item dropdown-toggle" href="/catalogoM">Masculino</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/catalogoChaleco">Chaleco</a></li>
+                <li><a class="dropdown-item" href="/catalogoChaleco">Pantalones</a></li>
+                <li><a class="dropdown-item" href="/catalogoChaleco">Buzos</a></li>
+            </ul>
+        </li>
+
+        <li><a class="dropdown-item" href="/catalogoF">Femenino</a></li>
+        <li><a class="dropdown-item" href="/catalogoN">Niños</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/catalogo">Otros</a></li>
+    </ul>
+</li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">

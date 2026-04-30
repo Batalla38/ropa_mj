@@ -71,6 +71,55 @@ body {
     </p>
 </div></p>
 
+
+<div class="container mt-4">
+    <h3 class="mb-3">Preguntas</h3>
+    
+    <form id="formPregunta">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <input type="text" id="inputPregunta" class="form-control form-control-lg" placeholder="Escribí tu pregunta..." required>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary btn-lg d-flex align-items-center" onclick="enviarConsulta()">
+                    <i class="bi bi-stars me-2"></i> Preguntar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+                <h4 class="mt-3">¡Consulta enviada!</h4>
+                <p>La responderemos a la brevedad.</p>
+                <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function enviarConsulta() {
+    const input = document.getElementById('inputPregunta');
+    const pregunta = input.value;
+
+    if (pregunta.trim() === "") {
+        alert("Por favor, escribí una pregunta.");
+        return;
+    }
+
+    // Mostramos el modal
+    const miModal = new bootstrap.Modal(document.getElementById('modalExito'));
+    miModal.show();
+
+    // Limpiamos el input
+    input.value = "";
+}
+</script>
+
                     </div>
                 </div>
 
@@ -78,6 +127,7 @@ body {
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
+        
 
         <div class=" mt-3">
             @include('footer')

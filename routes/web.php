@@ -42,4 +42,16 @@ Route::get('/terminosYCondiciones', function () {
 Route::get('/consultas', function () {
     return view('consultas');
 });
+Route::get('/catalogoM', function () {
+    return view('catalogoM');
+});
+Route::get('/catalogoF', function () {
+    return view('catalogoF');
+});
+Route::get('/catalogoChaleco', function () {
+    return view('catalogoChaleco');
+});
+Route::get('/productoM', function () {
+    return view('productoM');
+});
 //>>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9

@@ -41,30 +41,59 @@
 
 
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <ul class="nav justify-content-center bg-white p-3 shadow-sm w-100 border-top">
-        <li class="nav-item">
-            <a class="nav-link text-dark mx-2" href="/terminosYCondiciones">
-                <p class="fs-4 border-bottom border-dark">Terminos y Usos</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark mx-2" href="/quienesSomos">
-                <p class="fs-4 border-bottom border-dark">Quiénes Somos</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark mx-2" href="/consultas">
-                <p class="fs-4 border-bottom border-dark">Consultas</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark mx-2" href="/metodosDePago">
-                <p class="fs-4 border-bottom border-dark">Metodos de Pago</p>
-            </a>
-        </li>
-    </ul>
-</body>
+<footer class="py-5 bg-white text-dark">
+    <div class="container text-center">
+        <div class="d-flex justify-content-center align-items-center mb-4">
+            <span class="fs-4 fw-bold">ROPA MJ</span>
+        </div>
+        <nav class="row text-center align-items-start">
+            
+            <!-- Columna Izquierda -->
+            <div class="col-md-4 mb-4">
+                <a href="/terminosYCondiciones" class="text-muted text-decoration-none fs-5">
+                    Términos y Usos
+                </a>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <a href="/consultas" class="text-muted text-decoration-none fs-5 d-block mb-4">
+                    Consultas
+                </a>
+                
+                <div class="d-flex flex-column align-items-center gap-3">
+                    <a href="https://wa.me/5493794123456" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                        <img src="WhatsA.png" alt="WhatsApp" width="25" height="25" class="me-2">
+                        <span class="fw-medium">3794-123456</span>
+                    </a>
+                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                        <img src="Ig.png" alt="Instagram" width="25" height="25" class="me-2">
+                        <span class="fw-medium">@RopaMJ_ok</span>
+                    </a>
+                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                          <img src="FB.png" alt="Facebook" width="25" height="25" class="me-2">
+                        <span class="fw-medium">@RopaMJ_ok</span>
+                    </a>
+                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
+                         <img src="TikT.png" alt="TikTok" width="25" height="25" class="me-2">
+                        <span class="fw-medium">@RopaMJ_ok</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <a href="/metodosDePago" class="text-muted text-decoration-none fs-5">
+                    Métodos de Pago
+                </a>
+            </div>
+        </nav>
+
+        
+        <div class="border-top pt-4 mt-4 text-center">
+            <p class="text-muted small mb-0">&copy; 2026 Distribuidora ROPA MJ. Creada por Batalla Juan Cruz & Teruel Laola Melanie.</p>
+        </div>
+    </div>
+</footer>
+
 
 </body>
 </html>
