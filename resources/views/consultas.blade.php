@@ -6,13 +6,13 @@
             <style>
                 /* Estilos globales aplicados al cuerpo del documento */
                 body {
-                    background-color: #a39898; /* Color de fondo definido por el usuario */
+                    background-color: #c1a391; /* Color de fondo definido por el usuario */
                     color: #9f9393;           /* Color de fuente definido por el usuario */
                 }
-body {
-                background-image: url(https://images.vexels.com/media/users/3/142647/isolated/preview/7975c8713e6cd70ff26097efbbebdbd1-ropa-de-camiseta.png);
-                background-repeat: repeat;
-                background-size: 80px; /* Aquí controlas el tamaño */
+                body {
+                    background-image: url(bg1.png);
+                    background-repeat: repeat;
+                    background-size: 700px; /* Aquí controlas el tamaño */
                 }
 
             </style>
@@ -74,9 +74,14 @@ body {
 
 <div class="container mt-4">
     <h3 class="mb-3">Preguntas</h3>
-    
+
     <form id="formPregunta">
         <div class="row g-2 align-items-center">
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Ingrese su Correo</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
             <div class="col">
                 <input type="text" id="inputPregunta" class="form-control form-control-lg" placeholder="Escribí tu pregunta..." required>
             </div>
@@ -127,7 +132,7 @@ function enviarConsulta() {
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-        
+
 
         <div class=" mt-3">
             @include('footer')

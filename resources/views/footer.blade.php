@@ -47,7 +47,7 @@
             <span class="fs-4 fw-bold">ROPA MJ</span>
         </div>
         <nav class="row text-center align-items-start">
-            
+
             <!-- Columna Izquierda -->
             <div class="col-md-4 mb-4">
                 <a href="/terminosYCondiciones" class="text-muted text-decoration-none fs-5">
@@ -59,7 +59,7 @@
                 <a href="/consultas" class="text-muted text-decoration-none fs-5 d-block mb-4">
                     Consultas
                 </a>
-                
+
                 <div class="d-flex flex-column align-items-center gap-3">
                     <a href="https://wa.me/5493794123456" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
                         <img src="WhatsA.png" alt="WhatsApp" width="25" height="25" class="me-2">
@@ -87,7 +87,7 @@
             </div>
         </nav>
 
-        
+
         <div class="border-top pt-4 mt-4 text-center">
             <p class="text-muted small mb-0">&copy; 2026 Distribuidora ROPA MJ. Creada por Batalla Juan Cruz & Teruel Laola Melanie.</p>
         </div>

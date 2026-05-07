@@ -181,10 +181,10 @@
                 <div id="carouselCol1" class="carousel slide" data-bs-ride="hover">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="ropa/mujer/mujer (12).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;">
+                            <a href="/productoM"><img src="ropa/mujer/mujer (12).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
                         </div>
                         <div class="carousel-item">
-                            <img src="ropa/mujer/mujer (13).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;">
+                            <a href="/productoM"><img src="ropa/mujer/mujer (13).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
                         </div>
                     </div>
                     <!-- Los botones apuntan correctamente a #carouselCol1 -->
@@ -213,10 +213,11 @@
                 <div id="carouselCol2" class="carousel slide" data-bs-ride="hover">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="ropa/mujer/mujer (1).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;">
+                            <a href="/productoM"><img src="ropa/mujer/mujer (1).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
                         </div>
-                        <div class="carousel-item">
-                            <img src="ropa/mujer/mujer (2).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;">
+                        <div class="carousel-item href=/productoM">
+                           <a href="/productoM"> <img src="ropa/mujer/mujer (2).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
+
                         </div>
                     </div>
                     <!-- CAMBIAMOS EL TARGET A #carouselCol2 PARA QUE NO MUEVA EL PRIMERO -->

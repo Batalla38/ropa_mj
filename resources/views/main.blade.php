@@ -409,64 +409,58 @@
 
 <!-- carrusel inferior -->
 <div class="container mt-5">
-                <div class="card p-4">
-                    <div class="container-fluid mt-1 p-1">
-                        <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="10000">
-                        <div class="carousel-inner" >
-                            <div class="carousel-item active">
-                                <img src="{{ asset('banner slider/banner1.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner2.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner3.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner4.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner5.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner6.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner7.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner1.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
+    <div class="card p-4 border-0 shadow-sm">
+        <div class="container-fluid mt-1 p-1">
+            <!-- CAMBIAMOS EL ID A: carruselInferiorMJ -->
+            <div id="carruselInferiorMJ" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+                <div class="carousel-inner">
+                    <!-- Item 1 -->
+                    <div class="carousel-item active">
+                        <img src="banner slider2/bannerM (1).jpeg"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 1">
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+
+                    <!-- Item 2 -->
+                    <div class="carousel-item">
+                        <img src="banner slider2/bannerM (2).jpeg"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 2">
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="carousel-item">
+                        <img src="banner slider2/bannerM (3).jpeg"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 3">
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="carousel-item">
+                        <img src="{{ asset('banner slider/banner2.jpeg') }}"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 4">
+                    </div>
                 </div>
+
+                <!-- BOTONES: Ahora apuntan específicamente a #carruselInferiorMJ -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselInferiorMJ" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselInferiorMJ" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
+    </div>
+</div>
 
 
 

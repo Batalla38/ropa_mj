@@ -184,12 +184,12 @@
                                 <!-- Primera Imagen -->
                                 <div class="carousel-item active">
                                     <!-- Cambiamos card-img-top por d-block w-100 para que Bootstrap la reconozca bien -->
-                                    <img src="ropa/casual/ChalecoH.jpg" class="d-block w-100" alt="Chomba Hombre Vista 1" style="height: 350px; object-fit: cover;">
+                                    <a href="/producto"><img src="ropa/casual/ChalecoH.jpg" class="d-block w-100" alt="Chomba Hombre Vista 1" style="height: 350px; object-fit: cover;"></a>
                                 </div>
 
                                 <!-- Segunda Imagen -->
                                 <div class="carousel-item">
-                                    <img src="ropa/casual/ChalecoH2.jpg" class="d-block w-100" alt="Chomba Hombre Vista 2" style="height: 350px; object-fit: cover;">
+                                    <a href="/producto"><img src="ropa/casual/ChalecoH2.jpg" class="d-block w-100" alt="Chomba Hombre Vista 2" style="height: 350px; object-fit: cover;"></a>
                                 </div>
 
                             </div>

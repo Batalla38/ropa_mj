@@ -6,6 +6,26 @@
         <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
             <style>
+                 /* Estilos globales aplicados al cuerpo del documento */
+                body {
+                    background-color: #c1a391; /* Color de fondo definido por el usuario */
+                    color: #9f9393;           /* Color de fuente definido por el usuario */
+                }
+                body {
+                    background-image: url(bg1.png);
+                    background-repeat: repeat;
+                    background-size: 700px; /* Aquí controlas el tamaño */
+                }
+                 /* Estilos globales aplicados al cuerpo del documento */
+                body {
+                    background-color: #c1a391; /* Color de fondo definido por el usuario */
+                    color: #9f9393;           /* Color de fuente definido por el usuario */
+                }
+                body {
+                    background-image: url(bg1.png);
+                    background-repeat: repeat;
+                    background-size: 700px; /* Aquí controlas el tamaño */
+                }
         /* Estilos globales aplicados al cuerpo del documento */
             body {
             background-color: #a39898; /* Color de fondo definido por el usuario */
@@ -14,7 +34,7 @@
             .carousel {
                 .carousel-inner {
         height: 650px; /* Ajusta este valor según qué tan alto lo quieras */
-       
+
             border: none; /* Quitamos el borde predeterminado */
             border-radius: 25px !important; /* Bordes muy redondeados (efecto circular) */
             box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Sombra suave para dar profundidad */
@@ -43,10 +63,10 @@
                             </div>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                <img src="ropa Hombre/ConjuntoRayasH.jpg" class="d-block img-fluid w-75 d-block mx-auto" alt="conjunto de rayas">
+                                <img src="ropa/mujer/mujer (1).jpeg" class="d-block img-fluid w-75 d-block mx-auto" alt="conjunto de rayas">
                                 </div>
                                 <div class="carousel-item">
-                                <img src="ropa Hombre/ConjuntoRayasH2.jpg" class="d-block img-fluid w-75 d-block mx-auto" alt="conjunto de rayas">
+                                <img src="ropa/mujer/mujer (2).jpeg" class="d-block img-fluid w-75 d-block mx-auto" alt="conjunto de rayas">
                                 </div>
 
                             </div>
