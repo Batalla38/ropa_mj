@@ -11,11 +11,19 @@
             background-color: #a39898; /* Color de fondo definido por el usuario */
             color: #9f9393;           /* Color de fuente definido por el usuario */
             }
-            body {
-                background-image: url(https://images.vexels.com/media/users/3/142647/isolated/preview/7975c8713e6cd70ff26097efbbebdbd1-ropa-de-camiseta.png);
-                background-repeat: repeat;
-                background-size: 80px; /* Aquí controlas el tamaño */
-                }
+            .carousel {
+                .carousel-inner {
+        height: 650px; /* Ajusta este valor según qué tan alto lo quieras */
+       
+            border: none; /* Quitamos el borde predeterminado */
+            border-radius: 25px !important; /* Bordes muy redondeados (efecto circular) */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Sombra suave para dar profundidad */
+            overflow: hidden; /* Asegura que el contenido interno respete el borde redondeado */
+            background-color: #a39898; /* Fondo blanco para las tarjetas */
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
+            padding: 1px;
+        }
         </style>
 
         <h1></h1>
@@ -26,7 +34,7 @@
                 @include('header')
 
                 <div class="container mt-5">
-                    <h2 class="text-center">Hombre</h2>
+                    <h2 class="text-center">Mujer</h2>
                     <div class="row">
                         <div id="carouselExampleIndicators" class=" col-6 py-3 carousel slide">
                             <div class="carousel-indicators">
@@ -56,9 +64,9 @@
                         <div class="col-6 py-3">
                             <div class="card border-0">
                                 <div class="card-body">
-                                    <h5 class="card-title fw-bold fs-1">Conjunto a Rayas</h5>
-                                    <p class="card-text fs-4">Este conjunto destaca por su comodidad y su diseño pinstripe atemporal en blanco y negro. <br>El set incluye una camiseta de manga corta y pantalones cortos a juego, perfectos para los días cálidos de verano. </p>
-                                   <h5 class="card-title fw-bold fs-3">$90.000</h5>
+                                    <h5 class="card-title fw-bold fs-1">Polera de Hilo</h5>
+                                    <p class="card-text fs-4">Destaca por su textura suave y su diseño de tejido acanalado que se adapta  a la silueta. <br>Es una prenda básica de alta calidad, ideal para crear looks sofisticados y abrigados durante los días de media estación. </p>
+                                   <h5 class="card-title fw-bold fs-3">$30.000</h5>
                                     <div class="mt-2">
                                         <p class="text-muted small fs-4">Medios de pago aceptados:</p>
                                         <div class="d-flex flex-wrap gap-2 align-items-center">
@@ -71,9 +79,9 @@
                                     </div>
 
                                     <h5 class="card-title py-2 fs-5">Caracteristicas:</h5>
-                                    <p class="card-text fs-5">Material: Lino de alta calidad</p>
-                                    <p class="card-text fs-5">Patrón: Rayas finas (pinstripe) blanco y negro</p>
-                                    <p class="card-text fs-5">Cuidado: Lavado a máquina [especificar temperatura, si se sabe, ej. frío].</p>
+                                    <p class="card-text fs-5">Material: Hilo de punto fino con textura canelada.</p>
+                                    <p class="card-text fs-5">Patrón: Cuello media polera y mangas largas con acabado elástico</p>
+                                    <p class="card-text fs-5">Cuidado: Lavado a mano o ciclo delicado con agua fría.</p>
                                     <div class="container mt-3">
 
                                     <p class="mb-2">Seleccione su talle</p>
@@ -81,11 +89,11 @@
 
                                         <div class="col-auto">
                                         <input type="radio" class="btn-check" name="talle" id="t345" value="34.5">
-                                        <label class="btn btn-outline-dark" for="t345">S</label>
+                                        <label class="btn btn-outline-dark" for="t345">XS</label>
                                         </div>
                                         <div class="col-auto">
                                         <input type="radio" class="btn-check" name="talle" id="t35" value="35">
-                                        <label class="btn btn-outline-dark" for="t35">M</label>
+                                        <label class="btn btn-outline-dark" for="t35">S</label>
                                         </div>
                                         <div class="col-auto">
                                         <input type="radio" class="btn-check" name="talle" id="t36" value="36">
@@ -93,7 +101,7 @@
                                         </div>
                                         <div class="col-auto">
                                         <input type="radio" class="btn-check" name="talle" id="t365" value="36.5">
-                                        <label class="btn btn-outline-dark" for="t365">XL</label>
+                                        <label class="btn btn-outline-dark" for="t365">M</label>
                                         </div>
 
                                     </div>

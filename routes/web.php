@@ -29,6 +29,9 @@ Route::get('/metodosDePago', function () {
 Route::get('/producto', function () {
     return view('producto');
 });
+Route::get('/productoM', function () {
+    return view('productoM');
+});
 
 //<<<<<<< HEAD
 Route::post('/contacto', [ContactoController::class, 'procesar']);
