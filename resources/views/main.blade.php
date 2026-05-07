@@ -90,9 +90,6 @@
 .marquee-wrapper:hover .marquee-content {
     animation-play-state: paused;
 }
-
-
-
             </style>
         </head>
 
@@ -186,7 +183,7 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/ChalecoH.jpg" class="card-img-top" alt="Jean" style="height: 300px; object-fit: cover;">
-                            <div class="card-body text-center">
+                            <div class="card-body text-center bg-light">
                                 <h5 class="card-title fs-2">Chaleco de Invierno</h5>
                                 <p class="card-text fs-3">80.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
@@ -196,7 +193,7 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/ChombaLargaH.jpg" class="card-img-top" alt="Sueter" style="height: 300px; object-fit: cover;">
-                            <div class="card-body text-center">
+                            <div class="card-body text-center bg-light">
                                 <h5 class="card-title fs-2">Chomba Larga</h5>
                                 <p class="card-text fs-3">90.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
@@ -206,7 +203,7 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/mujer4.jpeg" class="card-img-top" alt="Conjunto" style="height: 300px; object-fit: cover;">
-                            <div class="card-body text-center">
+                            <div class="card-body text-center bg-light">
                                 <h5 class="card-title fs-2">Tapado Rojo</h5>
                                 <p class="card-text fs-3">120.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
@@ -227,7 +224,7 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/mujer8.jpeg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover;">
-                            <div class="card-body text-center">
+                           <div class="card-body text-center bg-light">
                                 <h5 class="card-title fs-2">Tapado Beige</h5>
                                 <p class="card-text fs-3">125.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
@@ -237,7 +234,7 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/PuloverH3.jpg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover;">
-                            <div class="card-body text-center">
+                            <div class="card-body text-center bg-light">
                                 <h5 class="card-title fs-2">Pulover</h5>
                                 <p class="card-text fs-3">100.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
@@ -247,7 +244,7 @@
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm card-animada">
                             <img src="ropa/relevante/SueterPolarH.jpg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover;">
-                            <div class="card-body text-center">
+                            <div class="card-body text-center bg-light">
                                 <h5 class="card-title fs-2">Sueter Polar</h5>
                                 <p class="card-text fs-3">150.000$</p>
                                 <a href="#" class="btn btn-primary">Ver más</a>
@@ -412,64 +409,58 @@
 
 <!-- carrusel inferior -->
 <div class="container mt-5">
-                <div class="card p-4">
-                    <div class="container-fluid mt-1 p-1">
-                        <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="10000">
-                        <div class="carousel-inner" >
-                            <div class="carousel-item active">
-                                <img src="{{ asset('banner slider/banner1.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner2.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner3.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner4.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner5.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner6.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner7.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('banner slider/banner1.jpeg') }}"
-                                    class="d-block w-100"
-                                    style="height: auto; object-fit: contain;"
-                                    alt="Banner 1"></div>
+    <div class="card p-4 border-0 shadow-sm">
+        <div class="container-fluid mt-1 p-1">
+            <!-- CAMBIAMOS EL ID A: carruselInferiorMJ -->
+            <div id="carruselInferiorMJ" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+                <div class="carousel-inner">
+                    <!-- Item 1 -->
+                    <div class="carousel-item active">
+                        <img src="banner slider2/bannerM (1).jpeg"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 1">
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+
+                    <!-- Item 2 -->
+                    <div class="carousel-item">
+                        <img src="banner slider2/bannerM (2).jpeg"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 2">
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="carousel-item">
+                        <img src="banner slider2/bannerM (3).jpeg"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 3">
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="carousel-item">
+                        <img src="{{ asset('banner slider/banner2.jpeg') }}"
+                             class="d-block w-100"
+                             style="height: 400px; object-fit: cover;"
+                             alt="Banner 4">
+                    </div>
                 </div>
+
+                <!-- BOTONES: Ahora apuntan específicamente a #carruselInferiorMJ -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselInferiorMJ" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselInferiorMJ" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
+    </div>
+</div>
 
 
 
@@ -477,40 +468,40 @@
                 <div class="container mt-4">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/PuloverH.jpg"
+                        <div class="card" style="height: 100%;"> <img src="ropa/mujer/mujer (8).jpeg"
                                 class="card-img-top"
                                 alt="..."
                                 style="height: 100%; width: 100%; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">Pulover</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fs-2">Chaqueta de Levis</h5>
+                                <p class="card-text fs-3">Diseñadores de confianza</p>
+                                <a href="#" class="btn btn-primary">Ver mas</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/BermudaH.jpg"
+                        <div class="card" style="height: 100%;"> <img src="ropa/mujer/mujer (2).jpeg"
                                 class="card-img-top"
                                 alt="..."
                                 style="height: 100%; width: 100%; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">Bermuda</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fs-2">Poleras</h5>
+                                <p class="card-text fs-3">Poleras al por mayor con descuento</p>
+                                <a href="#" class="btn btn-primary">Ver mas</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card" style="height: 100%;"> <img src="ropa Hombre/ShortRusticoH.jpg"
+                        <div class="card" style="height: 100%;"> <img src= "ropa/mujer/mujer (1).jpeg"
                                 class="card-img-top"
                                 alt="..."
                                 style="height: 100%; width: 100%; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">Short Rustico</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title fs-2">Pulover Femenino LEUTTHE</h5>
+                                <p class="card-text fs-3">Marcas de diseño que confian</p>
+                                <a href="#" class="btn btn-primary">Ver mas</a>
                             </div>
                         </div>
                     </div>
@@ -519,7 +510,7 @@
             </div>
 
 
-
+<!-- Lista de Marcas -->
 
            <div class="marquee-wrapper border-top border-bottom bg-light py-4 mt-4">
                 <div class="marquee-content">

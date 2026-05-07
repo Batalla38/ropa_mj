@@ -6,16 +6,34 @@
         <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
             <style>
-        /* Estilos globales aplicados al cuerpo del documento */
+                 /* Estilos globales aplicados al cuerpo del documento */
+                body {
+                    background-color: #c1a391; /* Color de fondo definido por el usuario */
+                    color: #9f9393;           /* Color de fuente definido por el usuario */
+                }
+                body {
+                    background-image: url(bg1.png);
+                    background-repeat: repeat;
+                    background-size: 700px; /* Aquí controlas el tamaño */
+                }
+       /* Estilos globales aplicados al cuerpo del documento */
             body {
             background-color: #a39898; /* Color de fondo definido por el usuario */
             color: #9f9393;           /* Color de fuente definido por el usuario */
             }
-            body {
-                background-image: url(https://images.vexels.com/media/users/3/142647/isolated/preview/7975c8713e6cd70ff26097efbbebdbd1-ropa-de-camiseta.png);
-                background-repeat: repeat;
-                background-size: 80px; /* Aquí controlas el tamaño */
-                }
+            .carousel {
+                .carousel-inner {
+        height: 650px; /* Ajusta este valor según qué tan alto lo quieras */
+
+            border: none; /* Quitamos el borde predeterminado */
+            border-radius: 25px !important; /* Bordes muy redondeados (efecto circular) */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Sombra suave para dar profundidad */
+            overflow: hidden; /* Asegura que el contenido interno respete el borde redondeado */
+            background-color: #a39898; /* Fondo blanco para las tarjetas */
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
+            padding: 1px;
+        }
         </style>
 
         <h1></h1>

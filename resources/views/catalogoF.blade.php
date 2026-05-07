@@ -171,142 +171,80 @@
 
         </div>
 
-        <div class="col-md-9">
+       <div class="col-md-9">
+    <div class="row g-4 mb-5">
 
-            <div class="row g-4 mb-5">
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-
-                        <!-- 1. Agregamos controles (flechas) para que puedas cambiar la imagen manualmente -->
-                        <div id="carouselCol1" class="carousel slide" data-bs-ride="hover">
-                            <div class="carousel-inner">
-
-                                <!-- Primera Imagen -->
-                                <div class="carousel-item active">
-                                    <!-- Cambiamos card-img-top por d-block w-100 para que Bootstrap la reconozca bien -->
-                                    <a href="/producto"> <img src="ropa/casual/ChalecoH.jpg" class="d-block w-100" alt="Chomba Hombre Vista 1" style="height: 350px; object-fit: cover;"> </a>
-                                </div>
-
-                                <!-- Segunda Imagen -->
-                                <div class="carousel-item">
-                                    <a href="/producto "><img src="ropa/casual/ChalecoH2.jpg" class="d-block w-100" alt="Chomba Hombre Vista 2" style="height: 350px; object-fit: cover;"> </a>
-                                </div>
-
-                            </div>
-
-                            <!-- 2. Botones de Control (Opcional, pero recomendados para que el usuario vea la otra foto) -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Anterior</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCol1" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Siguiente</span>
-                            </button>
+        <!-- PRIMERA TARJETA -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <!-- Este mantiene el ID original -->
+                <div id="carouselCol1" class="carousel slide" data-bs-ride="hover">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a href="/productoM"><img src="ropa/mujer/mujer (12).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
                         </div>
-                        <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Chaleco</h5>
-                            <p class="text-muted small">Outfit Adidas Masculino.</p>
-                            <p class="text-black fw-bold fs-5">$150.000</p>
+                        <div class="carousel-item">
+                            <a href="/productoM"><img src="ropa/mujer/mujer (13).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
                         </div>
                     </div>
+                    <!-- Los botones apuntan correctamente a #carouselCol1 -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCol1" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
                 </div>
 
-
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-
-                        <!-- 1. Agregamos controles (flechas) para que puedas cambiar la imagen manualmente -->
-                        <div id="carouselCol1" class="carousel slide" data-bs-ride="hover">
-                            <div class="carousel-inner">
-
-                                <!-- Primera Imagen -->
-                                <div class="carousel-item active">
-                                    <!-- Cambiamos card-img-top por d-block w-100 para que Bootstrap la reconozca bien -->
-                                    <a href="/producto"><img src="ropa/casual/ChombaLargaH.jpg" class="d-block w-100" alt="Chomba Hombre Vista 1" style="height: 350px; object-fit: cover;"></a>
-                                </div>
-
-                                <!-- Segunda Imagen -->
-                                <div class="carousel-item">
-                                   <a href="/producto"> <img src="ropa/casual/ChombaLargaH1.jpg" class="d-block w-100" alt="Chomba Hombre Vista 2" style="height: 350px; object-fit: cover;"></a>
-                                </div>
-
-                            </div>
-
-                            <!-- 2. Botones de Control (Opcional, pero recomendados para que el usuario vea la otra foto) -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Anterior</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCol1" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Siguiente</span>
-                            </button>
-                        </div>
-                        <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Chomba Larga </h5>
-                            <p class="text-muted small">Outfit Adidas Masculino.</p>
-                            <p class="text-black fw-bold fs-5">$150.000</p>
-                        </div>
-                    </div>
+                <div class="card-body text-center mt-2">
+                    <h5 class="text-dark fw-bold">Conjunto Pijama/Deporte</h5>
+                    <p class="text-muted small">Outfit Adidas Femenino</p>
+                    <p class="text-black fw-bold fs-5">$180.000</p>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-
-                        <!-- 1. Agregamos controles (flechas) para que puedas cambiar la imagen manualmente -->
-                        <div id="carouselCol1" class="carousel slide" data-bs-ride="hover">
-                            <div class="carousel-inner">
-
-                                <!-- Primera Imagen -->
-                                <div class="carousel-item active">
-                                    <!-- Cambiamos card-img-top por d-block w-100 para que Bootstrap la reconozca bien -->
-                                    <a href="/producto"><img src="ropa/casual/JeanH.jpg" class="d-block w-100" alt="Chomba Hombre Vista 1" style="height: 350px; object-fit: cover;"></a>
-                                </div>
-
-                                <!-- Segunda Imagen -->
-                                <div class="carousel-item">
-                                    <img src="ropa/casual/JeanH2.jpg" class="d-block w-100" alt="Chomba Hombre Vista 2" style="height: 350px; object-fit: cover;">
-                                </div>
-
-                            </div>
-
-                            <!-- 2. Botones de Control (Opcional, pero recomendados para que el usuario vea la otra foto) -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol1" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Anterior</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCol1" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Siguiente</span>
-                            </button>
-                        </div>
-                        <div class="card-body text-center mt-2">
-                            <h5 class="text-dark fw-bold">Jeans Babucha </h5>
-                            <p class="text-muted small">Outfit Adidas Deportivo.</p>
-                            <p class="text-black fw-bold fs-5">$120.000</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
+            </div>
         </div>
+
+        <!-- SEGUNDA TARJETA -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <!-- CAMBIAMOS EL ID A carouselCol2 -->
+                <div id="carouselCol2" class="carousel slide" data-bs-ride="hover">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a href="/productoM"><img src="ropa/mujer/mujer (1).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
+                        </div>
+                        <div class="carousel-item href=/productoM">
+                           <a href="/productoM"> <img src="ropa/mujer/mujer (2).jpeg" class="d-block w-100" alt="..." style="height: 350px; object-fit: cover;"></a>
+
+                        </div>
+                    </div>
+                    <!-- CAMBIAMOS EL TARGET A #carouselCol2 PARA QUE NO MUEVA EL PRIMERO -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCol2" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCol2" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+                <div class="card-body text-center mt-2">
+                    <h5 class="text-dark fw-bold">Polera Femenino </h5>
+                    <p class="text-muted small">Outfit Leutthe</p>
+                    <p class="text-black fw-bold fs-5">$120.000</p>
+                </div>
+            </div>
+        </div>
+
     </div>
-
 </div>
-
-
-
-</div> </div> </div>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <div class= " mt-3">
+
                 @include('footer')
-        </div>
+
     </body>
 <html>

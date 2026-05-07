@@ -4,6 +4,16 @@
             <title>Terminos y Condiciones</title>
             <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
         <style>
+             /* Estilos globales aplicados al cuerpo del documento */
+                body {
+                    background-color: #c1a391; /* Color de fondo definido por el usuario */
+                    color: #9f9393;           /* Color de fuente definido por el usuario */
+                }
+                body {
+                    background-image: url(bg1.png);
+                    background-repeat: repeat;
+                    background-size: 700px; /* Aquí controlas el tamaño */
+                }
         /* Estilos globales aplicados al cuerpo del documento */
             body {
             background-color: #a39898; /* Color de fondo definido por el usuario */
