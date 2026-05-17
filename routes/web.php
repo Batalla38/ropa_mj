@@ -57,4 +57,12 @@ Route::get('/catalogoChaleco', function () {
 Route::get('/productoM', function () {
     return view('productoM');
 });
+
+Route::get('/inicioSesion', function () {
+    return view('inicioSesion');
+});
+Route::get('/registro', function () {
+    return view('registro');
+});
+
 //>>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9

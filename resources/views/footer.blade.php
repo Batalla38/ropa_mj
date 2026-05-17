@@ -47,11 +47,6 @@
             <span class="fs-4 fw-bold">ROPA MJ</span>
         </div>
         <nav class="row text-center align-items-start">
-<<<<<<< HEAD
-            
-=======
-
->>>>>>> b5bd8f3899d6b1b8000596eb2dada6721159e85d
             <!-- Columna Izquierda -->
             <div class="col-md-4 mb-4">
                 <a href="/terminosYCondiciones" class="text-muted text-decoration-none fs-5">
@@ -90,12 +85,6 @@
                 </a>
             </div>
         </nav>
-
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> b5bd8f3899d6b1b8000596eb2dada6721159e85d
         <div class="border-top pt-4 mt-4 text-center">
             <p class="text-muted small mb-0">&copy; 2026 Distribuidora ROPA MJ. Creada por Batalla Juan Cruz & Teruel Laola Melanie.</p>
         </div>
