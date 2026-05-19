@@ -6,7 +6,6 @@
     <title>Registro - Ropa MJ</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <style>
-
                  /* Estilos globales aplicados al cuerpo del documento */
                 body {
                     background-color: #c1a391; /* Color de fondo definido por el usuario */
@@ -71,7 +70,7 @@
                 </form>
 
                 <div class="text-center mt-3">
-                    <small class="text-muted">¿Ya tienes cuenta? <a href="#" class="text-decoration-none text-dark fw-semibold">Inicia sesión</a></small>
+                    <small class="text-muted">¿Ya tienes cuenta? <a href="inicioSesion" class="text-decoration-none text-dark fw-semibold">Inicia sesión</a></small>
                 </div>
 
             </div>
