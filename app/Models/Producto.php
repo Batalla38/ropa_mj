@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
+    protected $table = 'productos';
     protected $fillable = [
     'nombre',
     'descripcion',
@@ -15,6 +16,7 @@ class Producto extends Model
     'url_imagen',
     'activo',
     ];
+    //Casteo de Atributos
     protected $casts = [
     'precio' => 'decimal:2',
     'stock' => 'integer',
