@@ -38,17 +38,26 @@
             <div class="card-body p-4">
 
                 <h3 class="card-title text-center mb-4 fw-bold text-dark">Crear Cuenta</h3>
-
-                <form action="#" method="POST">
-                    @csrf
-
-                    <div class="mb-3">
-                        <label for="name" class="form-label fw-semibold">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" id="nombre" required>
+                @if (session('status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                @endif
+
+                <form action="{{ route('cuenta.procesar') }}" method="POST">
+                <form action="{{ route('cuenta.procesar') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label fw-semibold">Apellido</label>
-                        <input type="text" class="form-control" id="lastName" lname="lastName" placeholder="Apellido" required>
+                        <label for="nombre" class="form-label fw-semibold">Nombre</label>
+                        <!-- Cambiado id a "nombre" y name ya está como "nombre" -->
+                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label fw-semibold">Apellido</label>
+                        <!-- ¡CORREGIDO!: Cambié lname="apellido" por name="apellido" e id a "apellido" -->
+                        <input type="text" name="apellido" class="form-control" id="apellido" placeholder="Apellido" required>
                     </div>
 
                     <div class="mb-3">
