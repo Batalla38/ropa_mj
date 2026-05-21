@@ -44,7 +44,7 @@
 
                     <div class="mb-3">
                         <label for="name" class="form-label fw-semibold">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
+                        <input type="text" name="nombre" class="form-control" id="nombre" required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label fw-semibold">Apellido</label>
