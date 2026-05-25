@@ -65,4 +65,12 @@ Route::get('/registro', function () {
     return view('registro');
 });
 
-//>>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9
+
+
+
+use App\Http\Controllers\registroController;
+
+// El truco está en el ->name() del final
+Route::post('/crear-cuenta', [registroController::class, 'procesar'])->name('cuenta.procesar');
+return redirect()->back()->with('status', '¡Tu cuenta ha sido creada con éxito!');
+
