@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('subcaegorias', function (Blueprint $table) {
             $table->id();
-            $table->string('correo')->unique();
-            $table->string('contraseña')->unique();
+            $table->string('nombreSub', 30);
             $table->timestamps();
+
+            //$table->foreignId('categoria_id')
+              //      ->constrained('caegorias')
+                //    ->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('subcaegorias');
     }
 };

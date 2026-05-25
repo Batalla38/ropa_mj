@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-        ProductoSeeder::class, // <-- ¡Esto tiene que estar sí o sí!
+        CaegoriaSeeder::class, 
+        SubcaegoriaSeeder::class, 
+        //ProductoSeeder::class, // <-- ¡Esto tiene que estar sí o sí!
+       
     ]);
     }
 }
