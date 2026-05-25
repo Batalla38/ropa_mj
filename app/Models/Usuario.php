@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-    use HasFactory;
+    protected $table = 'usuarios';
+    protected $fillable = [
+    'nombre',
+    'apellido',
+    'telefono',
+    'correo',
+    'contraseña',
+    ];
+    //Casteo de Atributos
+    protected $casts = [
+    'nombre' => 'varchar',
+    'apellido' => 'varchar',
+    'telefono' => 'integer',
+    'correo' => 'varchar',
+    'contraseña' => 'varchar',
+    ];
 }

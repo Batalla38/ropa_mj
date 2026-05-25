@@ -15,8 +15,13 @@ return new class extends Migration
     {
         Schema::create('caegorias', function (Blueprint $table) {
             $table->id();
+            $table->string('nombreC', 30);
             $table->timestamps();
-        });
+            //$table->foreignId('subcaegoria_id')
+              //    ->constrained('subcaegorias')
+               //    ->onDelete('cascade'); 
+         });
+
     }
 
     /**

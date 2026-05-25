@@ -22,6 +22,15 @@ return new class extends Migration
                 $table->string('url_imagen')->nullable();
                 $table->boolean('activo')->default(true);
                 $table->timestamps();
+
+                //vinculacion de tablas
+                //$table->foreignId('categoria_id')
+                //    ->constrained('caegorias')
+                //    ->onDelete('cascade');
+                //$table->foreignId('subcaegoria_id')
+                //    ->constrained('subcaegorias')
+                //    ->onDelete('cascade'); 
+                //$table->timestamps();
                 });
         }
 

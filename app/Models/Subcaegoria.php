@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Roles extends Model
+class Subcaegoria extends Model
 {
-    protected $table = 'roles';
+    protected $table = 'subcaegorias';
     protected $fillable = [
-    'correo',
-    'contraseña',
+    'nombreSub',
+    //'caegoria_id',
     ];
     //Casteo de Atributos
     protected $casts = [
-    'correo' => 'varchar',
-    'contraseña' => 'varchar',
+    'nombreSub' => 'string',
+    //'caegoria_id' => 'integer',
     
     ];
 }

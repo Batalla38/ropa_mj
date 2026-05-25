@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Caegoria extends Model
 {
-    use HasFactory;
+    protected $table = 'caegorias';
+    protected $fillable = [
+    'nombreC',
+    ];
+    //Casteo de Atributos
+    protected $casts = [
+    'nombreC' => 'string',
+    
+    ];
 }

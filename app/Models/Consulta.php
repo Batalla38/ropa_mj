@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consulta extends Model
 {
-    use HasFactory;
+    protected $table = 'consultas';
+    protected $fillable = [
+    'correo',
+    'consulta',
+    ];
+    //Casteo de Atributos
+    protected $casts = [
+    'correo' => 'varchar',
+    'consulta' => 'text',
+    
+    ];
 }
