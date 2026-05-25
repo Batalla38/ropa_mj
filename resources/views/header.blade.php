@@ -84,64 +84,98 @@
 
 </style>
 
-
 <body>
 <nav class="navbar navbar-expand-lg bg-white fixed-top shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="/main">
-            <p class="fs-2">ROPA MJ</p></a>
+            <p class="fs-2 mb-0">ROPA MJ</p>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- Enlaces del lado izquierdo (Tus categorías originales) -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/main"><p class= "fs-4">Inicio</p></a>
+                    <a class="nav-link active" aria-current="page" href="/main"><p class="fs-4 mb-0">Inicio</p></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link p-0" href="/quienesSomos" >
+                    <a class="nav-link p-0" href="/quienesSomos">
                         <p class="fs-4 m-0 p-2">Quiénes Somos</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/catalogo"><p class= "fs-4">Catálogo</p></a>
+                    <a class="nav-link" href="/catalogo"><p class="fs-4 mb-0">Catálogo</p></a>
                 </li>
 
                 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle fs-4 d-flex align-items-center" href="/catalogo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Ropas
-    </a>
-    <ul class="dropdown-menu">
-        <!-- Submenú Masculino -->
-        <li class="dropdown-submenu">
-            <a class="dropdown-item dropdown-toggle" href="/catalogoM">Masculino</a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/catalogoChaleco">Chaleco</a></li>
-                <li><a class="dropdown-item" href="/catalogoChaleco">Pantalones</a></li>
-                <li><a class="dropdown-item" href="/catalogoChaleco">Buzos</a></li>
+                    <a class="nav-link dropdown-toggle fs-4 d-flex align-items-center" href="/catalogo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ropas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- Submenú Masculino -->
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="/catalogoM">Masculino</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/catalogoChaleco">Chaleco</a></li>
+                                <li><a class="dropdown-item" href="/catalogoChaleco">Pantalones</a></li>
+                                <li><a class="dropdown-item" href="/catalogoChaleco">Buzos</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="/catalogoF">Femenino</a></li>
+                        <li><a class="dropdown-item" href="/catalogoN">Niños</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/catalogo">Otros</a></li>
+                    </ul>
+                </li>
             </ul>
-        </li>
 
-        <li><a class="dropdown-item" href="/catalogoF">Femenino</a></li>
-        <li><a class="dropdown-item" href="/catalogoN">Niños</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="/catalogo">Otros</a></li>
-    </ul>
-</li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                <button class="btn btn-outline-dark" type="submit">Search</button>
-            </form>
+            <!-- Sección Derecha: Control de Sesión según el rol + Buscador -->
+            <div class="d-flex align-items-center ms-auto">
+                <ul class="navbar-nav mb-2 mb-lg-0 me-3 align-items-center">
 
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login"><p class="fs-4 mb-0">Iniciar Sesión</p></a>
+                        </li>
+                    @endguest
+
+                    @auth
+                        @if(auth()->user()->role === 'admin')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fs-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Administración
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item fs-5" href="/ventas">Ventas</a></li>
+                                    <li><a class="dropdown-item fs-5" href="/agregar-catalogo">Agregar Catálogo</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        <li class="nav-item">
+                            <form action="/logout" method="POST" class="d-inline m-0 p-0">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link fs-4 border-0 p-2" style="text-decoration: none; background: none;">
+                                    Cerrar Sesión
+                                </button>
+                            </form>
+                        </li>
+                    @endauth
+
+                </ul>
+
+                <!-- Buscador original -->
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                </form>
+            </div>
 
         </div>
     </div>
 </nav>
-
-
 </body>
 
 </html>
