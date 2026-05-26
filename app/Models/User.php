@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin', // 1. Agregamos el campo para permitir la carga masiva
     ];
 
     /**
@@ -40,5 +41,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean', // 2. Convertimos el valor de la BD (0 o 1) a true/false en PHP automáticamente
     ];
 }

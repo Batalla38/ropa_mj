@@ -2,21 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\LoginController; //  Conectado directamente a la carpeta Controllers
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// --- VISTAS PRINCIPALES Y CATÁLOGOS ---
 
 Route::get('/main', function () {
     return view('main');
-});
+})->name('main'); //  El LoginController usa este nombre para redireccionarte acá
 
 Route::get('/contacto', function () {
     return view('contacto');
 });
 
-Route::get('/catalogo', function () {
-    return view('catalogo');
-});
-
-//<<<<<<< HEAD
-//=======
 Route::get('/quienesSomos', function () {
     return view('quienesSomos');
 });
@@ -25,52 +29,63 @@ Route::get('/metodosDePago', function () {
     return view('metodosDePago');
 });
 
-//>>>>>>> 11dcd97addb0124dfd833a0ec156ed6724352eb9
-Route::get('/producto', function () {
-    return view('producto');
-});
-Route::get('/productoM', function () {
-    return view('productoM');
-});
-
-//<<<<<<< HEAD
-Route::post('/contacto', [ContactoController::class, 'procesar']);
-//=======
-Route::get('/catalogo', function () {
-    return view('catalogo');
-});
 Route::get('/terminosYCondiciones', function () {
     return view('terminosYCondiciones');
 });
+
 Route::get('/consultas', function () {
     return view('consultas');
 });
+
+// Catálogos
+Route::get('/catalogo', function () {
+    return view('catalogo');
+});
+
 Route::get('/catalogoM', function () {
     return view('catalogoM');
 });
+
 Route::get('/catalogoF', function () {
     return view('catalogoF');
 });
+
 Route::get('/catalogoChaleco', function () {
     return view('catalogoChaleco');
 });
+
+// Productos
+Route::get('/producto', function () {
+    return view('producto');
+});
+
 Route::get('/productoM', function () {
     return view('productoM');
 });
 
+
+// --- PROCESAMIENTO DE FORMULARIOS (POST) ---
+
+// Formulario de Contacto
+Route::post('/contacto', [ContactoController::class, 'procesar']);
+
+// Formulario de Registro de cuenta
+Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cuenta.procesar');
+
+
+// --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
+
+// Mostrar las pantallas (GET)
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
+
 Route::get('/registro', function () {
     return view('registro');
 });
 
+// Capturar los datos del Login e iniciar sesión
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-
-
-use App\Http\Controllers\registroController;
-
-// El truco está en el ->name() del final
-Route::post('/crear-cuenta', [registroController::class, 'procesar'])->name('cuenta.procesar');
-return redirect()->back()->with('status', '¡Tu cuenta ha sido creada con éxito!');
-
+// NUEVA: Ruta necesaria para poder cerrar sesión cuando quieras salír
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
