@@ -58,8 +58,8 @@ Route::get('/productoM', function () {
     return view('productoM');
 });
 
-Route::get('/inicioSesion', function () {
-    return view('inicioSesion');
+Route::get('/login', function () {
+    return view('login');
 });
 Route::get('/registro', function () {
     return view('registro');
