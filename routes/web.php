@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\ConsultaController;
 
 Route::get('/main', function () {
     return view('main');
@@ -45,6 +46,8 @@ Route::get('/terminosYCondiciones', function () {
 Route::get('/consultas', function () {
     return view('consultas');
 });
+Route::post('/consultas', [App\Http\Controllers\ConsultaController::class, 'store']);
+
 Route::get('/catalogoM', function () {
     return view('catalogoM');
 });
@@ -74,3 +77,11 @@ use App\Http\Controllers\registroController;
 Route::post('/crear-cuenta', [registroController::class, 'procesar'])->name('cuenta.procesar');
 return redirect()->back()->with('status', '¡Tu cuenta ha sido creada con éxito!');
 
+
+Route::post('/enviar-consulta', [App\Http\Controllers\ConsultaController::class, 'store']);
+
+
+
+    
+
+//Route::any('/consultas', [App\Http\Controllers\ConsultaController::class, 'store']);

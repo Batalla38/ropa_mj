@@ -7,15 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consulta extends Model
 {
+    // Definimos las opciones aquí
+    public const TIPOS = [
+        'Presupuesto',
+        'Envios',
+        'Productos',
+        'Stock',
+    ];
+
     protected $table = 'consultas';
     protected $fillable = [
-    'correo',
-    'consulta',
+        'correo', 
+        'tipoConsul', 
+        'descripcion'
     ];
+
     //Casteo de Atributos
     protected $casts = [
-    'correo' => 'varchar',
-    'consulta' => 'text',
-    
-    ];
+    //'correo' => 'string',
+    //'tipoConsul' => 'string',
+    //'descripcion' => 'text',    
+     ];
 }
+
+

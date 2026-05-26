@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nombre', 100);
             $table->string('apellido', 100);
             $table->bigInteger('telefono');
+            $table->string('correo')->unique();
+            $table->string('contraseña');
             $table->timestamps();
         });
         // Si estabas queriendo usar un entero para el rol (ej: 1 para admin, 2 para cliente):
