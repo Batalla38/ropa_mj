@@ -19,7 +19,8 @@ class Consulta extends Model
     protected $fillable = [
         'correo', 
         'tipoConsul', 
-        'descripcion'
+        'descripcion',
+        'respuesta'
     ];
 
     //Casteo de Atributos
