@@ -15,18 +15,18 @@ class LoginController extends Controller
     {
         // 1. Validamos los campos que vienen del HTML
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
+            'correo' => ['required', 'email'],
+            'contraseña' => ['required', 'string'],
         ], [
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'Por favor, ingresa un correo válido.',
-            'password.required' => 'La contraseña es obligatoria.',
+            'correo.required' => 'El correo electrónico es obligatorio.',
+            'correo.email' => 'Por favor, ingresa un correo válido.',
+            'contraseña.required' => 'La contraseña es obligatoria.',
         ]);
 
         // 2. Buscamos directamente en la base de datos al usuario que coincida con mail y clave en texto plano
         $user = DB::table('users')
-            ->where('email', $credentials['email'])
-            ->where('password', $credentials['password']) // Compara texto plano directamente (ej: "1234")
+            ->where('correo', $credentials['correo'])
+            ->where('contraseña', $credentials['contraseña']) // Compara texto plano directamente (ej: "1234")
             ->first();
 
         // 3. Si el usuario existe
@@ -48,8 +48,8 @@ class LoginController extends Controller
 
         // 5. Si no se encontró ningún usuario con esos datos, volvemos atrás con el error
         return redirect()->back()->withErrors([
-            'email' => 'El correo electrónico o la contraseña son incorrectos.',
-        ])->onlyInput('email');
+            'correo' => 'El correo electrónico o la contraseña son incorrectos.',
+        ])->onlyInput('correo');
     }
 
     /**
