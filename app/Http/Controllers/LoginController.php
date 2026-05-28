@@ -23,10 +23,10 @@ class LoginController extends Controller
             'contraseña.required' => 'La contraseña es obligatoria.',
         ]);
 
-        // 2. Buscamos directamente en la base de datos al usuario que coincida con mail y clave en texto plano
-        $user = DB::table('users')
+        // 2. Buscamos directamente en la tabla 'usuario' (Modificado)
+        $user = DB::table('usuarios') // <-- CAMBIADO: 'users' por 'Usuario'
             ->where('correo', $credentials['correo'])
-            ->where('contraseña', $credentials['contraseña']) // Compara texto plano directamente (ej: "1234")
+            ->where('contraseña', $credentials['contraseña']) // Compara texto plano directamente
             ->first();
 
         // 3. Si el usuario existe
@@ -34,12 +34,16 @@ class LoginController extends Controller
 
             // Guardamos manualmente el ID del usuario en la sesión para recordar que inició sesión
             $request->session()->put('user_id', $user->id);
-            $request->session()->put('user_name', $user->name);
+            
+            // Si tu columna de nombre se llama 'nombre' o 'name', esto previene errores:
+            $user_name = $user->nombre ?? $user->name ?? 'usuarios';
+            $request->session()->put('user_name', $user_name);
 
-            // 4. Verificamos si es administrador (ya sea por su ID exacto o por la columna is_admin)
-            // Podés usar: $user->id == 1  o  $user->is_admin == 1
-            if ($user->is_admin == 1 || $user->id == 1) {
-                return redirect('/main'); // Te manda directo a la página main
+            // 4. Verificamos si es administrador
+            // Revisa si la columna se llama 'is_admin'. Si el ID de tu admin es 1, entrará de todos modos.
+            $isAdminColumn = $user->is_admin ?? 0; 
+            if ($isAdminColumn == 1 || $user->id == 1) {
+                return redirect('/main'); // Te manda directo a la página main (panel de administración)
             }
 
             // Si es un usuario común, lo mandamos a la raíz
