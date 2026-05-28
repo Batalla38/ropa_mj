@@ -37,6 +37,16 @@
         <div class="card shadow-sm" style="max-width: 450px; width: 100%;">
             <div class="card-body p-4">
 
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <h3 class="card-title text-center mb-4 fw-bold text-dark">Crear Cuenta</h3>
                 @if (session('status'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,7 +55,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('cuenta.procesar') }}" method="POST">
+                <!-- <form action="{{ route('cuenta.procesar') }}" method="POST"> -->
                 <form action="{{ route('cuenta.procesar') }}" method="POST">
                     @csrf
                     <div class="mb-3">
@@ -61,13 +71,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label fw-semibold">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com" required>
+                        <label for="correo" class="form-label fw-semibold">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" placeholder="nombre@ejemplo.com" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label fw-semibold">Contraseña</label>
-                        <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock" required>
+                        <label for="contraseña" class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" id="contraseña" name="contraseña" class="form-control" aria-describedby="passwordHelpBlock" required>
                         <div id="passwordHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
                             Debe tener entre 8 y 20 caracteres, incluir letras y números, sin espacios ni caracteres especiales.
                         </div>

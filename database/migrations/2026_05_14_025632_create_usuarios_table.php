@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 100);
             $table->string('apellido', 100);
-            $table->bigInteger('telefono');
             $table->string('correo')->unique();
             $table->string('contraseña');
             $table->timestamps();
