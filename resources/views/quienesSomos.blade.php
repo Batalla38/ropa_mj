@@ -176,46 +176,7 @@
                 </div>
 
                 <div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div class="card shadow-sm border-0 p-4 rounded-4">
-                <h3 class="mb-4 fw-bold">Contactanos</h3>
-
-                <div class="d-flex flex-column gap-4">
-
-                    <!-- WhatsApp -->
-                    <a href="https://wa.me/5493794123456" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="30" height="30" class="me-3">
-                        <span class="fs-5 fw-medium">3794-123456</span>
-                    </a>
-
-                    <!-- Instagram -->
-                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" width="30" height="30" class="me-3">
-                        <span class="fs-5 fw-medium">@RopaMJ_ok</span>
-                    </a>
-
-                    <!-- Facebook -->
-                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook" width="30" height="30" class="me-3">
-                        <span class="fs-5 fw-medium">Ropa MJ Mayorista</span>
-                    </a>
-
-                    <!-- TikTok -->
-                    <a href="#" target="_blank" class="text-decoration-none d-flex align-items-center text-dark">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" width="30" height="30" class="me-3">
-                        <span class="fs-5 fw-medium">ropamj_tiktok</span>
-                    </a>
-                    <hr class="my-4 opacity-25">
-
-                                    <div class="text-secondary">
-                                        <p class="mb-1"><i class="bi bi-envelope me-2"></i> mayoristamjropas@gmail.com</p>
-                                        <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Barranqueras, Chaco</p>
-                                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 
