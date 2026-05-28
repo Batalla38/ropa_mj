@@ -133,38 +133,47 @@
 
             <!-- Sección Derecha: Control de Sesión según el rol + Buscador -->
             <div class="d-flex align-items-center ms-auto">
-                <ul class="navbar-nav mb-2 mb-lg-0 me-3 align-items-center">
 
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login"><p class="fs-4 mb-0">Iniciar Sesión</p></a>
-                        </li>
-                    @endguest
+                        @if(session()->has('user_id'))
 
-                    @auth
-                        @if(auth()->user()->role === 'admin')
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle fs-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Administración
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item fs-5" href="/ventas">Ventas</a></li>
-                                    <li><a class="dropdown-item fs-5" href="/agregar-catalogo">Agregar Catálogo</a></li>
-                                </ul>
-                            </li>
-                        @endif
+                        <div class="dropdown">
+                            <button class="btn btn-outline-dark dropdown-toggle fw-semibold" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                👤 Hola, {{ session('user_name') }}
 
-                        <li class="nav-item">
-                            <form action="/logout" method="POST" class="d-inline m-0 p-0">
-                                @csrf
-                                <button type="submit" class="nav-link btn btn-link fs-4 border-0 p-2" style="text-decoration: none; background: none;">
-                                    Cerrar Sesión
-                                </button>
-                            </form>
-                        </li>
-                    @endauth
+                                @if(session('is_admin') == 1) <!--igual a 1 es admin-->
+                                    <span class="badge bg-danger ms-1" style="font-size: 0.7rem;">Admin</span>
+                                @endif
+                            </button>
 
-                </ul>
+                            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
+
+                                @if(session('is_admin') == 1) <!--admin iguala uno despliega este menu -->
+                                    <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
+
+                                    <li><a class="dropdown-item" href="{{ url('/main') }}"> Productos</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('/gestionar-ventas') }}">💰 Gestionar Ventas</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('/consultas') }}">💬 Gestionar Consultas</a></li>
+
+                                    <li><hr class="dropdown-divider"></li>
+                                @endif
+
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST" class="px-3 py-1">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-dark w-100">Cerrar Sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+
+                    @else
+
+                        <a href="{{ url('/login') }}" class="btn btn-outline-dark me-2 fw-semibold">Iniciar Sesión</a>
+
+
+                    @endif
+
+                    </div>
 
                 <!-- Buscador original -->
                 <form class="d-flex" role="search">
