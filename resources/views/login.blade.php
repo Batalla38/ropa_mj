@@ -41,13 +41,13 @@
 
                 <form action="{{ route('login.store') }}" method="POST">
                     @csrf <div class="mb-3">
-                        <label for="email" class="form-label fw-semibold">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="nombre@ejemplo.com" required>
+                        <label for="correo" class="form-label fw-semibold">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" value="{{ old('correo') }}" placeholder="nombre@ejemplo.com" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label fw-semibold">Contraseña</label>
-                        <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock" required>
+                        <label for="contraseña" class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" id="contraseña" name="contraseña" class="form-control" aria-describedby="passwordHelpBlock" required>
                         <div id="passwordHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
                             Debe tener entre 8 y 20 caracteres, incluir letras y números, sin espacios ni caracteres especiales.
                         </div>
