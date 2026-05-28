@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactoController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController; //  Conectado directamente a la carpeta Controllers
 
@@ -13,9 +13,8 @@ use App\Http\Controllers\LoginController; //  Conectado directamente a la carpet
 */
 
 // --- VISTAS PRINCIPALES Y CATÁLOGOS ---
-=======
+
 use App\Http\Controllers\ConsultaController;
->>>>>>> 91f50705c82cad097c0b30d28b074cf7dd9e093a
 
 Route::get('/main', function () {
     return view('main');
@@ -40,15 +39,15 @@ Route::get('/terminosYCondiciones', function () {
 Route::get('/consultas', function () {
     return view('consultas');
 });
-<<<<<<< HEAD
+
 
 // Catálogos
 Route::get('/catalogo', function () {
     return view('catalogo');
 });
-=======
+
 Route::post('/consultas', [App\Http\Controllers\ConsultaController::class, 'store']);
->>>>>>> 91f50705c82cad097c0b30d28b074cf7dd9e093a
+
 
 Route::get('/catalogoM', function () {
     return view('catalogoM');
@@ -95,13 +94,13 @@ Route::get('/registro', function () {
 // Capturar los datos del Login e iniciar sesión
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-<<<<<<< HEAD
+
 // NUEVA: Ruta necesaria para poder cerrar sesión cuando quieras salír
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-=======
 
 
-use App\Http\Controllers\registroController;
+
+//use App\Http\Controllers\registroController;
 
 // El truco está en el ->name() del final
 Route::post('/crear-cuenta', [registroController::class, 'procesar'])->name('cuenta.procesar');
@@ -115,4 +114,3 @@ Route::post('/enviar-consulta', [App\Http\Controllers\ConsultaController::class,
     
 
 //Route::any('/consultas', [App\Http\Controllers\ConsultaController::class, 'store']);
->>>>>>> 91f50705c82cad097c0b30d28b074cf7dd9e093a
