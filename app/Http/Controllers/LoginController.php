@@ -23,18 +23,25 @@ class LoginController extends Controller
             'contraseña.required' => 'La contraseña es obligatoria.',
         ]);
 
+<<<<<<< HEAD
         // 2. Buscamos directamente en la tabla 'usuario' (Modificado)
         $user = DB::table('usuarios') // <-- CAMBIADO: 'users' por 'Usuario'
+=======
+        // 2. Buscamos directamente en la tabla 'usuarios'
+        $user = DB::table('usuarios')
+>>>>>>> e43a936bfa89e3a0b6aca180ba2666dbfbf7eb59
             ->where('correo', $credentials['correo'])
             ->where('contraseña', $credentials['contraseña']) // Compara texto plano directamente
             ->first();
 
+
         // 3. Si el usuario existe
         if ($user) {
 
-            // Guardamos manualmente el ID del usuario en la sesión para recordar que inició sesión
+            // Guardamos manualmente el ID del usuario en la sesión
             $request->session()->put('user_id', $user->id);
             
+<<<<<<< HEAD
             // Si tu columna de nombre se llama 'nombre' o 'name', esto previene errores:
             $user_name = $user->nombre ?? $user->name ?? 'usuarios';
             $request->session()->put('user_name', $user_name);
@@ -44,9 +51,21 @@ class LoginController extends Controller
             $isAdminColumn = $user->is_admin ?? 0; 
             if ($isAdminColumn == 1 || $user->id == 1) {
                 return redirect('/main'); // Te manda directo a la página main (panel de administración)
+=======
+            // 🛠️ ¡AGREGÁ ESTA LÍNEA CLAVE ACÁ ABAJO!
+            $request->session()->put('id_rol', $user->id_rol); // <-- Guarda el rol en la sesión
+
+            // Guardamos el nombre
+            $user_name = $user->nombre ?? $user->name ?? 'Usuario';
+            $request->session()->put('user_name', $user_name);
+
+            // 4. Verificamos si es administrador
+            $rolUsuario = $user->id_rol ?? 0; 
+            if ($rolUsuario == 1 || $user->id == 1) {
+                return redirect('/main');
+>>>>>>> e43a936bfa89e3a0b6aca180ba2666dbfbf7eb59
             }
 
-            // Si es un usuario común, lo mandamos a la raíz
             return redirect('/');
         }
 

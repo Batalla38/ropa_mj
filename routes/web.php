@@ -69,7 +69,9 @@ Route::get('/producto', function () {
 Route::get('/productoM', function () {
     return view('productoM');
 });
-
+Route::get('/gestionConsultas', function () {
+    return view('admin.gestionConsultas');
+});
 
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
 
@@ -111,6 +113,6 @@ Route::post('/enviar-consulta', [App\Http\Controllers\ConsultaController::class,
 
 
 
-    
+
 
 //Route::any('/consultas', [App\Http\Controllers\ConsultaController::class, 'store']);

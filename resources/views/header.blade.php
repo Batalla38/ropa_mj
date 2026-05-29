@@ -130,51 +130,48 @@
                     </ul>
                 </li>
             </ul>
-
-            <!-- Sección Derecha: Control de Sesión según el rol + Buscador -->
             <div class="d-flex align-items-center ms-auto">
 
-                        @if(session()->has('user_id'))
+                @if(session()->has('user_id'))
 
-                        <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle fw-semibold" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                👤 Hola, {{ session('user_name') }}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle fw-semibold" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            👤 Hola, {{ session('user_name') }}
 
-                                @if(session('is_admin') == 1) <!--igual a 1 es admin-->
-                                    <span class="badge bg-danger ms-1" style="font-size: 0.7rem;">Admin</span>
-                                @endif
-                            </button>
+                            {{-- Modificado para asegurar que detecte el 1 correctamente --}}
+                            @if(session('id_rol') == 1 || session('user_id') == 1)
+                                <span class="badge bg-danger ms-1" style="font-size: 0.7rem;">Admin</span>
+                            @endif
+                        </button>
 
-                            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
 
-                                @if(session('is_admin') == 1) <!--admin iguala uno despliega este menu -->
-                                    <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
+                            @if(session('id_rol') == 1 || session('user_id') == 1)
+                                <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
 
-                                    <li><a class="dropdown-item" href="{{ url('/main') }}"> Productos</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/gestionar-ventas') }}">💰 Gestionar Ventas</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/consultas') }}">💬 Gestionar Consultas</a></li>
+                                <li><a class="dropdown-item" href="{{ url('/main') }}"> Productos</a></li>
+                                <li><a class="dropdown-item" href="{{ url('/gestionar-ventas') }}">💰 Gestionar Ventas</a></li>
+                                <li><a class="dropdown-item" href="{{ url('/consultas') }}">💬 Gestionar Consultas</a></li>
 
-                                    <li><hr class="dropdown-divider"></li>
-                                @endif
+                                <li><hr class="dropdown-divider"></li>
+                            @endif
 
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST" class="px-3 py-1">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-dark w-100">Cerrar Sesión</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-
-                    @else
-
-                        <a href="{{ url('/login') }}" class="btn btn-outline-dark me-2 fw-semibold">Iniciar Sesión</a>
-
-
-                    @endif
-
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST" class="px-3 py-1">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-dark w-100">Cerrar Sesión</button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
 
+                @else
+
+                    <a href="{{ url('/login') }}" class="btn btn-outline-dark me-2 fw-semibold">Iniciar Sesión</a>
+
+                @endif
+
+            </div>
                 <!-- Buscador original -->
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">

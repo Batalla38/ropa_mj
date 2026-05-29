@@ -105,7 +105,7 @@
                     <form action="/consultas" method="POST">
                     @csrf
                         <div class="row g-2 align-items-center">
-                            
+
                             <div class="mb-3">
                                 <label class="form-label">Ingrese su Correo</label>
                                 <input type="email" name="correo" class="form-control" placeholder="name@example.com" required>

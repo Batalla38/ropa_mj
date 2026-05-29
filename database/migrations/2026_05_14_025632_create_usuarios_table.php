@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 100);
             $table->string('apellido', 100);
+            $table->integer('id_rol')->nullable(); // Si quieres relacionar con una tabla de roles
             $table->string('correo')->unique();
             $table->string('contraseña');
             $table->timestamps();
