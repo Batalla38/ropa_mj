@@ -81,6 +81,9 @@ Route::get('/gestionConsultas', function () {
 Route::get('/createProducto', function () {
     return view('admin.createProducto');
 });
+Route::get('/updateProducto', function () {
+    return view('admin.updateProducto');
+});
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
 
 // Formulario de Contacto
