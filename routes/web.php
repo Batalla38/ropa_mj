@@ -78,8 +78,8 @@ Route::get('/productoM', function () {
 Route::get('/gestionConsultas', function () {
     return view('admin.gestionConsultas');
 });
-Route::get('/agregarProducto', function () {
-    return view('admin.agregarProducto');
+Route::get('/createProducto', function () {
+    return view('admin.createProducto');
 });
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
 
