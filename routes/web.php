@@ -24,6 +24,10 @@ Route::get('/contacto', function () {
     return view('contacto');
 });
 
+Route::get('/main', function () {
+    return view('main');
+});
+
 Route::get('/quienesSomos', function () {
     return view('quienesSomos');
 });
@@ -69,10 +73,14 @@ Route::get('/producto', function () {
 Route::get('/productoM', function () {
     return view('productoM');
 });
+
+// --- LADO ADMINISTRADOR ---
 Route::get('/gestionConsultas', function () {
     return view('admin.gestionConsultas');
 });
-
+Route::get('/agregarProducto', function () {
+    return view('admin.agregarProducto');
+});
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
 
 // Formulario de Contacto
