@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactoController;
-
 use App\Http\Controllers\RegistroController;
-use App\Http\Controllers\LoginController; //  Conectado directamente a la carpeta Controllers
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\AdminConsultaController; // <-- CORREGIDO: Sin la "s"
 
 /*
 |--------------------------------------------------------------------------
@@ -12,13 +13,11 @@ use App\Http\Controllers\LoginController; //  Conectado directamente a la carpet
 |--------------------------------------------------------------------------
 */
 
-// --- VISTAS PRINCIPALES Y CATÁLOGOS ---
-
-use App\Http\Controllers\ConsultaController;
+// --- VISTAS PRINCIPALES Y PÁGINAS PÚBLICAS ---
 
 Route::get('/main', function () {
     return view('main');
-})->name('main'); //  El LoginController usa este nombre para redireccionarte acá
+})->name('main'); // El LoginController usa este nombre para redireccionarte acá
 
 Route::get('/contacto', function () {
     return view('contacto');
@@ -40,14 +39,11 @@ Route::get('/consultas', function () {
     return view('consultas');
 });
 
+// --- CATÁLOGOS Y PRODUCTOS ---
 
-// Catálogos
 Route::get('/catalogo', function () {
     return view('catalogo');
 });
-
-Route::post('/consultas', [App\Http\Controllers\ConsultaController::class, 'store']);
-
 
 Route::get('/catalogoM', function () {
     return view('catalogoM');
@@ -61,7 +57,6 @@ Route::get('/catalogoChaleco', function () {
     return view('catalogoChaleco');
 });
 
-// Productos
 Route::get('/producto', function () {
     return view('producto');
 });
@@ -69,17 +64,6 @@ Route::get('/producto', function () {
 Route::get('/productoM', function () {
     return view('productoM');
 });
-Route::get('/gestionConsultas', function () {
-    return view('admin.gestionConsultas');
-});
-
-// --- PROCESAMIENTO DE FORMULARIOS (POST) ---
-
-// Formulario de Contacto
-Route::post('/contacto', [ContactoController::class, 'procesar']);
-
-// Formulario de Registro de cuenta
-Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cuenta.procesar');
 
 
 // --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
@@ -93,26 +77,31 @@ Route::get('/registro', function () {
     return view('registro');
 });
 
-// Capturar los datos del Login e iniciar sesión
+// Procesar inicio y cierre de sesión
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-
-
-// NUEVA: Ruta necesaria para poder cerrar sesión cuando quieras salír
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+// --- PROCESAMIENTO DE FORMULARIOS DEL CLIENTE (POST) ---
 
-//use App\Http\Controllers\registroController;
+// Formulario de Contacto básico
+Route::post('/contacto', [ContactoController::class, 'procesar']);
 
-// El truco está en el ->name() del final
-Route::post('/crear-cuenta', [registroController::class, 'procesar'])->name('cuenta.procesar');
-return redirect()->back()->with('status', '¡Tu cuenta ha sido creada con éxito!');
+// Formulario de Registro de cuenta (CORREGIDO: Se eliminó el código duplicado y el return suelto)
+Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cuenta.procesar');
 
-
-Route::post('/enviar-consulta', [App\Http\Controllers\ConsultaController::class, 'store']);
-
-
-
+// Envío de consultas de los clientes (Ambas opciones apuntan al controlador)
+Route::post('/consultas', [ConsultaController::class, 'store']);
+Route::post('/enviar-consulta', [ConsultaController::class, 'store']);
 
 
-//Route::any('/consultas', [App\Http\Controllers\ConsultaController::class, 'store']);
+// --- PANEL DE ADMINISTRACIÓN (GESTIÓN DE CONSULTAS) ---
+
+// Cambiamos a la URL definitiva que querías usar para ver adminConsultas.blade.phpRoute::get('/admin/adminConsultas', [AdminConsultasController::class, 'index'])->name('admin.consultas.index');
+// Rutas del final
+
+
+// Rutas finales en singular
+Route::get('/admin/adminConsultas', [AdminConsultaController::class, 'index'])->name('admin.consultas.index');
+// Asegurate de que tu ruta en web.php esté escrita exactamente así:
+Route::put('/adminConsultas/{id}', [AdminConsultaController::class, 'responder'])->name('admin.consultas.responder');

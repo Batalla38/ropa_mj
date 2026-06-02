@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -23,53 +24,33 @@ class LoginController extends Controller
             'contraseña.required' => 'La contraseña es obligatoria.',
         ]);
 
-<<<<<<< HEAD
-        // 2. Buscamos directamente en la tabla 'usuario' (Modificado)
-        $user = DB::table('usuarios') // <-- CAMBIADO: 'users' por 'Usuario'
-=======
         // 2. Buscamos directamente en la tabla 'usuarios'
         $user = DB::table('usuarios')
->>>>>>> e43a936bfa89e3a0b6aca180ba2666dbfbf7eb59
             ->where('correo', $credentials['correo'])
             ->where('contraseña', $credentials['contraseña']) // Compara texto plano directamente
             ->first();
 
-
         // 3. Si el usuario existe
         if ($user) {
-
-            // Guardamos manualmente el ID del usuario en la sesión
+            // Guardamos manualmente los datos en la sesión
             $request->session()->put('user_id', $user->id);
-            
-<<<<<<< HEAD
-            // Si tu columna de nombre se llama 'nombre' o 'name', esto previene errores:
-            $user_name = $user->nombre ?? $user->name ?? 'usuarios';
-            $request->session()->put('user_name', $user_name);
+            $request->session()->put('id_rol', $user->id_rol); // Guarda el rol en la sesión
 
-            // 4. Verificamos si es administrador
-            // Revisa si la columna se llama 'is_admin'. Si el ID de tu admin es 1, entrará de todos modos.
-            $isAdminColumn = $user->is_admin ?? 0; 
-            if ($isAdminColumn == 1 || $user->id == 1) {
-                return redirect('/main'); // Te manda directo a la página main (panel de administración)
-=======
-            // 🛠️ ¡AGREGÁ ESTA LÍNEA CLAVE ACÁ ABAJO!
-            $request->session()->put('id_rol', $user->id_rol); // <-- Guarda el rol en la sesión
-
-            // Guardamos el nombre
+            // Guardamos el nombre dinámicamente para prevenir errores de columnas
             $user_name = $user->nombre ?? $user->name ?? 'Usuario';
             $request->session()->put('user_name', $user_name);
 
-            // 4. Verificamos si es administrador
+            // 4. Verificamos si es administrador (id_rol = 1 o ID de usuario = 1)
             $rolUsuario = $user->id_rol ?? 0; 
             if ($rolUsuario == 1 || $user->id == 1) {
-                return redirect('/main');
->>>>>>> e43a936bfa89e3a0b6aca180ba2666dbfbf7eb59
+                return redirect('/main'); // Redirige al panel de administración
             }
 
+            // Si es un usuario común, va a la raíz
             return redirect('/');
         }
 
-        // 5. Si no se encontró ningún usuario con esos datos, volvemos atrás con el error
+        // 5. Si las credenciales no coinciden
         return redirect()->back()->withErrors([
             'correo' => 'El correo electrónico o la contraseña son incorrectos.',
         ])->onlyInput('correo');
@@ -83,9 +64,10 @@ class LoginController extends Controller
         // Limpiamos los datos manuales de la sesión
         $request->session()->forget('user_id');
         $request->session()->forget('user_name');
+        $request->session()->forget('id_rol');
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect('/login');
     }
-}
+} // <-- Esta es la llave única que cierra la clase al final de todo
