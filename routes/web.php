@@ -23,6 +23,10 @@ Route::get('/contacto', function () {
     return view('contacto');
 });
 
+Route::get('/main', function () {
+    return view('main');
+});
+
 Route::get('/quienesSomos', function () {
     return view('quienesSomos');
 });
@@ -65,6 +69,21 @@ Route::get('/productoM', function () {
     return view('productoM');
 });
 
+// --- LADO ADMINISTRADOR ---
+Route::get('/gestionConsultas', function () {
+    return view('admin.gestionConsultas');
+});
+Route::get('/agregarProducto', function () {
+    return view('admin.agregarProducto');
+});
+// --- PROCESAMIENTO DE FORMULARIOS (POST) ---
+
+// Formulario de Contacto
+Route::post('/contacto', [ContactoController::class, 'procesar']);
+
+// Formulario de Registro de cuenta
+Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cuenta.procesar');
+
 
 // --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
 
@@ -97,11 +116,8 @@ Route::post('/enviar-consulta', [ConsultaController::class, 'store']);
 
 // --- PANEL DE ADMINISTRACIÓN (GESTIÓN DE CONSULTAS) ---
 
-// Cambiamos a la URL definitiva que querías usar para ver adminConsultas.blade.phpRoute::get('/admin/adminConsultas', [AdminConsultasController::class, 'index'])->name('admin.consultas.index');
-// Rutas del final
-
-
-// Rutas finales en singular
+// 1. Ruta para ver la tabla de consultas del administrador
 Route::get('/admin/adminConsultas', [AdminConsultaController::class, 'index'])->name('admin.consultas.index');
-// Asegurate de que tu ruta en web.php esté escrita exactamente así:
+
+// 2. Ruta para procesar la respuesta del modal (PUT)
 Route::put('/adminConsultas/{id}', [AdminConsultaController::class, 'responder'])->name('admin.consultas.responder');
