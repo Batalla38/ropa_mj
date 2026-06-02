@@ -76,8 +76,7 @@
                                         <small class="text-muted fw-normal">{{ $consulta->created_at->format('H:i') }} hs</small>
                                     </td>
                                     <td>
-                                        <div class="text-dark">{{ $consulta->nombre ?? 'Usuario Web' }}</div>
-                                        <small class="text-muted text-break">{{ $consulta->correo }}</small>
+                                       <div class="text-dark text-break">{{ $consulta->correo }}</div>
                                     </td>
                                     <td>
                                         <span class="badge bg-info text-white text-capitalize px-2 py-1 shadow-sm">
