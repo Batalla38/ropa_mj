@@ -5,12 +5,7 @@ use App\Http\Controllers\ContactoController;
 
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController; //  Conectado directamente a la carpeta Controllers
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
+use App\Http\Controllers\ProductoController;
 
 // --- VISTAS PRINCIPALES Y CATÁLOGOS ---
 
@@ -84,6 +79,9 @@ Route::get('/createProducto', function () {
 Route::get('/updateProducto', function () {
     return view('admin.updateProducto');
 });
+
+Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
+
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
 
 // Formulario de Contacto

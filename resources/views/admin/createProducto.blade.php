@@ -24,66 +24,67 @@
 
         </div>
 
-        <div class="container mt-2 bg-light rounded shadow-sm d-fl  ex align-items-center p-2">
-            <div class="w-5">
-                <label for="titulo" class="form-label">Titulo</label>
-                <textarea class="form-control" id="titulo" name="titulo" rows="1"></textarea>
-            </div>
+<form action="{{ route('productos.guardar') }}" method="POST">
+    @csrf
+
+    <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
+        <div class="w-100">
+            <label for="titulo" class="form-label fw-bold">Título del Producto</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+    </div>
+
+    <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
+        <div class="w-100">
+            <label for="descripcion" class="form-label fw-bold">Descripción del Producto</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+        </div>
+    </div>
+
+    <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 50px;">
+        <span class="me-3 text-secondary fw-bold">Género:</span>
+        <input type="checkbox" class="btn-check" id="masculino" name="categorias[]" value="masculino" autocomplete="off">
+        <label class="btn btn-outline-primary me-2" for="masculino">Masculino</label>
+        <input type="checkbox" class="btn-check" id="femenino" name="categorias[]" value="femenino" autocomplete="off">
+        <label class="btn btn-outline-primary me-2" for="femenino">Femenino</label>
+        <input type="checkbox" class="btn-check" id="nino" name="categorias[]" value="nino" autocomplete="off">
+        <label class="btn btn-outline-primary" for="nino">Niño</label>
+    </div>
+
+    <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center" style="min-height: 50px;">
+        <div class="form-check form-check-inline ms-2">
+            <input class="form-check-input" type="checkbox" id="talleXL" name="talles[]" value="XL">
+            <label class="form-check-label" for="talleXL">XL</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="talleX" name="talles[]" value="X">
+            <label class="form-check-label" for="talleX">X</label>
+        </div>
+    </div>
+
+    <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center" style="min-height: 50px;">
+        <select class="form-select" name="metodo_pago">
+            <option selected disabled>Seleccionar Método de Pago</option>
+            <option value="1">Mercado Pago</option>
+            <option value="2">Tarjeta de Naranja</option>
+            <option value="3">Banco Corrientes</option>
+        </select>
+    </div>
+
+    <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 50px;">
+        <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="number" step="0.01" class="form-control" name="precio" placeholder="0.00" required>
+        </div>
+    </div>
+
+    <div class="container mt-4 text-center">
+        <button type="submit" class="btn btn-success btn-lg px-5 shadow">Cargar Producto</button>
+    </div>
+</form>
+
         </div>
 
-        <div class="container mt-2 bg-light rounded shadow-sm d-fl  ex align-items-center p-2">
-            <div class="w-100">
-                <label for="descripcion" class="form-label">Descripción del Producto</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
-            </div>
-        </div>
-
-        <div class="container mt-2 bg-light rounded shadow-sm d-flex  align-items-center" style="min-height: 50px;">
-            <input type="checkbox" class="btn-check" id="masculino" autocomplete="off">
-            <label class="btn btn-primary" for="masculino">Masculino</label>
-            <input type="checkbox" class="btn-check" id="femenino" checked autocomplete="off">
-            <label class="btn btn-primary" for="femenino">Femenino</label>
-            <input type="checkbox" class="btn-check" id="nino" checked autocomplete="off">
-            <label class="btn btn-primary" for="nino">Niño</label>
-        </div>
-
-
-        <div class="container mt-2 bg-light rounded shadow-sm d-flex  align-items-center" style="min-height: 50px;">
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="talleXL" value="option1">
-                <label class="form-check-label" for="talleXL">XL</label>
-                </div>
-                <div class="form-check form-check-inline ">
-                <input class="form-check-input" type="checkbox" id="talleX" value="option2">
-                <label class="form-check-label" for="talleX">X</label>
-                </div>
-        </div>
-
-        <div class="container mt-2 bg-light rounded shadow-sm d-flex  align-items-center" style="min-height: 50px;">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Seleccionar Metodo de Pago</option>
-                <option value="1">Mercado Pago</option>
-                <option value="2">Tarjeta de Naranja</option>
-                <option value="3">Banco Corrientes</option>
-            </select>
-        </div>
-
-
-        <div class="container mt-2 bg-light rounded shadow-sm d-flex  align-items-center" style="min-height: 50px;">
-                <div class="input-group mb-3">
-                <span class="input-group-text">$</span>
-                <span class="input-group-text">0.00</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-                </div>
-        </div>
-
-
-
-
-
-
-
-        </div>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <div class="mt-3">
             @include('footer') </div>
