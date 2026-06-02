@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Usuario extends Model
 {
     protected $table = 'usuarios';
-    // 🕒 ACTIVADOS: Laravel manejará automáticamente 'created_at' y 'updated_at'
     public $timestamps = true;
     protected $fillable = [
-    'nombre',
-    'apellido',
-    'correo',
-    'contraseña',
+        'nombre',
+        'apellido',
+        'id_rol',
+        'correo',
+        'contraseña',
     ];
     //Casteo de Atributos
     //protected $casts = [

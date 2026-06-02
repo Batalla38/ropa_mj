@@ -20,7 +20,8 @@ class RolesSeeder extends Seeder
             'id'=> 1,
             'correo' => 'solangemtl88@gmail.com',
             'contraseña' => '124356',
-            
+
+
         ]);
     }
 }

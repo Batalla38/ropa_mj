@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // Usamos la fachada DB para leer directo la tabla
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
     /**
-     * Procesa el formulario de inicio de sesión de forma directa.
+     * Procesa el inicio de sesión.
      */
     public function store(Request $request)
     {
@@ -23,53 +22,25 @@ class LoginController extends Controller
             'contraseña.required' => 'La contraseña es obligatoria.',
         ]);
 
-<<<<<<< HEAD
-        // 2. Buscamos directamente en la tabla 'usuario' (Modificado)
-        $user = DB::table('usuarios') // <-- CAMBIADO: 'users' por 'Usuario'
-=======
-        // 2. Buscamos directamente en la tabla 'usuarios'
+        // 2. Buscamos directamente en la tabla 'usuarios' usando texto plano
         $user = DB::table('usuarios')
->>>>>>> e43a936bfa89e3a0b6aca180ba2666dbfbf7eb59
             ->where('correo', $credentials['correo'])
-            ->where('contraseña', $credentials['contraseña']) // Compara texto plano directamente
+            ->where('contraseña', $credentials['contraseña'])
             ->first();
 
-
-        // 3. Si el usuario existe
+        // 3. Si el usuario existe, validamos su rol
         if ($user) {
+            // Evaluamos si es administrador (ya sea por id_rol o por ser el ID 1 primario)
+            $rolUsuario = $user->id_rol ?? 0;
 
-            // Guardamos manualmente el ID del usuario en la sesión
-            $request->session()->put('user_id', $user->id);
-            
-<<<<<<< HEAD
-            // Si tu columna de nombre se llama 'nombre' o 'name', esto previene errores:
-            $user_name = $user->nombre ?? $user->name ?? 'usuarios';
-            $request->session()->put('user_name', $user_name);
-
-            // 4. Verificamos si es administrador
-            // Revisa si la columna se llama 'is_admin'. Si el ID de tu admin es 1, entrará de todos modos.
-            $isAdminColumn = $user->is_admin ?? 0; 
-            if ($isAdminColumn == 1 || $user->id == 1) {
-                return redirect('/main'); // Te manda directo a la página main (panel de administración)
-=======
-            // 🛠️ ¡AGREGÁ ESTA LÍNEA CLAVE ACÁ ABAJO!
-            $request->session()->put('id_rol', $user->id_rol); // <-- Guarda el rol en la sesión
-
-            // Guardamos el nombre
-            $user_name = $user->nombre ?? $user->name ?? 'Usuario';
-            $request->session()->put('user_name', $user_name);
-
-            // 4. Verificamos si es administrador
-            $rolUsuario = $user->id_rol ?? 0; 
             if ($rolUsuario == 1 || $user->id == 1) {
-                return redirect('/main');
->>>>>>> e43a936bfa89e3a0b6aca180ba2666dbfbf7eb59
+                return redirect('/main'); // Redirecciona al catálogo/panel principal
             }
 
-            return redirect('/');
+            return redirect('/'); // Redirecciona a la tienda común
         }
 
-        // 5. Si no se encontró ningún usuario con esos datos, volvemos atrás con el error
+        // 4. Si no se encontró ningún usuario con esos datos, volvemos atrás con error
         return redirect()->back()->withErrors([
             'correo' => 'El correo electrónico o la contraseña son incorrectos.',
         ])->onlyInput('correo');
@@ -80,12 +51,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        // Limpiamos los datos manuales de la sesión
-        $request->session()->forget('user_id');
-        $request->session()->forget('user_name');
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/login');
+        // Si usás sesiones manuales, podés limpiar acá o usar Auth si migrás a Laravel estándar
+        return redirect('/login')->with('status', 'Sesión cerrada correctamente.');
     }
 }
