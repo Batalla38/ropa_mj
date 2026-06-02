@@ -74,7 +74,7 @@
     <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 50px;">
         <div class="input-group">
             <span class="input-group-text">$</span>
-            <input type="number" step="0.01" class="form-control" name="precio" placeholder="0.00" required>
+            <input type="number" step="any" class="form-control" name="precio" placeholder="0.00" required>
         </div>
     </div>
 
