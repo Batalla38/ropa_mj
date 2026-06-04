@@ -17,7 +17,7 @@ class RolesSeeder extends Seeder
     {
         //
         Roles::create([
-            'id'=> 1,
+            'id_rol'=> 1,
             'correo' => 'solangemtl88@gmail.com',
             'contraseña' => '124356',
             

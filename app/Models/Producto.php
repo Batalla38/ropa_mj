@@ -19,12 +19,9 @@ class Producto extends Model
     ];
     //Casteo de Atributos
     protected $casts = [
-    'nombre' => 'varchar(100)',
-    'descripcion' => 'text',
     'categoria_id' => 'integer',
     'precio' => 'decimal:2',
     'stock' => 'integer',
-    'url_imagen' => 'varchar(255)',
     'activo' => 'boolean',
     ];
 }
