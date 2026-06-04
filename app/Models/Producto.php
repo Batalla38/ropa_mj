@@ -9,7 +9,7 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $table = 'productos';
+    protected $table = 'producto';
 
     // CAMBIADO A TRUE: Ahora que la migración crea creadat_at y updated_at,
     // le avisamos al modelo que las use automáticamente.
