@@ -79,6 +79,9 @@ Route::get('/createProducto', function () {
 Route::get('/updateProducto', function () {
     return view('admin.updateProducto');
 });
+Route::get('/readProducto', function () {
+    return view('admin.readProducto');
+});
 
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
 
