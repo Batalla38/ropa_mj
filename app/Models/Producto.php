@@ -11,29 +11,28 @@ class Producto extends Model
 
     protected $table = 'productos';
 
-    // Si tu tabla en phpMyAdmin no tiene las columnas created_at y updated_at, dejamos esto en false:
+    // Desactivado si tu tabla en phpMyAdmin no tiene columnas created_at / updated_at
     public $timestamps = false;
 
     protected $fillable = [
         'nombre',
         'descripcion',
-        'categoria_id',
-        'subcategoria_id',
         'precio',
+        'genero',
+        'talle',
         'stock',
         'url_imagen',
         'activo',
     ];
 
-    // Casteo de Atributos (CORREGIDO con formatos válidos de Laravel)
     protected $casts = [
-        'nombre' => 'string',
+        'nombre'      => 'string',
         'descripcion' => 'string',
-        'categoria_id' => 'integer',
-        'subcategoria_id' => 'integer',
-        'precio' => 'float',
-        'stock' => 'integer',
-        'url_imagen' => 'string',
-        'activo' => 'boolean',
+        'precio'      => 'float',
+        'genero'      => 'string',
+        'talle'       => 'string',
+        'stock'       => 'integer',
+        'url_imagen'  => 'string',
+        'activo'      => 'boolean',
     ];
 }
