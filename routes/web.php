@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactoController;
-
-use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController; //  Conectado directamente a la carpeta Controllers
 use App\Http\Controllers\ProductoController;
 
@@ -11,6 +9,8 @@ use App\Http\Controllers\ProductoController;
 
 use App\Http\Controllers\ConsultaController;
 
+
+use App\Http\Controllers\RegistroController;
 Route::get('/main', function () {
     return view('main');
 })->name('main'); //  El LoginController usa este nombre para redireccionarte acá
