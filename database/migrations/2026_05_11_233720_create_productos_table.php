@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up(): void
         {
-                Schema::create('productos', function (Blueprint $table) {
+                Schema::create('producto', function (Blueprint $table) {
                 $table->id();
                 $table->string('nombre', 150);
                 $table->text('descripcion')->nullable();
                 $table->decimal('precio', 10, 2);
                 $table->integer('stock')->default(0);
+                $table->string('genero')->nullable(); // Guardará "masculino, femenino" o "unisex"
+                $table->string('talle')->nullable();  // Guardará "X, XL
                 $table->string('url_imagen')->nullable();
                 $table->boolean('activo')->default(true);
                 $table->timestamps();

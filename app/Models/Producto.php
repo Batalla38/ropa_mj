@@ -9,7 +9,7 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $table = 'productos';
+    protected $table = 'producto';
 
     // Desactivado si tu tabla en phpMyAdmin no tiene columnas created_at / updated_at
     public $timestamps = false;
