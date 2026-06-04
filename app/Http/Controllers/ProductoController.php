@@ -9,13 +9,11 @@ class ProductoController extends Controller
 {
     public function guardar(Request $request)
     {
-        // 1. Validar campos
+        // 1. Validar campos (quitamos géneros y talles de los requeridos al no estar en la DB)
         $request->validate([
             'titulo'      => 'required|string|max:100',
             'descripcion' => 'required|string',
             'precio'      => 'required|numeric|min:0',
-            'generos'     => 'required|array',
-            'talles'      => 'required|array',
             'stock'       => 'required|integer|min:0',
             'url_imagen'  => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'activo'      => 'required|boolean',
@@ -29,9 +27,9 @@ class ProductoController extends Controller
         $producto->stock       = $request->input('stock');
         $producto->activo      = $request->input('activo');
 
-        // Convierte los grupos de checkboxes a texto ("masculino", "X, XL")
-        $producto->genero = implode(', ', $request->input('generos'));
-        $producto->talle  = implode(', ', $request->input('talles'));
+        /* NOTA: Se omiten las asignaciones de $producto->genero y $producto->talle
+           debido a que estas columnas no existen actualmente en la tabla 'productos' de tu DB.
+        */
 
         // 3. Guardar imagen física
         if ($request->hasFile('url_imagen')) {
@@ -43,9 +41,18 @@ class ProductoController extends Controller
             $producto->url_imagen = 'default.png';
         }
 
-        // 4. Guardar
+        // 4. Guardar en phpMyAdmin
         $producto->save();
 
         return redirect()->back()->with('success', '¡Producto guardado exitosamente en la base de datos!');
+    }
+
+    public function index()
+    {
+        // 1. Buscamos los productos en la base de datos
+        $productos = Producto::all();
+
+        // 2. Retornamos la vista pasando la colección ordenada
+        return view('admin.readProducto', compact('productos'));
     }
 }
