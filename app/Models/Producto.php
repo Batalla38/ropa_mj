@@ -11,8 +11,9 @@ class Producto extends Model
 
     protected $table = 'producto';
 
-    // Desactivado si tu tabla en phpMyAdmin no tiene columnas created_at / updated_at
-    public $timestamps = false;
+    // CAMBIADO A TRUE: Ahora que la migración crea creadat_at y updated_at,
+    // le avisamos al modelo que las use automáticamente.
+    public $timestamps = true;
 
     protected $fillable = [
         'nombre',
