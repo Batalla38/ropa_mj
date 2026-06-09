@@ -80,7 +80,7 @@
                             <p class="card-text mb-1 fs-6"><strong>Patrón:</strong> Rayas finas (pinstripe) blanco y negro</p>
                             <p class="card-text mb-3 fs-6"><strong>Cuidado:</strong> Lavado a máquina en frío.</p>
                             
-                            <form action="{{ route('carrito.agregar', 1) }}" method="POST">
+                           <form action="{{ route('carrito.agregar', 1) }}" method="POST">
                                 @csrf
 
                                 <p class="mb-2 fw-semibold text-dark">Seleccione su talle</p>
@@ -111,6 +111,16 @@
                                         <button class="btn btn-outline-secondary" type="button" onclick="increase()">+</button>
                                     </div>
                                 </div>
+
+                                @if(session('success'))
+                                    <div class="alert alert-success d-flex align-items-center py-2 px-3 mb-3 rounded-3 shadow-sm" role="alert" style="font-size: 0.9rem; animation: fadeIn 0.5s ease;">
+                                        <span class="me-2">✅</span>
+                                        <div>
+                                            {{ session('success') }} 
+                                            <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-1 text-success fw-bold">Ver mi carrito</a>
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-dark btn-lg">🛒 Agregar al Carrito</button>
