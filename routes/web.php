@@ -115,3 +115,6 @@ Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->n
 
 // Ruta para procesar la compra (Protegida, redirige al login si no está logueado)
 Route::post('/carrito/comprar', [CarritoController::class, 'procesarCompra'])->name('carrito.comprar');
+
+// El {id} le dice a Laravel que esa parte de la URL va a cambiar según el producto
+Route::get('/producto/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('producto.show');
