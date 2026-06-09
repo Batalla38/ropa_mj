@@ -31,9 +31,11 @@ class LoginController extends Controller
             ->first();
             
         // 3. Si el usuario existe, pasamos a comparar la contraseña encriptada
-        // Hash::check toma lo que escribió el usuario y lo compara con el hash de tu BD ($user->contraseña)
         if ($user && Hash::check($credentials['password'], $user->contraseña)) {
             
+            // --- CAMBIO 1: RESPALDAMOS EL CARRITO QUE ARMÓ COMO VISITANTE ---
+            $carritoRespaldo = $request->session()->get('carrito', []);
+
             // Guardamos manualmente los datos en la sesión
             $request->session()->put('user_id', $user->id);
             $request->session()->put('id_rol', $user->id_rol); 
@@ -42,17 +44,27 @@ class LoginController extends Controller
             $user_name = $user->nombre ?? $user->name ?? 'Usuario';
             $request->session()->put('user_name', $user_name);
 
-            // 4. Verificamos si es administrador o rol con acceso
+            // --- CAMBIO 2: DEVOLVEMOS EL CARRITO A LA SESIÓN ACTIVA ---
+            if (!empty($carritoRespaldo)) {
+                $request->session()->put('carrito', $carritoRespaldo);
+            }
+
+            // 4. Verificamos si es administrador (Rol 1)
             $rolUsuario = $user->id_rol ?? 0; 
             if ($rolUsuario == 1 || $user->id == 1) {
                 return redirect('/main'); // Redirige al panel de administración
             }
 
+            // --- CAMBIO 3: SI ES USUARIO CLIENTE (Rol 2), VA DIRECTO AL CARRITO ---
             if ($rolUsuario == 2 || $user->id == 2) {
-                return redirect('/main'); 
+                // Si tiene cosas en el carrito lo mandamos a que compre, si no, a la raíz
+                if (!empty($carritoRespaldo)) {
+                    return redirect('/carrito')->with('success', '¡Iniciaste sesión! Aquí están tus productos.');
+                }
+                return redirect('/'); 
             }
             
-            // Si es un usuario común, va a la raíz
+            // Si es otro tipo de usuario, va a la raíz
             return redirect('/');
         }
 

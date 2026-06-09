@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuario; // Importación para que VS Code no lo marque en rojo
-
-class registroController extends Controller
+// Usamos la ruta absoluta con la barra invertida para que VS Code no te marque error
+ class registroController extends Controller
 {
     public function procesar(Request $request)
     {
@@ -14,7 +13,6 @@ class registroController extends Controller
             'nombre'   => 'required|string|max:50',
             'apellido' => 'required|string|max:50',
             'correo'   => 'required|email|unique:usuarios,correo', 
-            // Validamos 'password' y exigimos que coincida con 'password_confirmation'
             'password' => 'required|string|min:8|max:20|confirmed', 
         ], [
             'correo.unique'     => 'Este correo electrónico ya está registrado.',
@@ -23,16 +21,35 @@ class registroController extends Controller
         ]);
 
         // 2. GUARDADO EN LA BASE DE DATOS
-        Usuario::create([
+        // Guardamos el resultado en la variable $nuevoUsuario
+        $nuevoUsuario = Usuario::create([
             'nombre'     => $request->input('nombre'),
             'apellido'   => $request->input('apellido'),
-            'id_rol'     => 2, // Se asigna el rol de forma obligatoria
+            'id_rol'     => 2, // Se asigna el rol de cliente de forma obligatoria
             'correo'     => $request->input('correo'),
-            // 'contraseña' apunta a tu BD, y mapea el input 'password' del formulario
             'contraseña' => bcrypt($request->input('password')), 
         ]);
 
-        // 3. REDIRECCIÓN CON MENSAJE DE ÉXITO
-        return redirect()->back()->with('status', '¡Tu cuenta ha sido creada con éxito!');
+        // --- NUEVO: LOGIN AUTOMÁTICO RESPALDANDO EL CARRITO ---
+        
+        // 1. Respaldamos el carrito que armó como visitante
+        $carritoRespaldo = $request->session()->get('carrito', []);
+
+        // 2. Le creamos la sesión manual usando los datos del usuario recién creado
+        // Nota: usamos 'id_usuario' que configuramos como tu clave primaria en el modelo
+        $request->session()->put('user_id', $nuevoUsuario->id_usuario); 
+        $request->session()->put('id_rol', $nuevoUsuario->id_rol);
+        $request->session()->put('user_name', $nuevoUsuario->nombre);
+
+        // 3. Le devolvemos el carrito a su nueva sesión activa
+        if (!empty($carritoRespaldo)) {
+            $request->session()->put('carrito', $carritoRespaldo);
+            
+            // Si tenía ropa cargada, lo mandamos directo al carrito a finalizar la compra
+            return redirect('/carrito')->with('status', '¡Cuenta creada con éxito! Aquí tienes tus productos listos para comprar.');
+        }
+
+        // 3. REDIRECCIÓN SI EL CARRITO ESTABA VACÍO
+        return redirect('/')->with('status', '¡Tu cuenta ha sido creada con éxito! Bienvenido a Ropa MJ.');
     }
 }
