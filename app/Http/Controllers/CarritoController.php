@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto; // Asegúrate de tener tu modelo Producto
+use Illuminate\Support\Facades\DB; // <-- AGREGA ESTA LÍNEA
 
 class CarritoController extends Controller
 {
@@ -26,7 +27,7 @@ class CarritoController extends Controller
     public function agregar(Request $request, $id)
     {
         // 1. Buscamos el producto en la base de datos para validar que existe y tener su precio/imagen
-        $producto = DB::table('productos')->where('id_producto', $id)->first(); 
+        $producto = DB::table('producto')->where('id', $id)->first(); 
         // Nota: Si usas el modelo Producto, puedes usar: Producto::findOrFail($id);
 
         if (!$producto) {
@@ -36,52 +37,27 @@ class CarritoController extends Controller
         // 2. Traemos el carrito actual de la sesión
         $carrito = session()->get('carrito', []);
 
-        // 3. Si el producto ya estaba en el carrito, solo le sumamos 1 a la cantidad
+       // 3. NUEVO: Capturamos la cantidad exacta que viene del formulario HTML
+        // Si por algún motivo viene vacío, por defecto le ponemos 1
+        $cantidadSeleccionada = (int) $request->input('cantidad', 1);
+
+        // 4. Si el producto ya estaba en el carrito, le sumamos la cantidad seleccionada
         if(isset($carrito[$id])) {
-            $carrito[$id]['cantidad']++;
+            $carrito[$id]['cantidad'] += $cantidadSeleccionada;
         } else {
-            // Si es nuevo, lo agregamos con cantidad inicial en 1
+            // Si es nuevo, lo agregamos con los datos dinámicos
             $carrito[$id] = [
-                "nombre" => $producto->nombre,
-                "cantidad" => 1,
-                "precio" => $producto->precio,
-                "imagen" => $producto->imagen ?? 'bg1.png' // Tu imagen por defecto
+                "nombre"   => $producto->nombre,
+                "cantidad" => $cantidadSeleccionada, // Usa los que el usuario sumó con el +
+                "precio"   => $producto->precio,
+                "imagen"   => $producto->url_imagen ?? 'bg1.png' // Corregido según tu phpMyAdmin
             ];
         }
 
-        // 4. Guardamos el carrito actualizado de vuelta en la sesión masiva
+        // 5. Guardamos el carrito actualizado en la sesión
         session()->put('carrito', $carrito);
 
-        return redirect()->route('carrito.ver')->with('success', '¡Producto agregado al carrito!');
-    }
-
-    // Elimina un artículo del carrito
-    public function eliminar($id)
-    {
-        $carrito = session()->get('carrito', []);
-
-        if(isset($carrito[$id])) {
-            unset($carrito[$id]); // Destruye esa prenda del arreglo
-            session()->put('carrito', $carrito);
-        }
-
-        return redirect()->route('carrito.ver')->with('status', 'Producto quitado del carrito.');
-    }
-
-    // El botón definitivo de "Comprar"
-    public function procesarCompra(Request $request)
-    {
-        // REGLA DE ORO: Si no hay un usuario con sesión activa ('user_id')
-        if (!session()->has('user_id')) {
-            // Lo mandamos al login, pero guardamos un mensaje para avisarle por qué lo sacamos
-            return redirect('/login')->withErrors([
-                'correo' => 'Debes iniciar sesión o registrarte para finalizar tu compra. ¡Tu carrito se guardó perfectamente!'
-            ]);
-        }
-
-        // Si está logueado, acá va tu lógica de transacciones/pedidos...
-        // Por ahora simulamos el éxito:
-        session()->forget('carrito'); // Vaciamos el carrito tras comprar
-        return redirect('/')->with('success', '¡Gracias por tu compra en Ropa MJ!');
+        // --- CAMBIO CLAVE: Volvemos a la misma página del producto con el mensaje verde ---
+        return redirect()->back()->with('success', '¡Excelente! El producto se agregó al carrito correctamente.');
     }
 }

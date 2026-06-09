@@ -18,7 +18,7 @@
         @if(empty($carrito))
             <div class="text-center py-5">
                 <p class="text-muted fs-4">No tienes productos en el carrito todavía.</p>
-                <a href="{{ url('/') }}" class="btn btn-dark btn-lg">Ver Catálogo de Ropa</a>
+                <a href="{{ url('/catalogo') }}" class="btn btn-dark btn-lg">Ver Catálogo de Ropa</a>
             </div>
         @else
             <div class="row">

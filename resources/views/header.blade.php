@@ -133,7 +133,7 @@
             <div class="d-flex align-items-center ms-auto gap-2">
 
                 <a href="{{ route('carrito.ver') }}" class="btn btn-outline-dark position-relative me-2">
-                    <span class="me-1">🛒</span> Carrito
+                    <span class="me-1">🛒</span> 
                     @if(session()->has('carrito') && count(session('carrito')) > 0)
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ count(session('carrito')) }}

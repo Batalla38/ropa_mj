@@ -80,10 +80,19 @@
                                     <textarea class="form-control border-2 text-muted" id="descripcion" name="descripcion" rows="3" required>{{ old('descripcion', $producto->descripcion) }}</textarea>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-sm-6 mb-3">
-                                        <label for="precio" class="form-label fw-bold text-dark fs-5">Precio ($)</label>
-                                        <input type="number" step="0.01" class="form-control form-control-lg border-2 text-success fw-bold" id="precio" name="precio" value="{{ old('precio', $producto->precio) }}" required>
+                            <h5 class="fw-bold fs-5 mb-2 text-dark">Características:</h5>
+                            <p class="card-text mb-1 fs-6"><strong>Material:</strong> Lino de alta calidad</p>
+                            <p class="card-text mb-1 fs-6"><strong>Patrón:</strong> Rayas finas (pinstripe) blanco y negro</p>
+                            <p class="card-text mb-3 fs-6"><strong>Cuidado:</strong> Lavado a máquina en frío.</p>
+
+                           <form action="{{ route('carrito.agregar', 1) }}" method="POST">
+                                @csrf
+
+                                <p class="mb-2 fw-semibold text-dark">Seleccione su talle</p>
+                                <div class="row g-2 mb-4">
+                                    <div class="col-auto">
+                                        <input type="radio" class="btn-check" name="talle" id="tS" value="S" checked>
+                                        <label class="btn btn-outline-dark" for="tS">S</label>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
@@ -106,6 +115,16 @@
                                         <a href="{{ route('productos.index') }}" class="btn btn-outline-secondary btn-lg w-100">Cancelar</a>
                                     </div>
                                 </div>
+
+                                @if(session('success'))
+                                    <div class="alert alert-success d-flex align-items-center py-2 px-3 mb-3 rounded-3 shadow-sm" role="alert" style="font-size: 0.9rem; animation: fadeIn 0.5s ease;">
+                                        <span class="me-2">✅</span>
+                                        <div>
+                                            {{ session('success') }}
+                                            <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-1 text-success fw-bold">Ver mi carrito</a>
+                                        </div>
+                                    </div>
+                                @endif
 
                             </form>
 

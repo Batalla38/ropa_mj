@@ -57,8 +57,8 @@ Route::get('/producto/{id}', function ($id) {
     return view('producto');
 })->name('productos.mostrar');
 
-Route::get('/productoM', function () {
-    return view('productoM');
+Route::get('/producto', function () {
+    return view('producto');
 });
 
 // --- LADO ADMINISTRADOR (GESTIÓN DE PRODUCTOS) ---
