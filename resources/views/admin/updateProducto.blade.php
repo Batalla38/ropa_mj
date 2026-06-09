@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <title>Gestión de Productos - Ropa MJ</title>
+        <meta charset="UTF-8">
+        <title>Editar Producto - Ropa MJ</title>
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <style>
             body {
                 background-color: #c1a391;
@@ -12,96 +13,100 @@
                 background-repeat: repeat;
                 background-size: 700px;
             }
+            .product-preview-box {
+                border-radius: 25px !important;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+                background-color: #a39898;
+                backdrop-filter: blur(5px);
+                padding: 20px;
+            }
         </style>
     </head>
+
     <body>
-        <div class="container-fluid bg-light py-4 border-bottom">
-            <div class="container">
-                @include('header')
-            </div>
-        </div>
+
+        @include('header')
 
         <div class="container mt-5">
-            <div class="card p-4 shadow-sm bg-white border-0 mb-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="h3 mb-0 fw-bold text-dark">Panel de Administración de Prendas</h1>
-                    <span class="badge bg-secondary fs-6">Total: {{ $productos->count() }} prendas</span>
+            <h2 class="text-center mb-4 text-dark fw-bold">Editar Producto: {{ $producto->nombre }}</h2>
+
+            @if ($errors->any())
+                <div class="alert alert-danger shadow-sm rounded-4 mb-4" role="alert">
+                    <div class="fw-bold mb-1">⚠️ Por favor, corrige los siguientes errores:</div>
+                    <ul class="mb-0 small">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-            </div>
-        </div>
+            @endif
 
-        <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center" style="min-height: 50px;">
-            <div class="container text-center fw-bold text-secondary">
-                <div class="row align-items-start">
-                    <div class="col">Nombre</div>
-                    <div class="col">Descripción</div>
-                    <div class="col">Talles</div>
-                    <div class="col">Precio</div>
-                    <div class="col">Stock</div>
-                    <div class="col">Acciones</div>
+            <div class="row">
+                <div class="col-md-5 py-3">
+                    <div class="product-preview-box text-center">
+                        @if($producto->url_imagen)
+                            <img src="{{ asset('images/' . $producto->url_imagen) }}" class="img-fluid rounded-3 w-75 visual-preview" alt="Imagen del producto">
+                        @else
+                            <img src="{{ asset('images/default.png') }}" class="img-fluid rounded-3 w-75 visual-preview" alt="Imagen por defecto">
+                        @endif
+                    </div>
+                    <p class="text-center text-muted small mt-3 fw-semibold">Imagen actual guardada en el sistema</p>
                 </div>
-            </div>
-        </div>
 
-        <div class="container mt-1">
-            @forelse($productos as $item)
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 60px;">
-                    <div class="container text-center">
-                        <div class="row align-items-center">
+                <div class="col-md-7 py-3">
+                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+                        <div class="card-body">
 
-                            <div class="col fw-bold text-dark">
-                                {{ $item->nombre }}
-                            </div>
+                            <form action="{{ route('productos.update', $producto->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
-                            <div class="col text-muted small">
-                                {{ \Illuminate\Support\Str::limit($item->descripcion, 40, '...') }}
-                            </div>
-
-                            <div class="col text-secondary">
-                                {{ $item->talle ?? 'N/A' }}
-                            </div>
-
-                            <div class="col text-success fw-bold">
-                                ${{ number_format($item->precio, 2, ',', '.') }}
-                            </div>
-
-                            <div class="col text-dark">
-                                {{ $item->stock }} u.
-                            </div>
-
-                            <div class="col">
-                                <div class="btn-group" role="group" aria-label="Acciones de producto">
-
-                                    <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-
-                                    <a href="{{ route('productos.edit', $item->id) }}" class="btn btn-warning btn-sm">Editar</a>
-
-                                    <form action="{{ route('productos.estado', $item->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('PATCH')
-                                        @if($item->activo == 1)
-                                            <button type="submit" class="btn btn-success btn-sm">Activo</button>
-                                        @else
-                                            <button type="submit" class="btn btn-secondary btn-sm">Inactivo</button>
-                                        @endif
-                                    </form>
-
+                                <div class="mb-3">
+                                    <label for="titulo" class="form-label fw-bold text-secondary">Título del Producto</label>
+                                    <input type="text" class="form-control" id="titulo" name="titulo" value="{{ old('titulo', $producto->nombre) }}" required>
                                 </div>
-                            </div>
+
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fw-bold text-secondary">Descripción de la Prenda</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required>{{ old('descripcion', $producto->descripcion) }}</textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
+                                        <label for="precio" class="form-label fw-bold text-secondary">Precio ($)</label>
+                                        <input type="number" step="0.01" class="form-control text-success fw-bold" id="precio" name="precio" value="{{ old('precio', $producto->precio) }}" required>
+                                    </div>
+
+                                    <div class="col-sm-6 mb-3">
+                                        <label for="stock" class="form-label fw-bold text-secondary">Stock Disponible</label>
+                                        <input type="number" class="form-control fw-bold" id="stock" name="stock" value="{{ old('stock', $producto->stock) }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4 p-3 bg-light rounded-3 border">
+                                    <label for="url_imagen" class="form-label fw-bold text-dark">🔄 Cambiar foto de la prenda</label>
+                                    <input class="form-control" type="file" id="url_imagen" name="url_imagen" accept="image/*">
+                                    <div class="form-text text-muted small">Si no seleccionas ningún archivo, se mantendrá la foto actual.</div>
+                                </div>
+
+                                <div class="row g-2 pt-2">
+                                    <div class="col-sm-8">
+                                        <button type="submit" class="btn btn-dark btn-lg w-100 fw-bold">💾 Guardar Cambios</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ route('productos.index') }}" class="btn btn-outline-secondary btn-lg w-100">Cancelar</a>
+                                    </div>
+                                </div>
+
+                            </form>
 
                         </div>
                     </div>
                 </div>
-            @empty
-                <div class="alert alert-warning text-center mt-3" role="alert">
-                    No se encontraron productos en la base de datos.
-                </div>
-            @endforelse
+            </div>
         </div>
 
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <div class="mt-5">
-            @include('footer')
-        </div>
+        @include('footer')
+
     </body>
 </html>

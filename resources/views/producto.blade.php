@@ -2,119 +2,111 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Producto Especifico</title>
-        <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+        <title>Editar Producto - Ropa MJ</title>
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <style>
-            /* Estilos globales aplicados al cuerpo del documento */
             body {
-                background-color: #c1a391; 
-                color: #9f9393;           
-                background-image: url({{ asset('bg1.png') }}); /* Helper asset por seguridad */
+                background-color: #c1a391;
+                color: #333333;
+                background-image: url({{ asset('bg1.png') }});
                 background-repeat: repeat;
-                background-size: 700px; 
+                background-size: 700px;
             }
             .carousel .carousel-inner {
-                height: 650px; 
-                border: none; 
-                border-radius: 25px !important; 
-                box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
-                overflow: hidden; 
-                background-color: #a39898; 
+                height: 520px;
+                border: none;
+                border-radius: 25px !important;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+                overflow: hidden;
+                background-color: #a39898;
                 backdrop-filter: blur(5px);
-                transition: transform 0.3s ease; 
+                transition: transform 0.3s ease;
                 padding: 1px;
             }
         </style>
     </head>
 
-    <body class="bg-light">
+    <body>
 
         @include('header')
 
         <div class="container mt-5">
-            <h2 class="text-center mb-4 text-dark fw-bold">Hombre</h2>
+            <h2 class="text-center mb-4 text-dark fw-bold">Panel de Edición Dinámica</h2>
+
+            @if ($errors->any())
+                <div class="alert alert-danger shadow-sm rounded-4 mb-4" role="alert">
+                    <div class="fw-bold mb-1">⚠️ Por favor, corrige los siguientes errores:</div>
+                    <ul class="mb-0 small">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="row">
-                <div id="carouselExampleIndicators" class="col-md-6 py-3 carousel slide">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('ropa Hombre/ConjuntoRayasH.jpg') }}" class="d-block img-fluid w-75 mx-auto" alt="conjunto de rayas">
+                <div class="col-md-5 py-3">
+                    <div id="productPreviewCarousel" class="carousel slide">
+                        <div class="carousel-inner d-flex align-items-center">
+                            <div class="carousel-item active">
+                                @if($producto->url_imagen)
+                                    <img src="{{ asset('images/' . $producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="Imagen del producto">
+                                @else
+                                    <img src="{{ asset('images/default.png') }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="Imagen por defecto">
+                                @endif
+                            </div>
                         </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('ropa Hombre/ConjuntoRayasH2.jpg') }}" class="d-block img-fluid w-75 mx-auto" alt="conjunto de rayas2">
-                        </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+
+                    <p class="text-center text-muted small mt-3 fw-semibold">Vista previa de la prenda en base de datos</p>
                 </div>
 
-                <div class="col-md-6 py-3">
-                    <div class="card border-0 shadow-sm rounded-4 p-2">
+                <div class="col-md-7 py-3">
+                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold fs-1 text-dark">Conjunto a Rayas</h5>
-                            <p class="card-text text-muted fs-5">Este conjunto destaca por su comodidad y su diseño pinstripe atemporal en blanco y negro. <br>El set incluye una camiseta de manga corta y pantalones cortos a juego, perfectos para los días cálidos de verano. </p>
-                            <h5 class="card-title fw-bold fs-2 text-success my-3">$90.000</h5>
-                            
-                            <div class="mb-4">
-                                <p class="text-muted small fs-6 mb-2">Medios de pago aceptados:</p>
-                                <div class="d-flex flex-wrap gap-2 align-items-center">
-                                    <img src="{{ asset('visa-logo.png') }}" alt="Visa" style="height: 30px;">
-                                    <img src="{{ asset('Mastercard-logo.png') }}" alt="mastercard" style="height: 30px;">
-                                    <img src="{{ asset('Logo_Naranja.png') }}" alt="naranja" style="height: 30px;">
-                                    <img src="{{ asset('logo_mp.png') }}" alt="MP" style="height: 30px;">
-                                </div>
-                            </div>
 
-                            <h5 class="fw-bold fs-5 mb-2 text-dark">Características:</h5>
-                            <p class="card-text mb-1 fs-6"><strong>Material:</strong> Lino de alta calidad</p>
-                            <p class="card-text mb-1 fs-6"><strong>Patrón:</strong> Rayas finas (pinstripe) blanco y negro</p>
-                            <p class="card-text mb-3 fs-6"><strong>Cuidado:</strong> Lavado a máquina en frío.</p>
-                            
-                            <form action="{{ route('carrito.agregar', 1) }}" method="POST">
+                            <form action="{{ route('productos.update', $producto->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
 
-                                <p class="mb-2 fw-semibold text-dark">Seleccione su talle</p>
-                                <div class="row g-2 mb-4">
-                                    <div class="col-auto">
-                                        <input type="radio" class="btn-check" name="talle" id="tS" value="S" checked>
-                                        <label class="btn btn-outline-dark" for="tS">S</label>
+                                <div class="mb-3">
+                                    <label for="titulo" class="form-label fw-bold text-dark fs-5">Nombre del Producto</label>
+                                    <input type="text" class="form-control form-control-lg border-2" id="titulo" name="titulo" value="{{ old('titulo', $producto->nombre) }}" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fw-bold text-dark fs-5">Descripción de la Prenda</label>
+                                    <textarea class="form-control border-2 text-muted" id="descripcion" name="descripcion" rows="3" required>{{ old('descripcion', $producto->descripcion) }}</textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
+                                        <label for="precio" class="form-label fw-bold text-dark fs-5">Precio ($)</label>
+                                        <input type="number" step="0.01" class="form-control form-control-lg border-2 text-success fw-bold" id="precio" name="precio" value="{{ old('precio', $producto->precio) }}" required>
                                     </div>
-                                    <div class="col-auto">
-                                        <input type="radio" class="btn-check" name="talle" id="tM" value="M">
-                                        <label class="btn btn-outline-dark" for="tM">M</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="radio" class="btn-check" name="talle" id="tL" value="L">
-                                        <label class="btn btn-outline-dark" for="tL">L</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="radio" class="btn-check" name="talle" id="tXL" value="XL">
-                                        <label class="btn btn-outline-dark" for="tXL">XL</label>
+
+                                    <div class="col-sm-6 mb-3">
+                                        <label for="stock" class="form-label fw-bold text-dark fs-5">Stock Disponible</label>
+                                        <input type="number" class="form-control form-control-lg border-2 fw-bold" id="stock" name="stock" value="{{ old('stock', $producto->stock) }}" required>
                                     </div>
                                 </div>
 
-                                <div class="d-flex align-items-center gap-3 mb-4">
-                                    <span class="fw-semibold text-dark">Cantidad:</span>
-                                    <div class="input-group" style="width: 130px;">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="decrease()">−</button>
-                                        <input type="text" class="form-control text-center fw-bold" value="1" id="cantidad" name="cantidad" readonly>
-                                        <button class="btn btn-outline-secondary" type="button" onclick="increase()">+</button>
+                                <div class="mb-4 p-3 bg-light rounded-3 border">
+                                    <label for="url_imagen" class="form-label fw-bold text-dark">🔄 Reemplazar Imagen del Producto</label>
+                                    <input class="form-control" type="file" id="url_imagen" name="url_imagen" accept="image/*">
+                                    <div class="form-text text-muted small">Dejar vacío si deseas conservar la imagen actual.</div>
+                                </div>
+
+                                <div class="row g-2 pt-2">
+                                    <div class="col-sm-8">
+                                        <button type="submit" class="btn btn-dark btn-lg w-100 fw-bold">💾 Guardar Cambios</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ route('productos.index') }}" class="btn btn-outline-secondary btn-lg w-100">Cancelar</a>
                                     </div>
                                 </div>
 
-                                <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-dark btn-lg">🛒 Agregar al Carrito</button>
-                                </div>
                             </form>
 
                         </div>
@@ -125,18 +117,5 @@
 
         @include('footer')
 
-        <script>
-            function increase() {
-                let input = document.getElementById("cantidad");
-                input.value = parseInt(input.value) + 1;
-            }
-
-            function decrease() {
-                let input = document.getElementById("cantidad");
-                if (parseInt(input.value) > 1) {
-                    input.value = parseInt(input.value) - 1;
-                }
-            }
-        </script>
     </body>
 </html>
