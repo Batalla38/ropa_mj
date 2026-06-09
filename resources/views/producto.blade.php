@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{{ $producto->nombre }} - Ropa MJ</title>
-        <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <style>
             body {
@@ -61,9 +61,7 @@
                     <div class="card border-0 shadow-sm rounded-4 p-2">
                         <div class="card-body">
                             <h5 class="card-title fw-bold fs-1 text-dark">{{ $producto->nombre }}</h5>
-                            
                             <p class="card-text text-muted fs-5">{{ $producto->descripcion ?? 'Sin descripción disponible.' }}</p>
-                            
                             <h5 class="card-title fw-bold fs-2 text-success my-3">${{ number_format($producto->precio, 0, ',', '.') }}</h5>
                             
                             <div class="mb-4">
@@ -113,11 +111,11 @@
                                     </div>
                                 </div>
 
-                                @if(session('success'))
+                                @if(session('success') || session()->has('success'))
                                     <div class="alert alert-success alert-dismissible fade show d-flex align-items-center py-2 px-3 mb-3 rounded-3 shadow-sm" role="alert" style="font-size: 0.9rem; color: #155724; background-color: #d4edda; border-color: #c3e6cb;">
                                         <span class="me-2">✅</span>
                                         <div>
-                                            {{ session('success') }} 
+                                            {{ session('success') ?? session()->get('success') }} 
                                             <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-1 text-success fw-bold">Ver mi carrito</a>
                                         </div>
                                         <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>

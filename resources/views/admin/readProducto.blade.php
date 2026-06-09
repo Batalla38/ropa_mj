@@ -70,7 +70,7 @@
 
                                 <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
 
-                                <a href="{{ route('productos.edit', $item->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="{{ route('productos.edit', $item->id) }}" class="btn btn-warning btn-sm fw-semibold">Editar</a>
 
                                 <form action="{{ route('productos.estado', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf
