@@ -130,29 +130,33 @@
                     </ul>
                 </li>
             </ul>
-            <div class="d-flex align-items-center ms-auto">
+            <div class="d-flex align-items-center ms-auto gap-2">
+
+                <a href="{{ route('carrito.ver') }}" class="btn btn-outline-dark position-relative me-2">
+                    <span class="me-1">🛒</span> Carrito
+                    @if(session()->has('carrito') && count(session('carrito')) > 0)
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ count(session('carrito')) }}
+                        </span>
+                    @endif
+                </a>
 
                 @if(session()->has('user_id'))
-
-                    <div class="dropdown">
+                    <div class="dropdown me-2">
                         <button class="btn btn-outline-dark dropdown-toggle fw-semibold" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             👤 Hola, {{ session('user_name') }}
 
-                            {{-- Modificado para asegurar que detecte el 1 correctamente --}}
                             @if(session('id_rol') == 1 || session('user_id') == 1)
                                 <span class="badge bg-danger ms-1" style="font-size: 0.7rem;">Admin</span>
                             @endif
                         </button>
 
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
-
                             @if(session('id_rol') == 1 || session('user_id') == 1)
                                 <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
-
                                 <li><a class="dropdown-item" href="{{ url('/main') }}"> Productos</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/gestionar-ventas') }}">💰 Gestionar Ventas</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/consultas') }}">💬 Gestionar Consultas</a></li>
-
                                 <li><hr class="dropdown-divider"></li>
                             @endif
 
@@ -164,20 +168,16 @@
                             </li>
                         </ul>
                     </div>
-
                 @else
-
                     <a href="{{ url('/login') }}" class="btn btn-outline-dark me-2 fw-semibold">Iniciar Sesión</a>
-
                 @endif
 
-            </div>
-                <!-- Buscador original -->
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                     <button class="btn btn-outline-dark" type="submit">Search</button>
                 </form>
-            </div>
+
+            </div>  
 
         </div>
     </div>

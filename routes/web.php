@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\CarritoController;
 
 // --- VISTAS PRINCIPALES ---
 
@@ -61,6 +62,10 @@ Route::get('/productoM', function () {
     return view('productoM');
 });
 
+Route::get('/producto', function () {
+    return view('producto');
+});
+
 // --- LADO ADMINISTRADOR ---
 Route::get('/gestionConsultas', function () {
     return view('admin.gestionConsultas');
@@ -101,3 +106,11 @@ Route::get('/registro', function () {
 
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Rutas para cualquier usuario (Visitante o Registrado)
+Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
+Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+
+// Ruta para procesar la compra (Protegida, redirige al login si no está logueado)
+Route::post('/carrito/comprar', [CarritoController::class, 'procesarCompra'])->name('carrito.comprar');
