@@ -52,7 +52,6 @@ Route::get('/catalogoChaleco', function () {
 
 // --- PRODUCTOS INDIVIDUALES (DETALLE) ---
 
-// Se añade el parámetro {id} y el nombre de ruta requerido por el lector de productos
 Route::get('/producto/{id}', function ($id) {
     return view('producto');
 })->name('productos.mostrar');
@@ -61,7 +60,8 @@ Route::get('/productoM', function () {
     return view('productoM');
 });
 
-// --- LADO ADMINISTRADOR ---
+// --- LADO ADMINISTRADOR (GESTIÓN DE PRODUCTOS) ---
+
 Route::get('/gestionConsultas', function () {
     return view('admin.gestionConsultas');
 });
@@ -70,15 +70,20 @@ Route::get('/createProducto', function () {
     return view('admin.createProducto');
 });
 
-Route::get('/updateProducto', function () {
-    return view('admin.updateProducto');
-});
-
-// Lector de productos (Llama directamente al método index de tu controlador)
+// Lector general de productos
 Route::get('/readProducto', [ProductoController::class, 'index'])->name('productos.index');
 
-// Guardar producto
+// Guardar nuevo producto
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
+
+// Formulario de edición (Carga los datos pasándole el ID en la URL)
+Route::get('/updateProducto/{id}', [ProductoController::class, 'edit'])->name('productos.edit');
+
+// Procesamiento de la actualización de datos (PUT)
+Route::put('/updateProducto/{id}', [ProductoController::class, 'update'])->name('productos.update');
+
+// Acción de baja lógica (PATCH para alternar estado activo 1 o 0)
+Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstado'])->name('productos.estado');
 
 
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---

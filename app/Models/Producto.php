@@ -9,10 +9,9 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $table = 'producto';
+    protected $table = 'productos';
 
-    // CAMBIADO A TRUE: Ahora que la migración crea creadat_at y updated_at,
-    // le avisamos al modelo que las use automáticamente.
+    // Lo dejamos en true porque tu tabla sí maneja created_at y updated_at
     public $timestamps = true;
 
     protected $fillable = [
