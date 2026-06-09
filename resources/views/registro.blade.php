@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">git commit -m "Merge y resolución de conflicto en vista registro"git commit -m "Merge y resolución de conflicto en vista registro"
     <title>Registro - Ropa MJ</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <style>
@@ -59,14 +59,22 @@
 
                     <div class="mb-3">
                         <label for="correo" class="form-label fw-semibold">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="correo" name="correo" placeholder="nombre@ejemplo.com" required>
+                        <input type="email" class="form-control" id="correo" name="correo" value="{{ old('correo') }}" placeholder="nombre@ejemplo.com" required>
+                    </div>
+
+                   <div class="mb-3">
+                        <label for="password" class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock" required>
+                        <div id="passwordHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
+                            Debe tener entre 8 y 20 caracteres, incluir letras y números, sin espacios ni caracteres especiales.
+                        </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="contraseña" class="form-label fw-semibold">Contraseña</label>
-                        <input type="password" id="contraseña" name="contraseña" class="form-control" aria-describedby="passwordHelpBlock" required>
-                        <div id="passwordHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
-                            Debe tener entre 8 y 20 caracteres, incluir letras y números, sin espacios ni caracteres especiales.
+                        <label for="password_confirmation" class="form-label fw-semibold">Repetir Contraseña</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" aria-describedby="passwordConfirmationHelpBlock" required>
+                        <div id="passwordConfirmationHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
+                            Por favor, vuelve a escribir la contraseña exactamente igual.
                         </div>
                     </div>
 

@@ -1,46 +1,62 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB; // Usamos la fachada DB para leer directo la tabla
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
     /**
-     * Procesa el inicio de sesión.
+     * Procesa el formulario de inicio de sesión de forma directa.
      */
     public function store(Request $request)
     {
         // 1. Validamos los campos que vienen del HTML
         $credentials = $request->validate([
             'correo' => ['required', 'email'],
-            'contraseña' => ['required', 'string'],
+            'password' => ['required', 'string'],
         ], [
             'correo.required' => 'El correo electrónico es obligatorio.',
             'correo.email' => 'Por favor, ingresa un correo válido.',
-            'contraseña.required' => 'La contraseña es obligatoria.',
+            'password.required' => 'La contraseña es obligatoria.',
         ]);
 
-        // 2. Buscamos directamente en la tabla 'usuarios' usando texto plano
+        // 2. Buscamos al usuario ÚNICAMENTE por su correo primero
         $user = DB::table('usuarios')
             ->where('correo', $credentials['correo'])
-            ->where('contraseña', $credentials['contraseña'])
             ->first();
+            
+        // 3. Si el usuario existe, pasamos a comparar la contraseña encriptada
+        // Hash::check toma lo que escribió el usuario y lo compara con el hash de tu BD ($user->contraseña)
+        if ($user && Hash::check($credentials['password'], $user->contraseña)) {
+            
+            // Guardamos manualmente los datos en la sesión
+            $request->session()->put('user_id', $user->id);
+            $request->session()->put('id_rol', $user->id_rol); 
 
-        // 3. Si el usuario existe, validamos su rol
-        if ($user) {
-            // Evaluamos si es administrador (ya sea por id_rol o por ser el ID 1 primario)
-            $rolUsuario = $user->id_rol ?? 0;
+            // Guardamos el nombre dinámicamente para prevenir errores de columnas
+            $user_name = $user->nombre ?? $user->name ?? 'Usuario';
+            $request->session()->put('user_name', $user_name);
 
+            // 4. Verificamos si es administrador o rol con acceso
+            $rolUsuario = $user->id_rol ?? 0; 
             if ($rolUsuario == 1 || $user->id == 1) {
-                return redirect('/main'); // Redirecciona al catálogo/panel principal
+                return redirect('/main'); // Redirige al panel de administración
             }
 
-            return redirect('/'); // Redirecciona a la tienda común
+            if ($rolUsuario == 2 || $user->id == 2) {
+                return redirect('/main'); 
+            }
+            
+            // Si es un usuario común, va a la raíz
+            return redirect('/');
         }
 
-        // 4. Si no se encontró ningún usuario con esos datos, volvemos atrás con error
+        // 5. Si las credenciales no coinciden
         return redirect()->back()->withErrors([
             'correo' => 'El correo electrónico o la contraseña son incorrectos.',
         ])->onlyInput('correo');
@@ -49,9 +65,15 @@ class LoginController extends Controller
     /**
      * Cierra la sesión destruyendo los datos manuales.
      */
-    public function logout(Request $request)
+   public function logout(Request $request)
     {
-        // Si usás sesiones manuales, podés limpiar acá o usar Auth si migrás a Laravel estándar
-        return redirect('/login')->with('status', 'Sesión cerrada correctamente.');
+        // Limpiamos los datos manuales de la sesión
+        $request->session()->forget('user_id');
+        $request->session()->forget('user_name');
+        $request->session()->forget('id_rol');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
-}
+} // <-- Esta es la llave única que cierra la clase al final de todo

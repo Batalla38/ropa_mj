@@ -21,6 +21,11 @@ class Usuario extends Model
         'contraseña'
     ];
 
+    // 4. NUEVO: Oculta la contraseña encriptada por seguridad
+    protected $hidden = [
+        'contraseña',
+    ];
+    
     // Desactiva los timestamps (created_at y updated_at) si tu tabla no los tiene
     public $timestamps = false; 
 }

@@ -10,7 +10,7 @@
         body {
             background-color: #c1a391; /* Color de fondo definido por el usuario */
             color: #9f9393;           /* Color de fuente definido por el usuario */
-            background-image: url(bg1.png);
+            background-image: url({{ asset('bg1.png') }}); /* Imagen de fondo definida por el usuario */
             background-repeat: repeat;
             background-size: 700px; /* Aquí controlas el tamaño */
         }
@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="contraseña" class="form-label fw-semibold">Contraseña</label>
-                        <input type="password" id="contraseña" name="contraseña" class="form-control" aria-describedby="passwordHelpBlock" required>
+                        <label for="password" class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock" required>
                         <div id="passwordHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
                             Debe tener entre 8 y 20 caracteres, incluir letras y números, sin espacios ni caracteres especiales.
                         </div>
@@ -61,7 +61,7 @@
                 <div class="text-center mt-3">
                     <small class="text-muted">¿No tienes cuenta? <a href="{{ url('registro') }}" class="text-decoration-none text-dark fw-semibold">Registrarse</a></small>
                 </div>
-
+                
             </div>
         </div>
     </main>
