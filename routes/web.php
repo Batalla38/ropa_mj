@@ -9,6 +9,7 @@ use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\CarritoController;
 
 // --- VISTAS PRINCIPALES ---
+
 Route::get('/main', function () {
     return view('main');
 })->name('main');
@@ -34,9 +35,9 @@ Route::get('/consultas', function () {
 });
 
 // --- CATÁLOGOS ---
-Route::get('/catalogo', function () {
-    return view('catalogo');
-});
+
+// El lector principal ahora pasa por el controlador para gestionar los filtros dinámicos
+Route::get('/catalogo', [ProductoController::class, 'index'])->name('catalogo.index');
 
 Route::get('/catalogoM', function () {
     return view('catalogoM');
@@ -50,11 +51,15 @@ Route::get('/catalogoChaleco', function () {
     return view('catalogoChaleco');
 });
 
-// --- PRODUCTOS INDIVIDUALES (DETALLE ÚNICO Y CORREGIDO) ---
-// Esta única ruta se encarga de manejar la vista pública apuntando al método show
+// --- PRODUCTOS INDIVIDUALES (DETALLE DE INTERFAZ ÚNICA) ---
+
+// Esta es la única ruta pública para ver el detalle de un producto específico por su ID.
+// Apunta al método 'show' que busca el modelo y renderiza la vista 'producto'.
 Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');
 
+
 // --- LADO ADMINISTRADOR (GESTIÓN DE PRODUCTOS) ---
+
 Route::get('/gestionConsultas', function () {
     return view('admin.gestionConsultas');
 });
@@ -63,23 +68,24 @@ Route::get('/createProducto', function () {
     return view('admin.createProducto');
 });
 
-// Lector general de productos
+// Lector de administración general de productos
 Route::get('/readProducto', [ProductoController::class, 'index'])->name('productos.index');
 
 // Guardar nuevo producto
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
 
-// Formulario de edición
+// Formulario de edición (Carga los datos pasándole el ID en la URL)
 Route::get('/updateProducto/{id}', [ProductoController::class, 'edit'])->name('productos.edit');
 
 // Procesamiento de la actualización de datos (PUT)
 Route::put('/updateProducto/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
-// Acción de baja lógica (PATCH)
+// Acción de baja lógica (PATCH para alternar estado activo 1 o 0)
 Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstado'])->name('productos.estado');
 
 
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
+
 Route::post('/contacto', [ContactoController::class, 'procesar']);
 Route::post('/consultas', [ConsultaController::class, 'store']);
 Route::post('/enviar-consulta', [ConsultaController::class, 'store']);
@@ -87,6 +93,7 @@ Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cue
 
 
 // --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -100,7 +107,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // --- CARRITO DE COMPRAS ---
+
 Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
 Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
 Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+
+// Ruta para procesar la compra (Protegida)
 Route::post('/carrito/comprar', [CarritoController::class, 'procesarCompra'])->name('carrito.comprar');
