@@ -92,7 +92,7 @@ class CarritoController extends Controller
         return redirect()->route('carrito.ver')->with('status', 'Producto quitado del carrito.');
     }
 
-    // Procesar Compra descontando el stock real de la Base de Datos
+    // Procesar Compra descontando el stock real de la Base de Datos y registrando la orden
     public function procesarCompra(Request $request)
     {
         // Verificar si inició sesión por el método manual que usan
@@ -120,10 +120,29 @@ class CarritoController extends Controller
             }
         }
 
-        // 2. DESCUENTO DE STOCK REAL EN LA BD
+        // =======================================================================
+        // SOLUCIÓN: Capturamos el id único del usuario desde la autenticación o sesión
+        // =======================================================================
+        $idUsuario = auth()->id() ?? session()->get('user_id');
+
+        // 2. REGISTRO EN LA TABLA COMPRAS Y DESCUENTO DE STOCK REAL EN LA BD
         foreach ($carrito as $id => $item) {
             $producto = DB::table('productos')->where('id', $id)->first();
+            
             if ($producto) {
+                // CALCULAMOS EL TOTAL: Multiplicamos el precio unitario por la cantidad comprada
+                $precioTotalItem = $producto->precio * $item['cantidad'];
+
+                // Insertamos la compra en tu tabla 'compras'
+                DB::table('compras')->insert([
+                    'id_usuario' => $idUsuario, // 👈 Ahora guarda el ID del cliente (ej: 1) de forma correcta
+                    'stock'      => $item['cantidad'], // Cuánto compró
+                    'precio'     => $precioTotalItem,  
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+
+                // Descontamos el stock de la tabla productos
                 DB::table('productos')
                     ->where('id', $id)
                     ->update(['stock' => $producto->stock - $item['cantidad']]);
@@ -132,6 +151,6 @@ class CarritoController extends Controller
 
         // 3. Limpiamos el carrito y cerramos transacción exitosa
         session()->forget('carrito');
-        return redirect('/main')->with('success', '¡Gracias por tu compra en Ropa MJ! Tu pedido fue procesado y el stock actualizado.');
+        return redirect('/main')->with('success', '¡Gracias por tu compra en Ropa MJ! Tu pedido fue procesado y registrado con éxito.');
     }
 }

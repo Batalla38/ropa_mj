@@ -45,7 +45,7 @@
                     </div>
                 @endif
 
-                // Alertas para el Registro de Usuario, con mensajes personalizados y botón de cierre
+                
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
                         <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
