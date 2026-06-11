@@ -39,6 +39,18 @@
                     </div>
                 @endif
 
+                {{-- Alertas para el Login y Bloqueo de Carrito --}}
+                @if($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert">
+                        <ul class="mb-0 ps-3 fw-bold">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <form action="{{ route('login.store') }}" method="POST">
                     @csrf <div class="mb-3">
                         <label for="correo" class="form-label fw-semibold">Correo Electrónico</label>

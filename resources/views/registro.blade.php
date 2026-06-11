@@ -45,6 +45,26 @@
                     </div>
                 @endif
 
+                // Alertas para el Registro de Usuario, con mensajes personalizados y botón de cierre
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert">
+                        <strong class="d-block mb-1"><i class="bi bi-exclamation-triangle-fill me-2"></i> No se pudo crear la cuenta:</strong>
+                        <ul class="mb-0 ps-3">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <form action="{{ route('cuenta.procesar') }}" method="POST">
                     @csrf
                     <div class="mb-3">

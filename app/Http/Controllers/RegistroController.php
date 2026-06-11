@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Usuario;
 
 use Illuminate\Http\Request;
 // Usamos la ruta absoluta con la barra invertida para que VS Code no te marque error

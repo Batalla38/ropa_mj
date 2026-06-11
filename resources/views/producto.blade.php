@@ -1,10 +1,15 @@
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> ```
+
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
         <title>{{ $producto->nombre }} - Ropa MJ</title>
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <style>
             body {
                 background-color: #c1a391;
@@ -31,7 +36,25 @@
 
         @include('header')
 
-        <div class="container mt-5">
+        <div class="container pt-5 mt-4">
+    {{-- Si viene por sesión o si viene el "check" en la URL, mostramos el cartel --}}
+    @if(session('success') || request()->get('check') == 1)
+        <div class="alert alert-success alert-dismissible fade show text-center fw-bold shadow-sm" role="alert">
+            <i class="bi bi-cart-plus-fill me-2"></i> ¡Excelente! El producto se agregó al carrito correctamente.
+            <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-2 text-success">Ver mi carrito →</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if($errors->has('stock_error'))
+        <div class="alert alert-warning alert-dismissible fade show fw-bold shadow-sm" role="alert">
+            <i class="bi bi-exclamation-diamond-fill me-2"></i> {{ $errors->first('stock_error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+</div>
+
+        <div class="container mt-2">
             <h2 class="text-center mb-4 text-dark fw-bold">Detalle del Producto</h2>
             <div class="row">
 
@@ -43,14 +66,15 @@
                     <div class="carousel-inner d-flex align-items-center">
                         <div class="carousel-item active">
                             @if($producto->url_imagen)
-                                <img src="{{ asset('images/' . $producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="{{ $producto->nombre }}">
+                                <img src="{{ asset($producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="{{ $producto->nombre }}">
                             @else
                                 <img src="{{ asset('images/default.png') }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="Imagen no disponible">
                             @endif
                         </div>
+                        
                         <div class="carousel-item">
                             @if($producto->url_imagen)
-                                <img src="{{ asset('images/' . $producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3" style="filter: brightness(0.9);" alt="Vista alternativa">
+                                <img src="{{ asset($producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3" style="filter: brightness(0.9);" alt="Vista alternativa">
                             @else
                                 <img src="{{ asset('images/default.png') }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="Imagen no disponible">
                             @endif
@@ -112,17 +136,6 @@
                                     </div>
                                 </div>
 
-                                @if(session('success'))
-                                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center py-2 px-3 mb-3 rounded-3" role="alert" style="font-size: 0.9rem;">
-                                        <span class="me-2">✅</span>
-                                        <div>
-                                            {{ session('success') }}
-                                            <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-1 text-success fw-bold">Ver mi carrito</a>
-                                        </div>
-                                        <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                @endif
-
                                 <div class="d-grid gap-2">
                                     @if($producto->stock > 0)
                                         <button type="submit" class="btn btn-dark btn-lg fw-bold">🛒 Agregar al Carrito</button>
@@ -142,7 +155,6 @@
         @include('footer')
 
         <script>
-            // El aumento respeta el límite máximo de stock de tu base de datos
             function increase(maxStock) {
                 let input = document.getElementById("cantidad");
                 if (parseInt(input.value) < maxStock) {
@@ -157,5 +169,7 @@
                 }
             }
         </script>
+
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     </body>
 </html>
