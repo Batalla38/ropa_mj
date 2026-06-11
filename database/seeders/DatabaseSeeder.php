@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CaegoriaSeeder::class,
             SubcaegoriaSeeder::class,
-            ProductoSeeder::class,
+            UsuarioSeeder::class,
         ]);
 
         // 2. Limpia la tabla users antes para evitar el error de correo duplicado
