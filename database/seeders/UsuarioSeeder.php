@@ -18,7 +18,7 @@ class UsuarioSeeder extends Seeder
             'apellido' => 'Administrador',
             'id_rol' => 1, // <-- Usamos el ID numérico de tu columna real
             'correo' => 'solangemtl88@gmail.com',
-            'contraseña' => 'clave1234', // Texto plano sin encriptar como pediste
+            'contraseña' => bcrypt('clave1234'), // Texto plano sin encriptar como pediste
         ]);
     }
 }

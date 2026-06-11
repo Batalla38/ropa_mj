@@ -40,7 +40,7 @@
     {{-- Si viene por sesión o si viene el "check" en la URL, mostramos el cartel --}}
     @if(session('success') || request()->get('check') == 1)
         <div class="alert alert-success alert-dismissible fade show text-center fw-bold shadow-sm" role="alert">
-            <i class="bi bi-cart-plus-fill me-2"></i> ¡Excelente! El producto se agregó al carrito correctamente.
+            <i class="bi bi-cart-plus-fill me-2"></i> ¡Excelente! Producto agregado al carrito.
             <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-2 text-success">Ver mi carrito →</a>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -112,7 +112,7 @@
                             </div>
 
                             <h5 class="fw-bold fs-5 mb-2 text-dark">Características Técnicas:</h5>
-                            <p class="card-text mb-1 fs-6"><strong>Género asignado:</strong> {{ ucfirst($producto->genero ?? 'Unisex') }}</p>
+                            <p class="card-text mb-1 fs-6"><strong>Género:</strong> {{ ucfirst($producto->genero ?? 'Unisex') }}</p>
                             <p class="card-text mb-1 fs-6"><strong>Talle disponible:</strong> {{ $producto->talle ?? 'Único / No especificado' }}</p>
                             <p class="card-text mb-3 fs-6"><strong>Disponibilidad:</strong> En stock ({{ $producto->stock }} unidades)</p>
 

@@ -25,7 +25,7 @@
     @include('header')
 
     <main class="container my-5 pt-5">
-        <h2 class="mb-4 fw-bold text-dark text-center">Tu Carrito de Compras</h2>
+        <h2 class="mb-4 fw-bold text-dark text-center">Tu Carrito</h2>
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
@@ -49,8 +49,8 @@
         @endif
         @if(empty($carrito) || count($carrito) == 0)
             <div class="text-center py-5 bg-white rounded-4 shadow-sm">
-                <p class="text-muted fs-4">No tienes productos en el carrito todavía.</p>
-                <a href="{{ url('/catalogo') }}" class="btn btn-dark btn-lg rounded-pill">Ver Catálogo de Ropa</a>
+                <p class="text-muted fs-4">Aun no tiene productos cargados</p>
+                <a href="{{ url('/catalogo') }}" class="btn btn-dark btn-lg rounded-pill">Ver Catálogo</a>
             </div>
         @else
             <div class="row g-4">
@@ -81,7 +81,7 @@
                                         <td class="text-center">
                                             <form action="{{ route('carrito.eliminar', $id) }}" method="POST" onsubmit="return confirm('¿Quitar este producto del carrito?');">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-3">Quitar</button>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-3">Eliminar</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -95,13 +95,13 @@
                     <div class="card shadow-sm p-4 bg-white border-0 rounded-4">
                         <h4 class="fw-bold mb-3 text-dark">Resumen</h4>
                         <div class="d-flex justify-content-between mb-4 fs-5">
-                            <span class="text-muted">Total General:</span>
+                            <span class="text-muted">Total:</span>
                             <span class="fw-bold text-success fs-3">${{ number_format($total, 0, ',', '.') }}</span>
                         </div>
                         
                         <form action="{{ route('carrito.comprar') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-dark w-100 btn-lg py-3 rounded-3 fw-bold">Proceder a la Compra</button>
+                            <button type="submit" class="btn btn-dark w-100 btn-lg py-3 rounded-3 fw-bold">Continuar con la Compra</button>
                         </form>
                         
                         <a href="{{ url('/catalogo') }}" class="btn btn-outline-secondary w-100 mt-2 rounded-3">Seguir mirando</a>
