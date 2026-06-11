@@ -1,175 +1,130 @@
-<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> ```
-
-
 <!DOCTYPE html>
-<html lang="es">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <title>{{ $producto->nombre }} - Ropa MJ</title>
+        <title>Editar Producto - Ropa MJ</title>
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <style>
             body {
                 background-color: #c1a391;
-                color: #333333;
-                background-image: url({{ asset('bg1.png') }});
+                color: #9f9393;
+                background-image: url("{{ asset('bg1.png') }}");
                 background-repeat: repeat;
                 background-size: 700px;
             }
-            .carousel .carousel-inner {
-                height: 550px;
-                border: none;
-                border-radius: 25px !important;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-                overflow: hidden;
-                background-color: #a39898;
-                backdrop-filter: blur(5px);
-                transition: transform 0.3s ease;
-                padding: 1px;
-            }
         </style>
     </head>
-
     <body>
-
-        @include('header')
-
-        <div class="container pt-5 mt-4">
-    {{-- Si viene por sesión o si viene el "check" en la URL, mostramos el cartel --}}
-    @if(session('success') || request()->get('check') == 1)
-        <div class="alert alert-success alert-dismissible fade show text-center fw-bold shadow-sm" role="alert">
-            <i class="bi bi-cart-plus-fill me-2"></i> ¡Excelente! Producto agregado al carrito.
-            <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-2 text-success">Ver mi carrito →</a>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    @if($errors->has('stock_error'))
-        <div class="alert alert-warning alert-dismissible fade show fw-bold shadow-sm" role="alert">
-            <i class="bi bi-exclamation-diamond-fill me-2"></i> {{ $errors->first('stock_error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-</div>
-
-        <div class="container mt-2">
-            <h2 class="text-center mb-4 text-dark fw-bold">Detalle del Producto</h2>
-            <div class="row">
-
-                <div id="carouselExampleIndicators" class="col-md-6 py-3 carousel slide">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    </div>
-                    <div class="carousel-inner d-flex align-items-center">
-                        <div class="carousel-item active">
-                            @if($producto->url_imagen)
-                                <img src="{{ asset($producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="{{ $producto->nombre }}">
-                            @else
-                                <img src="{{ asset('images/default.png') }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="Imagen no disponible">
-                            @endif
-                        </div>
-                        
-                        <div class="carousel-item">
-                            @if($producto->url_imagen)
-                                <img src="{{ asset($producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3" style="filter: brightness(0.9);" alt="Vista alternativa">
-                            @else
-                                <img src="{{ asset('images/default.png') }}" class="d-block img-fluid w-75 mx-auto rounded-3" alt="Imagen no disponible">
-                            @endif
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-
-                <div class="col-md-6 py-3">
-                    <div class="card border-0 shadow-sm rounded-4 p-2 bg-white">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold fs-1 text-dark">{{ $producto->nombre }}</h5>
-
-                            <p class="card-text text-muted fs-5">{{ $producto->descripcion ?? 'Esta prenda no cuenta con una descripción detallada todavía.' }}</p>
-
-                            <h5 class="card-title fw-bold fs-2 text-success my-3">
-                                ${{ number_format($producto->precio, 0, ',', '.') }}
-                            </h5>
-
-                            <div class="mb-4">
-                                <p class="text-muted small fs-6 mb-2">Medios de pago aceptados:</p>
-                                <div class="d-flex flex-wrap gap-2 align-items-center">
-                                    <img src="{{ asset('visa-logo.png') }}" alt="Visa" style="height: 30px;">
-                                    <img src="{{ asset('Mastercard-logo.png') }}" alt="mastercard" style="height: 30px;">
-                                    <img src="{{ asset('Logo_Naranja.png') }}" alt="naranja" style="height: 30px;">
-                                    <img src="{{ asset('logo_mp.png') }}" alt="MP" style="height: 30px;">
-                                </div>
-                            </div>
-
-                            <h5 class="fw-bold fs-5 mb-2 text-dark">Características Técnicas:</h5>
-                            <p class="card-text mb-1 fs-6"><strong>Género:</strong> {{ ucfirst($producto->genero ?? 'Unisex') }}</p>
-                            <p class="card-text mb-1 fs-6"><strong>Talle disponible:</strong> {{ $producto->talle ?? 'Único / No especificado' }}</p>
-                            <p class="card-text mb-3 fs-6"><strong>Disponibilidad:</strong> En stock ({{ $producto->stock }} unidades)</p>
-
-                            <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
-                                @csrf
-
-                                <p class="mb-2 fw-semibold text-dark">Talle seleccionado</p>
-                                <div class="row g-2 mb-4">
-                                    <div class="col-auto">
-                                        <input type="radio" class="btn-check" name="talle" id="talleUnico" value="{{ $producto->talle ?? 'Único' }}" checked>
-                                        <label class="btn btn-outline-dark px-4" for="talleUnico">{{ $producto->talle ?? 'Único' }}</label>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex align-items-center gap-3 mb-4">
-                                    <span class="fw-semibold text-dark">Cantidad:</span>
-                                    <div class="input-group" style="width: 130px;">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="decrease()">−</button>
-                                        <input type="text" class="form-control text-center fw-bold" value="1" id="cantidad" name="cantidad" readonly>
-                                        <button class="btn btn-outline-secondary" type="button" onclick="increase({{ $producto->stock }})">+</button>
-                                    </div>
-                                </div>
-
-                                <div class="d-grid gap-2">
-                                    @if($producto->stock > 0)
-                                        <button type="submit" class="btn btn-dark btn-lg fw-bold">🛒 Agregar al Carrito</button>
-                                    @else
-                                        <button type="button" class="btn btn-secondary btn-lg disabled" disabled>🚫 Sin Stock Temporal</button>
-                                    @endif
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-
+        <div class="container-fluid bg-light py-4 border-bottom">
+            <div class="container">
+                @include('header')
             </div>
         </div>
 
-        @include('footer')
+        <div class="container mt-5 pt-2 mb-5">
 
-        <script>
-            function increase(maxStock) {
-                let input = document.getElementById("cantidad");
-                if (parseInt(input.value) < maxStock) {
-                    input.value = parseInt(input.value) + 1;
-                }
-            }
+            <form action="{{ route('productos.update', $producto->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
-            function decrease() {
-                let input = document.getElementById("cantidad");
-                if (parseInt(input.value) > 1) {
-                    input.value = parseInt(input.value) - 1;
-                }
-            }
-        </script>
+                @if ($errors->any())
+                    <div class="alert alert-danger my-3 shadow-sm rounded-3">
+                        <ul class="mb-0 text-start">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if(session('success'))
+                    <div class="alert alert-success my-3 text-center fw-bold shadow-sm">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
+                    <div class="w-100">
+                        <label for="nombre" class="form-label fw-bold mb-1">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Campera de Jean" value="{{ old('nombre', $producto->nombre) }}" required>
+                    </div>
+                </div>
+
+                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
+                    <div class="w-100">
+                        <label for="descripcion" class="form-label fw-bold mb-1">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Detalles del producto..." required>{{ old('descripcion', $producto->descripcion) }}</textarea>
+                    </div>
+                </div>
+
+                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
+                    <div class="w-100">
+                        <label for="precio" class="form-label fw-bold mb-1">Precio</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" step="any" id="precio" class="form-control" name="precio" placeholder="0.00" value="{{ old('precio', $producto->precio) }}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 50px;">
+                    <span class="me-3 text-secondary fw-bold">Género:</span>
+
+                    <input type="checkbox" class="btn-check" id="masculino" name="genero[]" value="Masculino" autocomplete="off"
+                        {{ str_contains($producto->genero, 'Masculino') ? 'checked' : '' }}>
+                    <label class="btn btn-outline-primary me-2" for="masculino">Masculino</label>
+
+                    <input type="checkbox" class="btn-check" id="femenino" name="genero[]" value="Femenino" autocomplete="off"
+                        {{ str_contains($producto->genero, 'Femenino') ? 'checked' : '' }}>
+                    <label class="btn btn-outline-primary me-2" for="femenino">Femenino</label>
+
+                    <input type="checkbox" class="btn-check" id="unisex" name="genero[]" value="Unisex" autocomplete="off"
+                        {{ str_contains($producto->genero, 'Unisex') ? 'checked' : '' }}>
+                    <label class="btn btn-outline-primary" for="unisex">Unisex</label>
+                </div>
+
+                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 50px;">
+                    <span class="me-3 text-secondary fw-bold">Talles:</span>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="talleX" name="talle[]" value="X"
+                            {{ str_contains($producto->talle, 'X') && !str_contains($producto->talle, 'XL') ? 'checked' : '' }}>
+                        <label class="form-check-label" for="talleX">X</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="talleXL" name="talle[]" value="XL"
+                            {{ str_contains($producto->talle, 'XL') ? 'checked' : '' }}>
+                        <label class="form-check-label" for="talleXL">XL</label>
+                    </div>
+                </div>
+
+                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
+                    <div class="w-100">
+                        <label for="stock" class="form-label fw-bold mb-1">Stock</label>
+                        <input type="number" class="form-control" id="stock" name="stock" min="0" placeholder="Ej: 15" value="{{ old('stock', $producto->stock) }}" required>
+                    </div>
+                </div>
+
+                <div class="container mt-2 bg-light rounded shadow-sm p-2">
+                    <div class="w-100">
+                        <label for="url_imagen" class="form-label fw-bold mb-1">Imagen del Producto</label>
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <img src="{{ asset($producto->url_imagen) }}" width="60" height="60" class="rounded object-fit-cover border shadow-sm" alt="Miniatura actual">
+                            <small class="text-muted">Imagen actual guardada. Subí un archivo nuevo solo si querés cambiarla.</small>
+                        </div>
+                        <input type="file" class="form-control" id="url_imagen" name="url_imagen" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="container mt-4 text-center">
+                    <a href="{{ route('productos.index') }}" class="btn btn-secondary btn-lg px-4 me-2 shadow-sm">Cancelar</a>
+                    <button type="submit" class="btn btn-success btn-lg px-5 shadow">Guardar Cambios</button>
+                </div>
+            </form>
+
+        </div>
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <div class="mt-3">
+            @include('footer')
+        </div>
     </body>
 </html>
