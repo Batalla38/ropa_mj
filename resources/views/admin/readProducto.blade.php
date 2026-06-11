@@ -1,102 +1,102 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Gestión de Productos - Ropa MJ</title>
-        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-        <style>
-            body {
-                background-color: #c1a391;
-                color: #333333;
-                background-image: url({{ asset('bg1.png') }});
-                background-repeat: repeat;
-                background-size: 700px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid bg-light py-4 border-bottom">
-            <div class="container">
-                @include('header')
+<head>
+    <title>Panel de Administración - Ropa MJ</title>
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            background-color: #c1a391;
+            background-image: url("{{ asset('bg1.png') }}");
+            background-repeat: repeat;
+            background-size: 700px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid bg-light py-4 border-bottom">
+        <div class="container">
+            @include('header')
+        </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded shadow-sm">
+            <h2 class="fw-bold text-dark mb-0">Control de Stock e Inventario</h2>
+            <a href="/createProducto" class="btn btn-primary fw-bold rounded-pill px-4">+ Cargar Nuevo Producto</a>
+        </div>
+
+        @if(session('success'))
+            <div class="alert alert-success text-center fw-bold shadow-sm rounded-3">
+                {{ session('success') }}
             </div>
+        @endif
+
+        <div class="card shadow border-0 rounded-3 overflow-hidden">
+            <table class="table table-hover align-middle mb-0 bg-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Género</th>
+                        <th>Talles</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($productos as $item)
+                        <tr>
+                            <td class="text-secondary fw-bold">{{ $item->id }}</td>
+                            <td>
+                                <img src="{{ asset($item->url_imagen) }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Prenda">
+                            </td>
+                            <td class="fw-bold text-dark">{{ $item->nombre }}</td>
+                            <td class="fw-bold text-success">${{ number_format($item->precio, 0, ',', '.') }}</td>
+                            <td>{{ $item->genero ?? 'No especificado' }}</td>
+                            <td><span class="badge bg-secondary px-2 py-1">{{ $item->talle ?? 'Sin talle' }}</span></td>
+                            <td class="fw-bold">{{ $item->stock }} u.</td>
+                            <td>
+                                @if($item->activo)
+                                    <span class="badge bg-success">Activo</span>
+                                @else
+                                    <span class="badge bg-danger">Inactivo</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <div class="d-inline-flex gap-2">
+                                    <a href="{{ route('productos.edit', $item->id) }}" class="btn btn-sm btn-warning fw-bold px-3">Editar</a>
+
+                                    <form action="{{ route('productos.estado', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-sm fw-bold px-3 {{ $item->activo ? 'btn-danger' : 'btn-success' }}">
+                                            {{ $item->activo ? 'Desactivar' : 'Activar' }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="9" class="text-center py-5 text-muted fw-bold bg-white">
+                                No hay productos registrados en la base de datos.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
+    </div>
 
-        <div class="container mt-5">
-            <div class="card p-4 shadow-sm bg-white border-0 mb-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="h3 mb-0 fw-bold text-dark">Panel de Administración de Prendas</h1>
-                    <span class="badge bg-secondary fs-6">Total: {{ $productos->count() }} prendas</span>
-                </div>
-            </div>
-        </div>
+    <div class="mt-5">
+        @include('footer')
+    </div>
 
-        <div class="container mt-2 bg-light rounded shadow-sm py-3 px-4">
-            <div class="row text-center fw-bold text-secondary align-items-center">
-                <div class="col">Nombre</div>
-                <div class="col">Descripción</div>
-                <div class="col">Talles</div>
-                <div class="col">Precio</div>
-                <div class="col">Stock</div>
-                <div class="col">Acciones</div>
-            </div>
-        </div>
-
-        <div class="container mt-1">
-            @forelse($productos as $item)
-                <div class="bg-light rounded shadow-sm p-3 mb-2 border-0 px-4">
-                    <div class="row text-center align-items-center">
-
-                        <div class="col fw-bold text-dark">
-                            {{ $item->nombre }}
-                        </div>
-
-                        <div class="col text-muted small">
-                            {{ Str::limit($item->descripcion, 40, '...') }}
-                        </div>
-
-                        <div class="col text-secondary">
-                            {{ $item->talle ?? 'N/A' }}
-                        </div>
-
-                        <div class="col text-success fw-bold">
-                            ${{ number_format($item->precio, 2, ',', '.') }}
-                        </div>
-
-                        <div class="col text-dark">
-                            {{ $item->stock }} u.
-                        </div>
-
-                        <div class="col">
-                            <div class="btn-group" role="group" aria-label="Acciones de producto">
-
-                                <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-
-                                <a href="{{ route('productos.edit', $item->id) }}" class="btn btn-warning btn-sm fw-semibold">Editar</a>
-
-                                <form action="{{ route('productos.estado', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('PATCH')
-                                    @if($item->activo == 1)
-                                        <button type="submit" class="btn btn-success btn-sm">Activo</button>
-                                    @else
-                                        <button type="submit" class="btn btn-secondary btn-sm">Inactivo</button>
-                                    @endif
-                                </form>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            @empty
-                <div class="alert alert-warning text-center mt-3" role="alert">
-                    No se encontraron productos en la base de datos.
-                </div>
-            @endforelse
-        </div>
-
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <div class="mt-5">
-            @include('footer')
-        </div>
-    </body>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
 </html>

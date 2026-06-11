@@ -34,7 +34,7 @@ Route::get('/consultas', function () {
     return view('consultas');
 });
 
-// --- CATÁLOGOS ---
+// --- CATÁLOGOS PÚBLICOS ---
 
 // El lector principal ahora pasa por el controlador para gestionar los filtros dinámicos
 Route::get('/catalogo', [ProductoController::class, 'index'])->name('catalogo.index');
@@ -54,11 +54,10 @@ Route::get('/catalogoChaleco', function () {
 // --- PRODUCTOS INDIVIDUALES (DETALLE DE INTERFAZ ÚNICA) ---
 
 // Esta es la única ruta pública para ver el detalle de un producto específico por su ID.
-// Apunta al método 'show' que busca el modelo y renderiza la vista 'producto'.
 Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');
 
 
-// --- LADO ADMINISTRADOR (GESTIÓN DE PRODUCTOS) ---
+// --- LADO ADMINISTRADOR (GESTIÓN INTERNA) ---
 
 Route::get('/gestionConsultas', function () {
     return view('admin.gestionConsultas');
@@ -68,8 +67,8 @@ Route::get('/createProducto', function () {
     return view('admin.createProducto');
 });
 
-// Lector de administración general de productos
-Route::get('/readProducto', [ProductoController::class, 'index'])->name('productos.index');
+// CORREGIDO: Lector de administración general mapeado al nuevo método de control interno
+Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
 
 // Guardar nuevo producto
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // Fachada DB para consultas rápidas
+use Illuminate\Support\Facades\DB; // Fachada DB para consultas rápidas si fueran necesarias
 use App\Models\Producto;
 
 class ProductoController extends Controller
@@ -11,10 +11,11 @@ class ProductoController extends Controller
     /**
      * Muestra el catálogo de productos con soporte para filtros de género y talle.
      * Si no hay filtros aplicados, muestra todos los productos activos.
+     * ACCESO: Clientes públicos -> Vista: 'catalogo'
      */
     public function index(Request $request)
     {
-        // Comenzamos la consulta trayendo solo los productos que estén activos
+        // Comenzamos la consulta trayendo solo los productos que estén activos (1)
         $query = Producto::where('activo', 1);
 
         // Filtro por Género (Si se selecciona algo distinto a "Todos")
@@ -23,7 +24,7 @@ class ProductoController extends Controller
             $query->where('genero', 'LIKE', '%' . $request->genero . '%');
         }
 
-        // Filtro por Talle
+        // Filtro por Talle (X o XL)
         if ($request->filled('talle')) {
             $query->where('talle', 'LIKE', '%' . $request->talle . '%');
         }
@@ -31,21 +32,109 @@ class ProductoController extends Controller
         // Obtenemos los productos finales filtrados de la base de datos
         $productos = $query->get();
 
-        // Enviamos los productos a la vista del catálogo
+        // Enviamos los productos a la vista del catálogo público
         return view('catalogo', compact('productos'));
     }
 
     /**
-     * Muestra la vista de un producto específico de forma dinámica por su ID.
+     * Muestra la tabla de control de inventario con todos los productos cargados.
+     * ACCESO: Administrador -> Vista: 'admin.readProducto'
+     */
+    public function adminIndex()
+    {
+        // Traemos absolutamente todos los productos de la BD (activos e inactivos)
+        $productos = Producto::all();
+
+        // Enviamos la colección a la vista exclusiva de administración interna
+        return view('admin.readProducto', compact('productos'));
+    }
+
+    /**
+     * Carga el formulario para modificar una prenda existente.
+     * Pasa el producto en singular para evitar el error de variable indefinida.
+     */
+    public function edit($id)
+    {
+        // Busca el producto por su ID o arroja un error 404 si no existe
+        $producto = Producto::findOrFail($id);
+
+        // Retorna la vista pasando la variable correcta en singular
+        return view('admin.updateProducto', compact('producto'));
+    }
+
+    /**
+     * Procesa la actualización de los datos de un producto en la base de datos (PUT).
+     */
+    public function update(Request $request, $id)
+    {
+        // 1. Validar los datos del formulario de edición
+        $request->validate([
+            'nombre'      => 'required|string|max:100',
+            'descripcion' => 'required|string',
+            'precio'      => 'required|numeric|min:0',
+            'genero'      => 'required|array',
+            'talle'       => 'required|array',
+            'stock'       => 'required|integer|min:0',
+            'url_imagen'  => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        // 2. Buscar el registro existente
+        $producto = Producto::findOrFail($id);
+        $producto->nombre      = $request->input('nombre');
+        $producto->descripcion = $request->input('descripcion');
+        $producto->precio      = $request->input('precio');
+        $producto->stock       = $request->input('stock');
+
+        // Volver a transformar los arrays de checkboxes a texto plano para guardar en BD
+        $producto->genero = implode(', ', $request->input('genero'));
+        $producto->talle  = implode(', ', $request->input('talle'));
+
+        // 3. Procesar nueva imagen si el usuario subió una
+        if ($request->hasFile('url_imagen')) {
+            $imagen = $request->file('url_imagen');
+            $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+            $imagen->move(public_path('images'), $nombreImagen);
+            $producto->url_imagen = 'images/' . $nombreImagen;
+        }
+
+        // 4. Guardar cambios en PHPMyAdmin
+        $producto->save();
+
+        return redirect()->route('productos.index')->with('success', '¡Producto actualizado correctamente!');
+    }
+
+    /**
+     * Alterna el estado de activación (Baja Lógica) de un producto.
+     */
+    public function cambiarEstado($id)
+    {
+        // Buscamos la prenda por su ID único
+        $producto = Producto::findOrFail($id);
+
+        // Invertimos el estado binario (si es 1 pasa a 0, si es 0 pasa a 1)
+        if ($producto->activo == 1) {
+            $producto->activo = 0;
+            $mensaje = '¡Producto desactivado (baja lógica) del catálogo público!';
+        } else {
+            $producto->activo = 1;
+            $mensaje = '¡Producto activado y visible en el catálogo nuevamente!';
+        }
+
+        // Guardamos los cambios en la base de datos
+        $producto->save();
+
+        // Redireccionamos al panel de control con el aviso correspondiente
+        return redirect()->route('productos.index')->with('success', $mensaje);
+    }
+
+    /**
+     * Muestra la vista de detalle de un producto específico por su ID (Para Clientes).
      */
     public function show($id)
     {
-        // 1. Buscamos el producto usando el Modelo Eloquent (conectado a tu tabla 'productos')
-        // Filtrando además que el producto esté activo (igual a 1)
         $producto = Producto::where('id', $id)->where('activo', 1)->first();
 
-        // 2. SIMULACIÓN INTELIGENTE: Si tu base de datos está vacía y pides el ID 1,
-        // armamos el Conjunto a Rayas para que no falle el testeo.
+        // Simulación de pruebas si la base de datos está vacía para el ID 1
         if (!$producto && $id == 1) {
             $producto = (object) [
                 'id' => 1,
@@ -59,12 +148,10 @@ class ProductoController extends Controller
             ];
         }
 
-        // Si no existe el producto real ni el simulado, tiramos un error 404
         if (!$producto) {
             abort(404, 'Producto no encontrado o no disponible actualmente.');
         }
 
-        // 3. Mandamos los datos a la vista que se llama simplemente 'producto'
         return view('producto', compact('producto'));
     }
 
@@ -73,7 +160,7 @@ class ProductoController extends Controller
      */
     public function guardar(Request $request)
     {
-        // 1. VALIDAR CAMPOS (Se asume que en el HTML usas name="genero[]" y name="talle[]")
+        // 1. VALIDAR CAMPOS
         $request->validate([
             'nombre'      => 'required|string|max:100',
             'descripcion' => 'required|string',
@@ -93,28 +180,20 @@ class ProductoController extends Controller
         $producto->stock       = $request->input('stock');
         $producto->activo      = $request->input('activo');
 
-        // Convierte los arreglos de checkboxes a texto plano ("Masculino, Femenino", "S, M, L")
-        // de forma limpia antes de guardarlos en la columna de texto de tu BD
         $producto->genero = implode(', ', $request->input('genero'));
         $producto->talle  = implode(', ', $request->input('talle'));
 
         // 3. GUARDAR IMAGEN FÍSICA
         if ($request->hasFile('url_imagen')) {
             $imagen = $request->file('url_imagen');
-            // Guardamos la imagen con un nombre único usando el tiempo para que no se pisen
             $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
-
-            // Movemos la imagen a public/images/
             $imagen->move(public_path('images'), $nombreImagen);
-
-            // Guardamos en la BD el string exacto para la etiqueta <img src="{{ asset('images/' . ...) }}">
             $producto->url_imagen = 'images/' . $nombreImagen;
         } else {
-            // Imagen por defecto si el administrador no sube ninguna
             $producto->url_imagen = 'images/default.png';
         }
 
-        // 4. GUARDAR DIRECTAMENTE EN PHP_MY_ADMIN
+        // 4. GUARDAR DIRECTAMENTE EN LA BD
         $producto->save();
 
         return redirect()->back()->with('success', '¡Producto guardado exitosamente en la base de datos!');
