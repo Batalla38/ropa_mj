@@ -64,7 +64,7 @@ Route::get('/createProducto', function () {
     return view('admin.createProducto');
 });
 
-// Tabla de control de inventario
+// Tabla de control de inventario (Productos)
 Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
 
 // Guardar nuevo producto
@@ -82,7 +82,7 @@ Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstad
 // Ver tabla de ventas/compras para el Administrador
 Route::get('/admin/compras', [ProductoController::class, 'verCompras'])->name('admin.compras');
 
-// Ver tabla de usuarios registrados (Apunta a la URL /verUsuarios)
+// Ver tabla de usuarios registrados (Mapeado a /verUsuarios)
 Route::get('/verUsuarios', [ProductoController::class, 'verUsuarios'])->name('admin.usuarios');
 
 

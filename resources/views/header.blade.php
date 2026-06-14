@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,77 +11,67 @@
     .header-mj-container {
         background-color: #ffffff;
         border-radius: 50px !important;
-        /* Reducimos padding vertical al mínimo (2px) */
         padding: 2px 15px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         border: 1px solid rgba(0,0,0,0.03);
-        /* Opcional: limitar el ancho máximo para que no se estire tanto */
         max-width: fit-content;
         margin: 0 auto;
     }
 
-    /* Fuente más pequeña y links más juntos */
     .header-mj-container .nav-link {
-        font-size: 0.8rem !important; /* Bajamos de 0.9 a 0.8 */
-        padding: 4px 10px !important; /* Reducimos el espacio entre botones */
+        font-size: 0.8rem !important;
+        padding: 4px 10px !important;
         font-weight: 500;
-        text-transform: uppercase; /* Las mayúsculas pequeñas se ven más finas */
+        text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
-    /* Logo más compacto */
     .header-mj-container .navbar-brand {
-        font-size: 0.95rem !important; /* Bajamos de 1.1 a 0.95 */
+        font-size: 0.95rem !important;
         font-weight: 800;
         margin-right: 10px;
     }
 
-    /* Si usas iconos en el navbar, esto los achica también */
     .header-mj-container .navbar-toggler {
         padding: 0.30rem 0.5rem;
         font-size: 0.75rem;
     }
-    /* Esto hace que el submenú se posicione a la derecha del menú principal /
-.dropdown-menu li {
-    position: relative;
-}
 
-.dropdown-menu .submenu {
-    display: none; / Oculto por defecto /
-    position: absolute;
-    left: 100%; / Lo mueve a la derecha /
-    top: -7px;
-}
+    .dropdown-menu li {
+        position: relative;
+    }
 
-/ Muestra el submenú cuando pasas el mouse por la categoría padre */
-.dropdown-menu li:hover > .submenu {
-    display: block;
-}
-/* Posicionamiento del submenú */
-.dropdown-submenu {
-    position: relative;
-}
+    .dropdown-menu .submenu {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: -7px;
+    }
 
-.dropdown-submenu .dropdown-menu {
-    top: 0;
-    left: 100%; /* Lo mueve a la derecha del menú principal */
-    margin-top: -1px;
-    display: none; /* Oculto por defecto */
-}
+    .dropdown-menu li:hover > .submenu {
+        display: block;
+    }
 
-/* Mostrar al hacer hover */
-.dropdown-submenu:hover > .dropdown-menu {
-    display: block;
-}
+    .dropdown-submenu {
+        position: relative;
+    }
 
-/* Ajuste para que la flecha apunte a la derecha en el submenú */
-.dropdown-submenu .dropdown-toggle::after {
-    transform: rotate(-90deg);
-    vertical-align: middle;
-    margin-left: 10px;
-}
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+        display: none;
+    }
 
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
 
+    .dropdown-submenu .dropdown-toggle::after {
+        transform: rotate(-90deg);
+        vertical-align: middle;
+        margin-left: 10px;
+    }
 </style>
 
 <body>
@@ -95,7 +85,6 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Enlaces del lado izquierdo (Tus categorías originales) -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/main"><p class="fs-4 mb-0">Inicio</p></a>
@@ -114,7 +103,6 @@
                         Ropas
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- Submenú Masculino -->
                         <li class="dropdown-submenu">
                             <a class="dropdown-item dropdown-toggle" href="/catalogoM">Masculino</a>
                             <ul class="dropdown-menu">
@@ -130,10 +118,11 @@
                     </ul>
                 </li>
             </ul>
+
             <div class="d-flex align-items-center ms-auto gap-2">
 
                 <a href="{{ route('carrito.ver') }}" class="btn btn-outline-dark position-relative me-2">
-                    <span class="me-1">🛒</span> 
+                    <span class="me-1">🛒</span>
                     @if(session()->has('carrito') && count(session('carrito')) > 0)
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ count(session('carrito')) }}
@@ -154,8 +143,8 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
                             @if(session('id_rol') == 1 || session('user_id') == 1)
                                 <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
-                                <li><a class="dropdown-item" href="{{ url('/main') }}"> Productos</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/gestionar-ventas') }}">💰 Gestionar Ventas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('productos.index') }}">📦 Productos</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.usuarios') }}">💰 Gestionar Ventas</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/consultas') }}">💬 Gestionar Consultas</a></li>
                                 <li><hr class="dropdown-divider"></li>
                             @endif
@@ -175,15 +164,12 @@
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                     <button class="btn btn-outline-dark" type="submit">Search</button>
-                </form>
+                </</form>
 
-            </div>  
+            </div>
 
         </div>
     </div>
 </nav>
 </body>
-
 </html>
-
-
