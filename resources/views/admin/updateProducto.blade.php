@@ -67,7 +67,7 @@
                 <div class="container mt-2 bg-light rounded shadow-sm p-3">
                     <div class="row">
                         <div class="col-md-6 mb-2 mb-md-0">
-                            <label Skinner for="precio" class="form-label fw-bold mb-1 text-secondary">Precio ($)</label>
+                            <label for="precio" class="form-label fw-bold mb-1 text-secondary">Precio ($)</label>
                             <input type="number" step="any" id="precio" class="form-control" name="precio" placeholder="0.00" value="{{ old('precio', $producto->precio) }}" required>
                         </div>
                         <div class="col-md-6">
@@ -81,7 +81,6 @@
                     <span class="me-3 text-secondary fw-bold">Género:</span>
 
                     @php
-                        // Convertimos a minúsculas la cadena de la BD para evitar problemas de tipeo (Masculino vs masculino)
                         $generoBD = strtolower($producto->genero ?? '');
                     @endphp
 
@@ -102,7 +101,6 @@
                     <span class="me-3 text-secondary fw-bold">Talles:</span>
 
                     @php
-                        // Separamos los talles guardados por coma en un array limpio
                         $tallesArray = array_map('trim', explode(',', strtolower($producto->talle ?? '')));
                     @endphp
 
@@ -122,7 +120,11 @@
                     <label class="form-label fw-bold mb-2 text-secondary d-block">Cambiar foto de la prenda</label>
                     <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3">
                         @if($producto->url_imagen)
-                            <img src="{{ asset($producto->url_imagen) }}" class="preview-img border shadow-sm" alt="Foto del producto">
+                            @if(str_starts_with($producto->url_imagen, 'images/'))
+                                <img src="{{ asset($producto->url_imagen) }}" class="preview-img border shadow-sm" alt="Foto del producto">
+                            @else
+                                <img src="{{ asset('images/' . $producto->url_imagen) }}" class="preview-img border shadow-sm" alt="Foto del producto">
+                            @endif
                         @else
                             <div class="bg-secondary text-white rounded d-flex align-items-center justify-content-center preview-img">Sin imagen</div>
                         @endif

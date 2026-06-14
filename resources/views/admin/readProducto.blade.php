@@ -53,7 +53,15 @@
                         <tr>
                             <td class="text-secondary fw-bold">{{ $item->id }}</td>
                             <td>
-                                <img src="{{ asset($item->url_imagen) }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Prenda">
+                                @if(!empty($item->url_imagen))
+                                    @if(str_starts_with($item->url_imagen, 'images/'))
+                                        <img src="{{ asset($item->url_imagen) }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Prenda">
+                                    @else
+                                        <img src="{{ asset('images/' . $item->url_imagen) }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Prenda">
+                                    @endif
+                                @else
+                                    <img src="{{ asset('images/default.png') }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Por defecto">
+                                @endif
                             </td>
                             <td class="fw-bold text-dark">{{ $item->nombre }}</td>
                             <td class="fw-bold text-success">${{ number_format($item->precio, 0, ',', '.') }}</td>

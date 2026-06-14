@@ -45,7 +45,7 @@
                     </div>
                 @endif
 
-                
+
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
                         <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
@@ -69,22 +69,22 @@
                     @csrf
                     <div class="mb-3">
                         <label for="nombre" class="form-label fw-semibold">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
+                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre">
                     </div>
 
                     <div class="mb-3">
                         <label for="apellido" class="form-label fw-semibold">Apellido</label>
-                        <input type="text" name="apellido" class="form-control" id="apellido" placeholder="Apellido" required>
+                        <input type="text" name="apellido" class="form-control" id="apellido" placeholder="Apellido" >
                     </div>
 
                     <div class="mb-3">
                         <label for="correo" class="form-label fw-semibold">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="correo" name="correo" value="{{ old('correo') }}" placeholder="nombre@ejemplo.com" required>
+                        <input type="email" class="form-control" id="correo" name="correo" value="{{ old('correo') }}" placeholder="nombre@ejemplo.com" >
                     </div>
 
                    <div class="mb-3">
                         <label for="password" class="form-label fw-semibold">Contraseña</label>
-                        <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock" required>
+                        <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock" >
                         <div id="passwordHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
                             Debe tener entre 8 y 20 caracteres, incluir letras y números, sin espacios ni caracteres especiales.
                         </div>
@@ -92,7 +92,7 @@
 
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label fw-semibold">Repetir Contraseña</label>
-                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" aria-describedby="passwordConfirmationHelpBlock" required>
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" aria-describedby="passwordConfirmationHelpBlock" >
                         <div id="passwordConfirmationHelpBlock" class="form-text mt-2" style="font-size: 0.82rem;">
                             Por favor, vuelve a escribir la contraseña exactamente igual.
                         </div>

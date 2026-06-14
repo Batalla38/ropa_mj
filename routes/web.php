@@ -36,7 +36,6 @@ Route::get('/consultas', function () {
 
 // --- CATÁLOGOS PÚBLICOS ---
 
-// El lector principal ahora pasa por el controlador para gestionar los filtros dinámicos
 Route::get('/catalogo', [ProductoController::class, 'index'])->name('catalogo.index');
 
 Route::get('/catalogoM', function () {
@@ -51,9 +50,7 @@ Route::get('/catalogoChaleco', function () {
     return view('catalogoChaleco');
 });
 
-// --- PRODUCTOS INDIVIDUALES (DETALLE DE INTERFAZ ÚNICA) ---
-
-// Esta es la única ruta pública para ver el detalle de un producto específico por su ID.
+// --- PRODUCTOS INDIVIDUALES (DETALLE DE INTERFAZ ÚNICA PARA CLIENTES) ---
 Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');
 
 
@@ -67,20 +64,23 @@ Route::get('/createProducto', function () {
     return view('admin.createProducto');
 });
 
-// CORREGIDO: Lector de administración general mapeado al nuevo método de control interno
+// Tabla de control de inventario
 Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
 
 // Guardar nuevo producto
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
 
-// Formulario de edición (Carga los datos pasándole el ID en la URL)
+// Formulario de edición para el Administrador
 Route::get('/updateProducto/{id}', [ProductoController::class, 'edit'])->name('productos.edit');
 
 // Procesamiento de la actualización de datos (PUT)
 Route::put('/updateProducto/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
-// Acción de baja lógica (PATCH para alternar estado activo 1 o 0)
+// Acción de baja lógica (PATCH)
 Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstado'])->name('productos.estado');
+
+// NUEVO: Ver tabla de ventas/compras para el Administrador
+Route::get('/admin/compras', [ProductoController::class, 'verCompras'])->name('admin.compras');
 
 
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
@@ -110,6 +110,4 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
 Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
 Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
-
-// Ruta para procesar la compra (Protegida)
 Route::post('/carrito/comprar', [CarritoController::class, 'procesarCompra'])->name('carrito.comprar');

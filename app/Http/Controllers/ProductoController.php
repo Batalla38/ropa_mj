@@ -10,8 +10,6 @@ class ProductoController extends Controller
 {
     /**
      * Muestra el catálogo de productos con soporte para filtros de género y talle.
-     * Si no hay filtros aplicados, muestra todos los productos activos.
-     * ACCESO: Clientes públicos -> Vista: 'catalogo'
      */
     public function index(Request $request)
     {
@@ -32,7 +30,6 @@ class ProductoController extends Controller
 
     /**
      * Muestra la tabla de control de inventario con todos los productos cargados.
-     * ACCESO: Administrador -> Vista: 'admin.readProducto'
      */
     public function adminIndex()
     {
@@ -51,11 +48,9 @@ class ProductoController extends Controller
 
     /**
      * Procesa la actualización de todos los datos modificables de un producto (PUT).
-     * El ID y el Estado de Activación quedan resguardados de alteraciones directas aquí.
      */
     public function update(Request $request, $id)
     {
-        // 1. Validar rigurosamente los campos requeridos del formulario
         $request->validate([
             'nombre'      => 'required|string|max:100',
             'descripcion' => 'required|string',
@@ -66,31 +61,29 @@ class ProductoController extends Controller
             'url_imagen'  => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        // 2. Localizar el producto original
         $producto = Producto::findOrFail($id);
 
-        // 3. Asignar los nuevos valores correspondientes
         $producto->nombre      = $request->input('nombre');
         $producto->descripcion = $request->input('descripcion');
         $producto->precio      = $request->input('precio');
         $producto->stock       = $request->input('stock');
 
-        // Normalizamos los elementos de los arrays uniéndolos por comas antes de guardar
         $producto->genero = implode(', ', $request->input('genero'));
         $producto->talle  = implode(', ', $request->input('talle'));
 
-        // 4. Procesar y almacenar imagen física en la carpeta pública en caso de subirse una nueva
         if ($request->hasFile('url_imagen')) {
             $imagen = $request->file('url_imagen');
             $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+
+            // Guardamos físicamente en public/images
             $imagen->move(public_path('images'), $nombreImagen);
-            $producto->url_imagen = 'images/' . $nombreImagen;
+
+            // Guardamos SOLO el nombre limpio en la BD
+            $producto->url_imagen = $nombreImagen;
         }
 
-        // 5. Guardar definitivamente los cambios en la base de datos
         $producto->save();
 
-        // Redirecciona al listado del Administrador (readProducto) con el cartel de éxito
         return redirect()->route('productos.index')->with('success', '¡El producto se ha modificado y guardado con éxito!');
     }
 
@@ -115,23 +108,26 @@ class ProductoController extends Controller
     }
 
     /**
-     * Muestra la vista de detalle de un producto específico por su ID (Para Clientes).
+     * Muestra la vista de detalle de un producto específico por su ID (Para Vista del Cliente).
      */
     public function show($id)
     {
-        $producto = Producto::where('id', $id)->where('activo', 1)->first();
+        $producto = Producto::find($id);
 
+        // Respaldo corregido convirtiéndolo en un objeto estándar para heredar el comportamiento
         if (!$producto && $id == 1) {
-            $producto = (object) [
+            $producto = new Producto([
                 'id' => 1,
                 'nombre' => 'Conjunto a Rayas',
                 'precio' => 90000,
-                'url_imagen' => 'ropa Hombre/ConjuntoRayasH.jpg',
+                'url_imagen' => 'default.png', // Solo el nombre
                 'descripcion' => 'Este conjunto destaca por su comodidad y su diseño pinstripe atemporal en blanco y negro.',
-                'material' => 'Lino de alta calidad',
-                'patron' => 'Rayas finas (pinstripe) blanco y negro',
-                'cuidado' => 'Lavado a máquina en frío.'
-            ];
+                'genero' => 'Hombre',
+                'talle' => 'M',
+                'stock' => 5
+            ]);
+            // Forzar ID ya que es una instancia nueva no guardada
+            $producto->id = 1;
         }
 
         if (!$producto) {
@@ -170,14 +166,27 @@ class ProductoController extends Controller
         if ($request->hasFile('url_imagen')) {
             $imagen = $request->file('url_imagen');
             $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+
+            // Guardamos físicamente en public/images
             $imagen->move(public_path('images'), $nombreImagen);
-            $producto->url_imagen = 'images/' . $nombreImagen;
+
+            // Guardamos SOLO el nombre limpio en la BD
+            $producto->url_imagen = $nombreImagen;
         } else {
-            $producto->url_imagen = 'images/default.png';
+            $producto->url_imagen = 'default.png';
         }
 
         $producto->save();
 
         return redirect()->back()->with('success', '¡Producto guardado exitosamente en la base de datos!');
+    }
+
+    /**
+     * Muestra la tabla de compras/ventas registradas para el Administrador.
+     */
+    public function verCompras()
+    {
+        $compras = DB::table('compras')->orderBy('id', 'desc')->get();
+        return view('admin.verCompras', compact('compras'));
     }
 }
