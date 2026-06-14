@@ -51,6 +51,22 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $mensajes = [
+            'nombre.required'      => 'El título del producto es obligatorio.',
+            'descripcion.required' => 'La descripción de la prenda es obligatoria.',
+            'precio.required'      => 'El precio es obligatorio.',
+            'precio.numeric'       => 'El precio debe ser un número válido.',
+            'precio.min'           => 'El precio no puede ser negativo.',
+            'genero.required'      => 'Debes seleccionar al menos un género.',
+            'talle.required'       => 'Debes seleccionar al menos un talle.',
+            'stock.required'       => 'El stock disponible es obligatorio.',
+            'stock.integer'        => 'El stock debe ser un número entero.',
+            'stock.min'            => 'El stock no puede ser menor a 0.',
+            'url_imagen.image'     => 'El archivo seleccionado debe ser una imagen.',
+            'url_imagen.mimes'     => 'La imagen debe tener formato: jpeg, png, jpg, webp.',
+            'url_imagen.max'       => 'La imagen no puede pesar más de 2MB.',
+        ];
+
         $request->validate([
             'nombre'      => 'required|string|max:100',
             'descripcion' => 'required|string',
@@ -59,7 +75,7 @@ class ProductoController extends Controller
             'talle'       => 'required|array|min:1',
             'stock'       => 'required|integer|min:0',
             'url_imagen'  => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-        ]);
+        ], $mensajes);
 
         $producto = Producto::findOrFail($id);
 
@@ -74,11 +90,7 @@ class ProductoController extends Controller
         if ($request->hasFile('url_imagen')) {
             $imagen = $request->file('url_imagen');
             $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
-
-            // Guardamos físicamente en public/images
             $imagen->move(public_path('images'), $nombreImagen);
-
-            // Guardamos SOLO el nombre limpio en la BD
             $producto->url_imagen = $nombreImagen;
         }
 
@@ -114,19 +126,17 @@ class ProductoController extends Controller
     {
         $producto = Producto::find($id);
 
-        // Respaldo corregido convirtiéndolo en un objeto estándar para heredar el comportamiento
         if (!$producto && $id == 1) {
             $producto = new Producto([
                 'id' => 1,
                 'nombre' => 'Conjunto a Rayas',
                 'precio' => 90000,
-                'url_imagen' => 'default.png', // Solo el nombre
+                'url_imagen' => 'default.png',
                 'descripcion' => 'Este conjunto destaca por su comodidad y su diseño pinstripe atemporal en blanco y negro.',
                 'genero' => 'Hombre',
                 'talle' => 'M',
                 'stock' => 5
             ]);
-            // Forzar ID ya que es una instancia nueva no guardada
             $producto->id = 1;
         }
 
@@ -142,16 +152,32 @@ class ProductoController extends Controller
      */
     public function guardar(Request $request)
     {
+        $mensajes = [
+            'nombre.required'      => 'El nombre del producto es obligatorio.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'precio.required'      => 'El precio es obligatorio.',
+            'precio.numeric'       => 'El precio debe ser un número válido.',
+            'precio.min'           => 'El precio no puede ser negativo.',
+            'genero.required'      => 'Debes marcar al menos un género.',
+            'talle.required'       => 'Debes marcar al menos un talle.',
+            'stock.required'       => 'El stock inicial es obligatorio.',
+            'stock.integer'        => 'El stock debe ser un número entero.',
+            'stock.min'            => 'El stock no puede ser menor a 0.',
+            'url_imagen.image'     => 'El archivo seleccionado debe ser una imagen.',
+            'url_imagen.mimes'     => 'La imagen debe tener formato: jpeg, png, jpg, webp.',
+            'url_imagen.max'       => 'La imagen no puede pesar más de 2MB.',
+        ];
+
         $request->validate([
             'nombre'      => 'required|string|max:100',
             'descripcion' => 'required|string',
             'precio'      => 'required|numeric|min:0',
-            'genero'      => 'required|array',
-            'talle'       => 'required|array',
+            'genero'      => 'required|array|min:1',
+            'talle'       => 'required|array|min:1',
             'stock'       => 'required|integer|min:0',
             'url_imagen'  => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'activo'      => 'required',
-        ]);
+        ], $mensajes);
 
         $producto = new Producto();
         $producto->nombre      = $request->input('nombre');
@@ -166,11 +192,7 @@ class ProductoController extends Controller
         if ($request->hasFile('url_imagen')) {
             $imagen = $request->file('url_imagen');
             $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
-
-            // Guardamos físicamente en public/images
             $imagen->move(public_path('images'), $nombreImagen);
-
-            // Guardamos SOLO el nombre limpio en la BD
             $producto->url_imagen = $nombreImagen;
         } else {
             $producto->url_imagen = 'default.png';
@@ -188,5 +210,17 @@ class ProductoController extends Controller
     {
         $compras = DB::table('compras')->orderBy('id', 'desc')->get();
         return view('admin.verCompras', compact('compras'));
+    }
+
+    /**
+     * Muestra la tabla de usuarios registrados para el Administrador.
+     */
+    public function verUsuarios()
+    {
+        // Consultamos la tabla 'usuarios'
+        $usuarios = DB::table('usuarios')->orderBy('id', 'desc')->get();
+
+        // CORREGIDO: Llama a admin.readUsuarios mapeando correctamente tu archivo
+        return view('admin.readUsuarios', compact('usuarios'));
     }
 }

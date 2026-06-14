@@ -79,8 +79,11 @@ Route::put('/updateProducto/{id}', [ProductoController::class, 'update'])->name(
 // Acción de baja lógica (PATCH)
 Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstado'])->name('productos.estado');
 
-// NUEVO: Ver tabla de ventas/compras para el Administrador
+// Ver tabla de ventas/compras para el Administrador
 Route::get('/admin/compras', [ProductoController::class, 'verCompras'])->name('admin.compras');
+
+// Ver tabla de usuarios registrados (Apunta a la URL /verUsuarios)
+Route::get('/verUsuarios', [ProductoController::class, 'verUsuarios'])->name('admin.usuarios');
 
 
 // --- PROCESAMIENTO DE FORMULARIOS (POST) ---
@@ -101,6 +104,7 @@ Route::get('/registro', function () {
     return view('registro');
 });
 
+// Procesamiento de login y logout
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
