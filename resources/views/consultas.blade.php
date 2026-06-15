@@ -40,6 +40,25 @@
     @endif
 
     <div class="container mt-4">
+        @include('header')
+    </div>
+
+    <div class="container" style="margin-top: 140px; margin-bottom: 1.5rem;">
+        <div class="card p-4 shadow-sm">
+            <p class="h1 text-dark border-bottom pb-2">Preguntas Frecuentes</p>
+            <div class="mt-3">
+                <p class="h4 text-primary">¿Cómo realizo un pedido por mayor?</p>
+                <p class="fs-5 text-muted">Solo debes registrarte en nuestro portal, añadir las prendas al carrito y finalizar el proceso.</p>
+            </div>
+            <hr>
+            <div>
+                <p class="h4 text-primary">¿Cuál es el monto mínimo de compra?</p>
+                <p class="fs-5 text-muted">Manejamos un monto mínimo competitivo de distribuidora inicial visible en tu panel principal.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
         <div class="card p-4 shadow-sm">
             <h2 class="mb-4 text-dark"><i class="bi bi-chat-left-text-fill me-2 text-primary"></i> Dejanos tu Consulta</h2>
             
@@ -75,28 +94,7 @@
         </div>
     </div>
 
-    <div class="container mt-4">
-        @include('header')
-    </div>
-
-    <div class="container mt-4 mb-5">
-        <div class="card p-4">
-            <p class="h1 text-dark border-bottom pb-2">Preguntas Frecuentes</p>
-            <div class="mt-3">
-                <p class="h4 text-primary">¿Cómo realizo un pedido por mayor?</p>
-                <p class="fs-5 text-muted">Solo debes registrarte en nuestro portal, añadir las prendas al carrito y finalizar el proceso.</p>
-            </div>
-            <hr>
-            <div>
-                <p class="h4 text-primary">¿Cuál es el monto mínimo de compra?</p>
-                <p class="fs-5 text-muted">Manejamos un monto mínimo competitivo de distribuidora inicial visible en tu panel principal.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mb-3">
-        @include('footer')
-    </div>
+    @include('footer')
 
 </body>
 </html>
