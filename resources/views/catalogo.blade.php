@@ -76,7 +76,7 @@
         @include('header')
     </div>
 
-    <div class="container-fluid mt-5 py-4">
+    <div class="container-fluid py-4" style="margin-top: 140px !important;">
         <form action="{{ route('catalogo.index') }}" method="GET">
             <div class="row">
 
@@ -120,19 +120,32 @@
                             <div class="col-md-4">
                                 <div class="card h-100 shadow-sm border-0 card-animada">
 
+                                    <!-- 1. Imagen (Redirige al detalle) -->
                                     <div class="img-container-custom" onclick="window.location.href='{{ route('producto.show', $producto->id) }}'">
                                         <img src="{{ asset($producto->url_imagen) }}" class="card-img-custom" alt="{{ $producto->nombre }}">
                                     </div>
 
+                                    <!-- 2. Información del Producto (Redirige al detalle) -->
                                     <div class="card-body text-center mt-2" onclick="window.location.href='{{ route('producto.show', $producto->id) }}'">
                                         <h5 class="text-dark fw-bold mb-1">{{ $producto->nombre }}</h5>
                                         <p class="text-muted small mb-1">Talles: <span class="badge bg-secondary">{{ $producto->talle }}</span></p>
-                                        <p class="text-black fw-bold fs-5">${{ number_format($producto->precio, 0, ',', '.') }}</p>
+                                        <p class="text-black fw-bold fs-5 mb-0">${{ number_format($producto->precio, 0, ',', '.') }}</p>
+                                    </div>
+
+                                    <!-- 3. NUEVO: Formulario para Agregar al Carrito (Aislado y Seguro) -->
+                                    <div class="p-3 pt-0">
+                                        <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary w-100 fw-bold rounded-pill shadow-sm py-2">
+                                                <i class="bi bi-cart-plus-fill me-2"></i>Agregar al Carrito
+                                            </button>
+                                        </form>
                                     </div>
 
                                 </div>
                             </div>
                         @empty
+                            <!-- Bloque de no se encontraron productos (Queda igual) -->
                             <div class="col-12 text-center py-5">
                                 <div class="p-5 bg-white border rounded rounded-4 shadow-sm">
                                     <h4 class="text-dark fw-bold">No se encontraron productos</h4>

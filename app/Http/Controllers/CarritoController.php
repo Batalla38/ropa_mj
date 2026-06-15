@@ -3,83 +3,61 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use App\Models\Producto; 
 
 class CarritoController extends Controller
 {
-    // Muestra la pantalla del carrito con los productos acumulados
-    public function ver()
+    // 1. Ver el contenido del carrito
+    public function index()
     {
+        // Trae lo que haya en la sesión, si no hay nada inicializa un array vacío []
         $carrito = session()->get('carrito', []);
-        
-        $total = 0;
-        foreach($carrito as $item) {
-            $total += $item['precio'] * $item['cantidad'];
-        }
 
-        return view('carrito', compact('carrito', 'total'));
+        // Mandamos a la vista ÚNICAMENTE la variable 'carrito' de forma correcta
+        return view('carrito', compact('carrito'));
     }
 
-    // Agrega un producto al carrito controlando el Stock
+    // 2. Agregar un producto o sumar cantidad
     public function agregar(Request $request, $id)
     {
-        // 1. Buscamos el producto real usando la tabla 'productos' (plural, como mapeamos antes)
-        $producto = DB::table('productos')->where('id', $id)->first(); 
-
-        // 2. SIMULACIÓN INTELIGENTE: Si tu base de datos está vacía todavía
-        if (!$producto) {
-            $producto = (object) [
-                'id' => 1,
-                'nombre' => 'Conjunto a Rayas',
-                'precio' => 90000,
-                'url_imagen' => 'ropa Hombre/ConjuntoRayasH.jpg',
-                'stock' => 10 // Le asignamos stock ficticio para las pruebas
-            ];
-        }
-
-        // 3. Traemos el carrito actual de la sesión
+        // Buscamos el producto usando tu clave real: id
+        $producto = Producto::findOrFail($id);
         $carrito = session()->get('carrito', []);
 
-        // 4. Capturamos la cantidad exacta del formulario
-        $cantidadSeleccionada = (int) $request->input('cantidad', 1);
-
-        // 5. --- CONTROL DE STOCK ANTES DE AGREGAR ---
-        $cantidadActualEnCarrito = isset($carrito[$id]) ? $carrito[$id]['cantidad'] : 0;
-        $cantidadTotalSolicitada = $cantidadActualEnCarrito + $cantidadSeleccionada;
-
-        if (isset($producto->stock) && $cantidadTotalSolicitada > $producto->stock) {
-            return redirect()->back()->withErrors([
-                'stock_error' => "No puedes agregar esa cantidad. Stock disponible: {$producto->stock} unidades (Ya tienes {$cantidadActualEnCarrito} en el carrito)."
-            ]);
-        }
-
-        // 6. Sumamos cantidad o creamos el artículo en el arreglo
         if(isset($carrito[$id])) {
-            $carrito[$id]['cantidad'] = $cantidadTotalSolicitada;
+            $carrito[$id]['cantidad']++;
         } else {
+            // Mapeamos con 'url_imagen' que es tu columna real
             $carrito[$id] = [
-                "nombre"   => $producto->nombre,
-                "cantidad" => $cantidadSeleccionada,
-                "precio"   => $producto->precio,
-                "imagen"   => $producto->url_imagen ?? 'bg1.png'
+                "nombre" => $producto->nombre,
+                "cantidad" => 1,
+                "precio" => $producto->precio,
+                "url_imagen" => $producto->url_imagen 
             ];
         }
 
-        // 7. Guardamos el carrito en la sesión
         session()->put('carrito', $carrito);
-
-        // 8. Forzamos el guardado del mensaje en la sesión (por seguridad)
-        session()->flash('success', '¡Excelente! El producto se agregó al carrito correctamente.');
-        session()->save(); 
-
-        // =========================================================
-        //  CAMBIO EXPLICITO: PASAMOS EL AVISO DIRECTO POR LA URL
-        // =========================================================
-        return redirect()->route('producto.show', ['id' => $id, 'check' => 1]);
+        return redirect()->back()->with('exito', 'Producto añadido al carrito.');
     }
 
-    // Elimina un artículo del carrito
+    // 3. Restar cantidad
+    public function restar($id)
+    {
+        $carrito = session()->get('carrito', []);
+
+        if(isset($carrito[$id])) {
+            if($carrito[$id]['cantidad'] > 1) {
+                $carrito[$id]['cantidad']--;
+            } else {
+                unset($carrito[$id]); 
+            }
+            session()->put('carrito', $carrito);
+        }
+
+        return redirect()->back()->with('exito', 'Carrito actualizado.');
+    }
+
+    // 4. Eliminar un producto completo
     public function eliminar($id)
     {
         $carrito = session()->get('carrito', []);
@@ -89,68 +67,13 @@ class CarritoController extends Controller
             session()->put('carrito', $carrito);
         }
 
-        return redirect()->route('carrito.ver')->with('status', 'Producto quitado del carrito.');
+        return redirect()->back()->with('exito', 'Producto removido del carrito.');
     }
 
-    // Procesar Compra descontando el stock real de la Base de Datos y registrando la orden
-    public function procesarCompra(Request $request)
+    // 5. Vaciar todo el carrito
+    public function vaciar()
     {
-        // Verificar si inició sesión por el método manual que usan
-        if (!session()->has('user_id')) {
-            return redirect('/login')->withErrors([
-                'correo' => 'Debes iniciar sesión o registrarte para finalizar tu compra. ¡Tu carrito se guardó perfectamente!'
-            ]);
-        }
-
-        $carrito = session()->get('carrito', []);
-
-        if (empty($carrito)) {
-            return redirect('/catalogo')->withErrors(['carrito_error' => 'El carrito está vacío.']);
-        }
-
-        // 1. CONTROL DE STOCK FINAL: Validamos todos los artículos antes de tocar nada
-        foreach ($carrito as $id => $item) {
-            $producto = DB::table('productos')->where('id', $id)->first();
-            
-            // Si el producto real existe en la BD, verificamos su stock actual
-            if ($producto && $item['cantidad'] > $producto->stock) {
-                return redirect()->route('carrito.ver')->withErrors([
-                    'stock_final' => "Lo sentimos, el producto '{$item['nombre']}' ya no cuenta con stock suficiente para tu orden (Disponibles: {$producto->stock})."
-                ]);
-            }
-        }
-
-        // =======================================================================
-        // SOLUCIÓN: Capturamos el id único del usuario desde la autenticación o sesión
-        // =======================================================================
-        $idUsuario = auth()->id() ?? session()->get('user_id');
-
-        // 2. REGISTRO EN LA TABLA COMPRAS Y DESCUENTO DE STOCK REAL EN LA BD
-        foreach ($carrito as $id => $item) {
-            $producto = DB::table('productos')->where('id', $id)->first();
-            
-            if ($producto) {
-                // CALCULAMOS EL TOTAL: Multiplicamos el precio unitario por la cantidad comprada
-                $precioTotalItem = $producto->precio * $item['cantidad'];
-
-                // Insertamos la compra en tu tabla 'compras'
-                DB::table('compras')->insert([
-                    'id_usuario' => $idUsuario, // 👈 Ahora guarda el ID del cliente (ej: 1) de forma correcta
-                    'stock'      => $item['cantidad'], // Cuánto compró
-                    'precio'     => $precioTotalItem,  
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-
-                // Descontamos el stock de la tabla productos
-                DB::table('productos')
-                    ->where('id', $id)
-                    ->update(['stock' => $producto->stock - $item['cantidad']]);
-            }
-        }
-
-        // 3. Limpiamos el carrito y cerramos transacción exitosa
         session()->forget('carrito');
-        return redirect('/main')->with('success', '¡Gracias por tu compra en Ropa MJ! Tu pedido fue procesado y registrado con éxito.');
+        return redirect()->route('carrito.index')->with('exito', 'El carrito se vació por completo.');
     }
 }

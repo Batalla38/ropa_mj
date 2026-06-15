@@ -2,117 +2,141 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Carrito - Ropa MJ</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        /* Mantenemos tu fondo personalizado de Ropa MJ */
         body {
-            background-color: #c1a391; 
-            background-image: url({{ asset('bg1.png') }}); 
+            background-color: #c1a391;
+            background-image: url("{{ asset('bg1.png') }}");
             background-repeat: repeat;
-            background-size: 700px; 
+            background-size: 700px;
         }
-        .table img {
-            object-fit: cover;
+        .contenedor-blanco {
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .titulo-carrito {
+            background-color: rgba(255, 255, 255, 0.75);
+            color: #4a3e3d !important;
+            padding: 15px 25px;
+            border-radius: 8px; 
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
-    @include('header')
+    <div class="container mt-3 mb-5">
+        @include('header')
+    </div>
 
-    <main class="container my-5 pt-5">
-        <h2 class="mb-4 fw-bold text-dark text-center">Tu Carrito</h2>
+    <div class="container" style="margin-top: 140px; margin-bottom: 4rem;">
+        
+        <div class="mb-4">
+            <h2 class="titulo-carrito text-center fw-bold mb-0">Mi Carrito de Compras</h2>
+        </div>
 
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
-                <i class="bi bi-shield-check me-2"></i> {{ session('success') }}
+        @if(session('exito'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>¡Hecho!</strong> {{ session('exito') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
-        @if(session('status'))
-            <div class="alert alert-secondary alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
-                <i class="bi bi-trash-fill me-2"></i> {{ session('status') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+        @if(count($carrito) > 0)
+            <div class="p-4 contenedor-blanco">
+                <table class="table align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Prenda</th>
+                            <th>Precio</th>
+                            <th class="text-center">Cantidad</th>
+                            <th>Subtotal</th>
+                            <th class="text-center">Quitar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php $totalGeneral = 0; @endphp
+                        @foreach($carrito as $id => $item)
+                            @php 
+                                $subtotal = $item['precio'] * $item['cantidad']; 
+                                $totalGeneral += $subtotal;
+                            @endphp
+                            <tr>
+                                <td>
+                                    <img src="{{ asset('storage/' . $item['url_imagen']) }}" alt="{{ $item['nombre'] }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                </td>
+                                <td><strong>{{ $item['nombre'] }}</strong></td>
+                                <td>${{ number_format($item['precio'], 2, ',', '.') }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center align-items-center gap-2">
+                                        <form action="{{ route('carrito.restar', $id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">-</button>
+                                        </form>
+                                        
+                                        <span class="fw-bold fs-5 px-2">{{ $item['cantidad'] }}</span>
+                                        
+                                        <form action="{{ route('carrito.agregar', $id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">+</button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td><strong>${{ number_format($subtotal, 2, ',', '.') }}</strong></td>
+                                <td class="text-center">
+                                    <form action="{{ route('carrito.eliminar', $id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-        @if($errors->has('stock_final'))
-            <div class="alert alert-danger alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
-                <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ $errors->first('stock_final') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if(empty($carrito) || count($carrito) == 0)
-            <div class="text-center py-5 bg-white rounded-4 shadow-sm">
-                <p class="text-muted fs-4">Aun no tiene productos cargados</p>
-                <a href="{{ url('/catalogo') }}" class="btn btn-dark btn-lg rounded-pill">Ver Catálogo</a>
+                <hr class="my-4">
+
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <a href="{{ route('carrito.vaciar') }}" class="btn btn-outline-danger fw-bold">
+                            <i class="bi bi-x-circle me-2"></i>Vaciar Carrito
+                        </a>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <h3 class="mb-3">Total General: <span class="text-success fw-bold">${{ number_format($totalGeneral, 2, ',', '.') }}</span></h3>
+                        
+                        @if(session()->has('user_id'))
+                            <a href="{{ url('/finalizar-compra') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm">
+                                <i class="bi bi-credit-card-2-back me-2"></i>Iniciar Pago
+                            </a>
+                        @else
+                            <div class="alert alert-warning d-inline-block text-start mb-0">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i> Debes <a href="{{ url('/login') }}" class="fw-bold">Iniciar Sesión</a> para poder comprar.
+                            </div>
+                        @endif
+                    </div>
+                </div>
             </div>
         @else
-            <div class="row g-4">
-                <div class="col-md-8">
-                    <div class="card shadow-sm p-3 border-0 rounded-4">
-                        <table class="table align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Producto</th>
-                                    <th class="text-center">Precio</th>
-                                    <th class="text-center">Cantidad</th>
-                                    <th class="text-end">Subtotal</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($carrito as $id => $detalles)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-3">
-                                                <img src="{{ asset($detalles['imagen']) }}" alt="{{ $detalles['nombre'] }}" style="width: 55px; height: 55px;">
-                                                <span class="fw-semibold text-dark">{{ $detalles['nombre'] }}</span>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">${{ number_format($detalles['precio'], 0, ',', '.') }}</td>
-                                        <td class="text-center fw-bold">{{ $detalles['cantidad'] }}</td>
-                                        <td class="text-end fw-bold text-dark">${{ number_format($detalles['precio'] * $detalles['cantidad'], 0, ',', '.') }}</td>
-                                        <td class="text-center">
-                                            <form action="{{ route('carrito.eliminar', $id) }}" method="POST" onsubmit="return confirm('¿Quitar este producto del carrito?');">
-                                                @csrf
-                                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-3">Eliminar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card shadow-sm p-4 bg-white border-0 rounded-4">
-                        <h4 class="fw-bold mb-3 text-dark">Resumen</h4>
-                        <div class="d-flex justify-content-between mb-4 fs-5">
-                            <span class="text-muted">Total:</span>
-                            <span class="fw-bold text-success fs-3">${{ number_format($total, 0, ',', '.') }}</span>
-                        </div>
-                        
-                        <form action="{{ route('carrito.comprar') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-dark w-100 btn-lg py-3 rounded-3 fw-bold">Continuar con la Compra</button>
-                        </form>
-                        
-                        <a href="{{ url('/catalogo') }}" class="btn btn-outline-secondary w-100 mt-2 rounded-3">Seguir mirando</a>
-                    </div>
-                </div>
+            <div class="p-5 text-center contenedor-blanco">
+                <i class="bi bi-cart-x text-muted" style="font-size: 4rem;"></i>
+                <h3 class="mt-3 text-dark">Tu carrito está vacío</h3>
+                <p class="text-muted">¡Date una vuelta por el catálogo para ver los ingresos de temporada!</p>
+                <a href="{{ url('/main') }}" class="btn btn-primary fw-bold px-4 mt-2">Ver Catálogo de Ropa</a>
             </div>
         @endif
-    </main>
 
-    @include('footer')
+    </div>
 
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    @include('footer')
+
 </body>
 </html>

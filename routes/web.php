@@ -116,7 +116,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // --- CARRITO DE COMPRAS ---
 
-Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
+Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index');
 Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
-Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
-Route::post('/carrito/comprar', [CarritoController::class, 'procesarCompra'])->name('carrito.comprar');
+Route::post('/carrito/restar/{id}', [CarritoController::class, 'restar'])->name('carrito.restar');
+Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+Route::get('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
