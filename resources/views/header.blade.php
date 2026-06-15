@@ -103,19 +103,16 @@
                         Ropas
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="/catalogoM">Masculino</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/catalogoChaleco">Chaleco</a></li>
-                                <li><a class="dropdown-item" href="/catalogoChaleco">Pantalones</a></li>
-                                <li><a class="dropdown-item" href="/catalogoChaleco">Buzos</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="dropdown-item" href="/catalogoF">Femenino</a></li>
-                        <li><a class="dropdown-item" href="/catalogoN">Niños</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/catalogo">Otros</a></li>
-                    </ul>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item" href="{{ route('catalogo.index', ['genero' => 'Masculino']) }}">Masculino</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('catalogo.index', ['genero' => 'Femenino']) }}">Femenino</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('catalogo.index', ['genero' => 'Unisex']) }}">Unisex</a>
+                    </li>
+                </ul>
                 </li>
             </ul>
 
