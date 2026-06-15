@@ -8,7 +8,12 @@ use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\CarritoController;
 
-// --- VISTAS PRINCIPALES ---
+// --- VISTAS PRINCIPALES (RETORNO DIRECTO A TU VISTA 'main') ---
+
+// Tanto la raíz como '/main' ahora cargan la vista directa sin pasar por el controlador
+Route::get('/', function () {
+    return view('main');
+})->name('main.home');
 
 Route::get('/main', function () {
     return view('main');
@@ -33,9 +38,6 @@ Route::get('/terminosYCondiciones', function () {
 Route::get('/consultas', function () { return view('consultas'); });
 Route::post('/consultas', [ConsultaController::class, 'store']);
 
-//Route::get('/consultas', function () {
-  //  return view('consultas');
-//})->name('consultas.index'); // Agregamos un nombre para usarlo fácilmente
 
 // --- CATÁLOGOS PÚBLICOS ---
 
@@ -53,23 +55,23 @@ Route::get('/catalogoChaleco', function () {
     return view('catalogoChaleco');
 });
 
+
 // --- PRODUCTOS INDIVIDUALES (DETALLE DE INTERFAZ ÚNICA PARA CLIENTES) ---
 Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');
 
 
-// --- LADO ADMINISTRADOR (GESTIÓN INTERNA) ---
+// --- LADO ADMINISTRADOR (GESTIÓN DE INVENTARIO - SE MANTIENE INTACTO) ---
 
-// 1. Ver la tabla con todas las consultas (Usa el controlador para traer los datos)
-Route::get('/gestionConsultas', [ConsultaController::class, 'index'])->name('admin.consultas.index');
-
-// 2. Procesar la respuesta del Administrador (Cambia el estado a respondido)
-//Route::put('/gestionConsultas/{id}/responder', [ConsultaController::class, 'responder'])->name('admin.consultas.responder');
-
-// Tabla de control de inventario (Productos)
-Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
+// Muestra el formulario para cargar un nuevo producto (Solución al Error 404 al presionar el botón)
+Route::get('/createProducto', function () {
+    return view('admin.createProducto');
+})->name('productos.create');
 
 // Guardar nuevo producto
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
+
+// Tabla de control de inventario
+Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
 
 // Formulario de edición para el Administrador
 Route::get('/updateProducto/{id}', [ProductoController::class, 'edit'])->name('productos.edit');
@@ -83,7 +85,7 @@ Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstad
 // Ver tabla de ventas/compras para el Administrador
 Route::get('/admin/compras', [ProductoController::class, 'verCompras'])->name('admin.compras');
 
-// Ver tabla de usuarios registrados (Mapeado a /verUsuarios)
+// Ver tabla de usuarios registrados
 Route::get('/verUsuarios', [ProductoController::class, 'verUsuarios'])->name('admin.usuarios');
 
 
@@ -97,6 +99,7 @@ Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cue
 Route::get('/gestionConsultas', [ConsultaController::class, 'index'])->name('admin.consultas.index');
 Route::post('/gestionConsultas/{id}/responder', [ConsultaController::class, 'responder'])->name('admin.consultas.responder');
 
+
 // --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
 
 Route::get('/login', function () {
@@ -107,7 +110,6 @@ Route::get('/registro', function () {
     return view('registro');
 });
 
-// Procesamiento de login y logout
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

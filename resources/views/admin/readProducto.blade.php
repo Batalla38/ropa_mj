@@ -24,7 +24,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded shadow-sm">
             <h2 class="fw-bold text-dark mb-0">Control de Stock e Inventario</h2>
-            <a href="/createProducto" class="btn btn-primary fw-bold rounded-pill px-4">+ Cargar Nuevo Producto</a>
+            <a href="{{ route('productos.create') }}" class="btn btn-primary fw-bold rounded-pill px-4">+ Cargar Nuevo Producto</a>
         </div>
 
         @if(session('success'))

@@ -54,7 +54,7 @@ class Producto extends Model
                     $value = str_replace('images/', '', $value);
                 }
 
-                // Retorna la URL pública absoluta (ej: http://ropa_mj.test/images/nombre.jpg)
+                // Retorna la URL pública absoluta
                 return asset('images/' . $value);
             }
         );
