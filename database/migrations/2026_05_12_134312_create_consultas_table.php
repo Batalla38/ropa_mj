@@ -6,29 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('consultas', function (Blueprint $table) {
             $table->id();
             $table->string('correo');
-            $table->string('tipoConsul', 30);
-            $table->string('descripcion', 300);
+            $table->string('tipoConsul', 50);
+            $table->string('descripcion', 300); // Límite estricto en BD
             $table->text('respuesta')->nullable(); 
-            $table->string('estado')->default('Pendiente'); // <--- AGREGÁ ESTA LÍNEA ACÁ
+            $table->string('estado')->default('Pendiente'); // Nace como Pendiente siempre
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('consultas');

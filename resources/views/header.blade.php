@@ -145,7 +145,7 @@
                                 <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
                                 <li><a class="dropdown-item" href="{{ route('productos.index') }}">📦 Productos</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.usuarios') }}">💰 Gestionar Ventas</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/consultas') }}">💬 Gestionar Consultas</a></li>
+                                <li><a class="dropdown-item" href="{{ url('/gestionConsultas') }}">💬 Gestionar Consultas</a></li>
                                 <li><hr class="dropdown-divider"></li>
                             @endif
 
@@ -164,7 +164,7 @@
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                     <button class="btn btn-outline-dark" type="submit">Search</button>
-                </</form>
+                </form>
 
             </div>
 

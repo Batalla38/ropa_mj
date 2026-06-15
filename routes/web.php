@@ -30,9 +30,12 @@ Route::get('/terminosYCondiciones', function () {
     return view('terminosYCondiciones');
 });
 
-Route::get('/consultas', function () {
-    return view('consultas');
-})->name('consultas.index'); // Agregamos un nombre para usarlo fácilmente
+Route::get('/consultas', function () { return view('consultas'); });
+Route::post('/consultas', [ConsultaController::class, 'store']);
+
+//Route::get('/consultas', function () {
+  //  return view('consultas');
+//})->name('consultas.index'); // Agregamos un nombre para usarlo fácilmente
 
 // --- CATÁLOGOS PÚBLICOS ---
 
@@ -60,7 +63,7 @@ Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('product
 Route::get('/gestionConsultas', [ConsultaController::class, 'index'])->name('admin.consultas.index');
 
 // 2. Procesar la respuesta del Administrador (Cambia el estado a respondido)
-Route::put('/gestionConsultas/{id}/responder', [ConsultaController::class, 'responder'])->name('admin.consultas.responder');
+//Route::put('/gestionConsultas/{id}/responder', [ConsultaController::class, 'responder'])->name('admin.consultas.responder');
 
 // Tabla de control de inventario (Productos)
 Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
@@ -91,6 +94,8 @@ Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas
 Route::post('/enviar-consulta', [ConsultaController::class, 'store']);
 Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cuenta.procesar');
 
+Route::get('/gestionConsultas', [ConsultaController::class, 'index'])->name('admin.consultas.index');
+Route::post('/gestionConsultas/{id}/responder', [ConsultaController::class, 'responder'])->name('admin.consultas.responder');
 
 // --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
 

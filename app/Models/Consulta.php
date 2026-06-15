@@ -9,32 +9,26 @@ class Consulta extends Model
 {
     use HasFactory;
 
-    // Opciones para los tipos de consulta disponibles en el sistema
-    public const TIPOS = [
-        'Presupuesto',
-        'Envios',
-        'Productos',
-        'Stock',
-    ];
-
-    // Nombre de la tabla en la base de datos
     protected $table = 'consultas';
 
-    // Campos que permitimos que se carguen de manera masiva (Mass Assignment)
-    // Agregamos 'estado' para poder controlar si está Pendiente o Respondido
+    // Campos que se pueden llenar en masa (create / update)
     protected $fillable = [
-        'correo', 
-        'tipoConsul', 
+        'correo',
+        'tipoConsul',
         'descripcion',
         'respuesta',
-        'estado'
+        'estado',
     ];
 
-    // Casteo de Atributos (se mantiene limpio por ahora)
-    protected $casts = [
-        // 'correo' => 'string',
-        // 'tipoConsul' => 'string',
-        // 'descripcion' => 'text',    
+    // Activar timestamps (created_at y updated_at)
+    public $timestamps = true;
+
+    // Opcional: valores posibles de tipos de consulta
+    const TIPOS = [
+        'Presupuestos y cotizaciones',
+        'Envios',
+        'Devoluciones y cambios',
+        'Stock',
+        'Otros'
     ];
 }
-
