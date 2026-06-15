@@ -7,16 +7,47 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\CarritoController;
+use App\Models\Producto;
 
-// --- VISTAS PRINCIPALES (RETORNO DIRECTO A TU VISTA 'main') ---
+// --- VISTAS PRINCIPALES (MODIFICADO: Ahora cargan los productos para la página principal) ---
 
-// Tanto la raíz como '/main' ahora cargan la vista directa sin pasar por el controlador
 Route::get('/', function () {
-    return view('main');
+    // Tomamos 4 productos activos al azar o los últimos cargados para la sección destacados
+    $destacados = Producto::where('activo', 1)->latest()->take(4)->get();
+
+    // Filtramos productos que contengan 'Hombre' o 'Masculino' en su atributo género
+    $productosHombre = Producto::where('activo', 1)
+        ->where(function($query) {
+            $query->where('genero', 'LIKE', '%Hombre%')
+                  ->orWhere('genero', 'LIKE', '%Masculino%');
+        })->take(4)->get();
+
+    // Filtramos productos que contengan 'Mujer' o 'Femenino' en su atributo género
+    $productosMujer = Producto::where('activo', 1)
+        ->where(function($query) {
+            $query->where('genero', 'LIKE', '%Mujer%')
+                  ->orWhere('genero', 'LIKE', '%Femenino%');
+        })->take(4)->get();
+
+    return view('main', compact('destacados', 'productosHombre', 'productosMujer'));
 })->name('main.home');
 
 Route::get('/main', function () {
-    return view('main');
+    $destacados = Producto::where('activo', 1)->latest()->take(4)->get();
+
+    $productosHombre = Producto::where('activo', 1)
+        ->where(function($query) {
+            $query->where('genero', 'LIKE', '%Hombre%')
+                  ->orWhere('genero', 'LIKE', '%Masculino%');
+        })->take(4)->get();
+
+    $productosMujer = Producto::where('activo', 1)
+        ->where(function($query) {
+            $query->where('genero', 'LIKE', '%Mujer%')
+                  ->orWhere('genero', 'LIKE', '%Femenino%');
+        })->take(4)->get();
+
+    return view('main', compact('destacados', 'productosHombre', 'productosMujer'));
 })->name('main');
 
 Route::get('/contacto', function () {
@@ -62,30 +93,22 @@ Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('product
 
 // --- LADO ADMINISTRADOR (GESTIÓN DE INVENTARIO - SE MANTIENE INTACTO) ---
 
-// Muestra el formulario para cargar un nuevo producto (Solución al Error 404 al presionar el botón)
 Route::get('/createProducto', function () {
     return view('admin.createProducto');
 })->name('productos.create');
 
-// Guardar nuevo producto
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
 
-// Tabla de control de inventario
 Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
 
-// Formulario de edición para el Administrador
 Route::get('/updateProducto/{id}', [ProductoController::class, 'edit'])->name('productos.edit');
 
-// Procesamiento de la actualización de datos (PUT)
 Route::put('/updateProducto/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
-// Acción de baja lógica (PATCH)
 Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstado'])->name('productos.estado');
 
-// Ver tabla de ventas/compras para el Administrador
 Route::get('/admin/compras', [ProductoController::class, 'verCompras'])->name('admin.compras');
 
-// Ver tabla de usuarios registrados
 Route::get('/verUsuarios', [ProductoController::class, 'verUsuarios'])->name('admin.usuarios');
 
 
