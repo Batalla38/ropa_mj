@@ -110,23 +110,76 @@
                     </h2>
                 </div>
 
-        </div>
-
-        <div class="container mt-5 mb-5">
-            <div class="row g-0 p-4 rounded-4" style="background-color: #c1a391ef;">
-                <h1 class="display-5 text-black text-center mb-4 fw-bold text-uppercase">
-                    <p class="bg-personalizado text-black p-3 text-center shadow-sm"><strong>{{ $config['titulo_masculino'] ?? 'Colección de Hombres' }}</strong></p>
-                </h1>
-
+                @forelse($destacados as $prod)
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card card-animada h-100 bg-white shadow-sm text-center">
+                            <img src="{{ $prod->url_imagen }}" class="card-img-top" alt="{{ $prod->nombre }}">
+                            <div class="card-body d-flex flex-column justify-content-between text-dark">
+                                <h5 class="card-title fw-bold text-truncate mb-1">{{ $prod->nombre }}</h5>
+                                <p class="card-text text-success fw-bold fs-5 mb-3">${{ number_format($prod->precio, 2, ',', '.') }}</p>
+                                <a href="{{ route('producto.show', $prod->id) }}" class="btn btn-dark w-100 rounded-pill fw-bold">Ver Prenda</a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center text-dark fw-bold">No hay artículos destacados disponibles en este momento.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
 
         <div class="container mt-5 mb-5">
-            <div class="row g-0 p-4 rounded-4" style="background-color: #c1a391ef;">
-                <h1 class="display-5 text-black text-center mb-4 fw-bold text-uppercase">
-                    <p class="bg-personalizado text-black p-3 text-center shadow-sm"><strong>{{ $config['titulo_femenino'] ?? 'Colección de Mujeres' }}</strong></p>
-                </h1>
+            <div class="row g-4 p-4 rounded-4" style="background-color: #c1a391ef;">
+                <div class="col-12">
+                    <h1 class="display-5 text-black text-center mb-4 fw-bold text-uppercase">
+                        <p class="bg-personalizado text-black p-3 text-center shadow-sm"><strong>{{ $config['titulo_masculino'] ?? 'Colección de Hombres' }}</strong></p>
+                    </h1>
+                </div>
 
+                @forelse($productosHombre as $prod)
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card card-animada h-100 bg-white shadow-sm text-center">
+                            <img src="{{ $prod->url_imagen }}" class="card-img-top" alt="{{ $prod->nombre }}">
+                            <div class="card-body d-flex flex-column justify-content-between text-dark">
+                                <h5 class="card-title fw-bold text-truncate mb-1">{{ $prod->nombre }}</h5>
+                                <p class="card-text text-success fw-bold fs-5 mb-3">${{ number_format($prod->precio, 2, ',', '.') }}</p>
+                                <a href="{{ route('producto.show', $prod->id) }}" class="btn btn-dark w-100 rounded-pill fw-bold">Ver Prenda</a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center text-dark fw-bold">Próximamente más productos para hombres.</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <div class="row g-4 p-4 rounded-4" style="background-color: #c1a391ef;">
+                <div class="col-12">
+                    <h1 class="display-5 text-black text-center mb-4 fw-bold text-uppercase">
+                        <p class="bg-personalizado text-black p-3 text-center shadow-sm"><strong>{{ $config['titulo_femenino'] ?? 'Colección de Mujeres' }}</strong></p>
+                    </h1>
+                </div>
+
+                @forelse($productosMujer as $prod)
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card card-animada h-100 bg-white shadow-sm text-center">
+                            <img src="{{ $prod->url_imagen }}" class="card-img-top" alt="{{ $prod->nombre }}">
+                            <div class="card-body d-flex flex-column justify-content-between text-dark">
+                                <h5 class="card-title fw-bold text-truncate mb-1">{{ $prod->nombre }}</h5>
+                                <p class="card-text text-success fw-bold fs-5 mb-3">${{ number_format($prod->precio, 2, ',', '.') }}</p>
+                                <a href="{{ route('producto.show', $prod->id) }}" class="btn btn-dark w-100 rounded-pill fw-bold">Ver Prenda</a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center text-dark fw-bold">Próximamente más productos para mujeres.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
 
@@ -154,7 +207,6 @@
         </div>
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
 
         <div class="mt-3">
             @include('footer')
