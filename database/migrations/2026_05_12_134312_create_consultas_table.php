@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('correo');
             $table->string('tipoConsul', 30);
-            $table->string('descripcion',300);
+            $table->string('descripcion', 300);
             $table->text('respuesta')->nullable(); 
+            $table->string('estado')->default('Pendiente'); // <--- AGREGÁ ESTA LÍNEA ACÁ
             $table->timestamps();
         });
     }

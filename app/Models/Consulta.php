@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consulta extends Model
 {
-    // Definimos las opciones aquí
+    use HasFactory;
+
+    // Opciones para los tipos de consulta disponibles en el sistema
     public const TIPOS = [
         'Presupuesto',
         'Envios',
@@ -15,20 +17,24 @@ class Consulta extends Model
         'Stock',
     ];
 
+    // Nombre de la tabla en la base de datos
     protected $table = 'consultas';
+
+    // Campos que permitimos que se carguen de manera masiva (Mass Assignment)
+    // Agregamos 'estado' para poder controlar si está Pendiente o Respondido
     protected $fillable = [
         'correo', 
         'tipoConsul', 
         'descripcion',
-        'respuesta'
+        'respuesta',
+        'estado'
     ];
 
-    //Casteo de Atributos
+    // Casteo de Atributos (se mantiene limpio por ahora)
     protected $casts = [
-    //'correo' => 'string',
-    //'tipoConsul' => 'string',
-    //'descripcion' => 'text',    
-     ];
+        // 'correo' => 'string',
+        // 'tipoConsul' => 'string',
+        // 'descripcion' => 'text',    
+    ];
 }
-
 

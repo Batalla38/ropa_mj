@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <title>Quienes Somos</title>
-        <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+        <meta charset="UTF-8">
+        <title>Quienes Somos / Preguntas Frecuentes</title>
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <style>
-            /* Estilos globales aplicados al cuerpo del documento */
             body {
-                background-color: #c1a391; /* Color de fondo definido por el usuario */
-                color: #9f9393;           /* Color de fuente definido por el usuario */
-            }
-            body {
-                background-image: url(bg1.png);
+                background-color: #c1a391; 
+                color: #9f9393;           
+                background-image: url("{{ asset('bg1.png') }}");
                 background-repeat: repeat;
-                background-size: 700px; /* Aquí controlas el tamaño */
+                background-size: 700px; 
             }
         </style>
     </head>
     <body>
-        <!-- header -->
-        <div class="container mt-3 mb-4" >
+        
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+        <div class="container mt-3 mb-4">
             @include('header')
         </div>
 
         <div class="container mt-5">
-            <div class="card p-4">
-                <p class="h1">Preguntas Frecuentes</p>
+            <div class="card p-4 text-dark"> <p class="h1">Preguntas Frecuentes</p>
                 <hr>
 
                 <div class="mb-5">
@@ -70,13 +70,11 @@
                     </p>
                 </div>
 
-                <!-- Sección de Formulario de Preguntas -->
                 <div class="container mt-4">
 
-                   <!-- MENSAJE DE ÉXITO EMERGENTE (TOAST) -->
                     @if(session('exito'))
                         <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1100;">
-                            <div id="liveToast" class="toast align-items-center text-white bg-success border-0 show p-3" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 350px; mt-3;">
+                            <div id="liveToast" class="toast align-items-center text-white bg-success border-0 show p-3" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 350px; margin-top: 20px;">
                                 <div class="d-flex align-items-center">
                                     <div class="toast-body fs-4 fw-bold text-center w-100">
                                         <i class="bi bi-check-circle-fill me-2 fs-3"></i> ¡Se ha enviado con éxito!
@@ -86,52 +84,49 @@
                             </div>
                         </div>
 
-
                         <script>
-                            // Oculta automáticamente la notificación después de 4 segundos
+                            // Ahora que Bootstrap cargó arriba, este script funciona nativamente sin errores
                             setTimeout(function() {
                                 var toastEl = document.getElementById('liveToast');
                                 if (toastEl) {
                                     var toast = new bootstrap.Toast(toastEl);
                                     toast.hide();
                                 }
-                            }, 8000);
+                            }, 4000); // Reducido a 4 segundos razonables de lectura
                         </script>
                     @endif
 
+                    <h3 class="mb-3 text-dark">Dejanos tu consulta</h3>
 
-                    <h3 class="mb-3">Preguntas</h3>
+                    <!-- Cambiá la línea 101 por esta -->
+                    <form action="{{ url('/consultas') }}" method="POST" autocomplete="off">
 
-                    <form action="/consultas" method="POST">
-                    @csrf
-                        <div class="row g-2 align-items-center">
+                        @csrf
+                        
+                        <div class="mb-3">
+                            <label class="form-label text-dark fw-bold">Ingrese su Correo</label>
+                            <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com" required>
+                        </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Ingrese su Correo</label>
-                                <input type="email" name="correo" class="form-control" placeholder="name@example.com" required>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label text-dark fw-bold">Tipo de Consulta:</label>
+                            <select name="tipoConsul" class="form-control" required>
+                                <option value="">Seleccione una opción</option>
+                                @foreach(App\Models\Consulta::TIPOS as $tipo)
+                                    <option value="{{ $tipo }}">{{ $tipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Tipo de Consulta:</label>
-                                <select name="tipoConsul" class="form-control" required>
-                                    <option value="">Seleccione una opción</option>
-                                    @foreach(App\Models\Consulta::TIPOS as $tipo)
-                                        <option value="{{ $tipo }}">{{ $tipo }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label text-dark fw-bold">Tu Pregunta:</label>
+                            <textarea name="descripcion" class="form-control" rows="4" placeholder="Escribí tu pregunta aquí (máximo 300 caracteres)..." required></textarea>
+                        </div>
 
-                            <div class="col">
-                                <label class="form-label">Tu Pregunta:</label>
-                                <input type="text" name="descripcion" class="form-control form-control-lg" placeholder="Escribí tu pregunta..." required>
-                            </div>
-
-                            <div class="col-auto align-self-end">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    <i class="bi bi-stars me-2"></i> Preguntar
-                                </button>
-                            </div>
-
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary btn-lg px-4">
+                                <i class="bi bi-stars me-2"></i> Enviar Pregunta
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -139,9 +134,7 @@
             </div>
         </div>
 
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-        <div class="mt-3">
+        <div class="mt-5">
             @include('footer')
         </div>
     </body>
