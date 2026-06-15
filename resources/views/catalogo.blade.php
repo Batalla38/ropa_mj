@@ -3,6 +3,7 @@
 <head>
     <title>Ropa MJ - Catálogo</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         body {
             background-color: #c1a391;
@@ -72,6 +73,20 @@
 
 <body>
 
+    @if(session('exito'))
+        <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; z-index: 9999;">
+            <div class="alert alert-success alert-dismissible fade show shadow-lg border-0 p-3" role="alert" style="border-radius: 15px; background-color: #d1e7dd; color: #0f5132;">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                    <div>
+                        <strong class="fs-5">¡Excelente!</strong><br>
+                        {{ session('exito') }}
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="top: 22px;"></button>
+            </div>
+        </div>
+    @endif
     <div class="container mt-3 mb-4">
         @include('header')
     </div>
@@ -120,19 +135,16 @@
                             <div class="col-md-4">
                                 <div class="card h-100 shadow-sm border-0 card-animada">
 
-                                    <!-- 1. Imagen (Redirige al detalle) -->
                                     <div class="img-container-custom" onclick="window.location.href='{{ route('producto.show', $producto->id) }}'">
                                         <img src="{{ asset($producto->url_imagen) }}" class="card-img-custom" alt="{{ $producto->nombre }}">
                                     </div>
 
-                                    <!-- 2. Información del Producto (Redirige al detalle) -->
                                     <div class="card-body text-center mt-2" onclick="window.location.href='{{ route('producto.show', $producto->id) }}'">
                                         <h5 class="text-dark fw-bold mb-1">{{ $producto->nombre }}</h5>
                                         <p class="text-muted small mb-1">Talles: <span class="badge bg-secondary">{{ $producto->talle }}</span></p>
                                         <p class="text-black fw-bold fs-5 mb-0">${{ number_format($producto->precio, 0, ',', '.') }}</p>
                                     </div>
 
-                                    <!-- 3. NUEVO: Formulario para Agregar al Carrito (Aislado y Seguro) -->
                                     <div class="p-3 pt-0">
                                         <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
                                             @csrf
@@ -145,7 +157,6 @@
                                 </div>
                             </div>
                         @empty
-                            <!-- Bloque de no se encontraron productos (Queda igual) -->
                             <div class="col-12 text-center py-5">
                                 <div class="p-5 bg-white border rounded rounded-4 shadow-sm">
                                     <h4 class="text-dark fw-bold">No se encontraron productos</h4>

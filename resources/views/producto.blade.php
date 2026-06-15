@@ -57,24 +57,26 @@
 
         @include('header')
 
-        <div class="container pt-5 mt-2">
-            @if(session('success') || request()->get('check') == 1)
-                <div class="alert alert-success alert-dismissible fade show text-center fw-bold shadow-sm" role="alert">
-                    <i class="bi bi-cart-plus-fill me-2"></i> ¡Excelente! Producto agregado al carrito.
-                    <a href="{{ route('carrito.ver') }}" class="alert-link text-decoration-underline ms-2 text-success">Ver mi carrito →</a>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; z-index: 9999;">
+            
+            {{-- Cartel de Éxito (Soporta 'success' o 'exito') --}}
+            @if(session('success') || session('exito') || request()->get('check') == 1)
+                <div class="alert alert-success alert-dismissible fade show text-center fw-bold shadow-lg border-0 p-3" role="alert" style="border-radius: 15px; background-color: #d1e7dd; color: #0f5132;">
+                    <i class="bi bi-cart-plus-fill me-2 fs-5"></i> ¡Excelente! Producto agregado al carrito.
+                    <a href="{{ route('carrito.index') }}" class="alert-link text-decoration-underline ms-2 text-success">Ver mi carrito →</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="top: 18px;"></button>
                 </div>
             @endif
 
+            {{-- Cartel de Error de Stock --}}
             @if($errors->has('stock_error'))
-                <div class="alert alert-warning alert-dismissible fade show fw-bold shadow-sm" role="alert">
+                <div class="alert alert-warning alert-dismissible fade show fw-bold shadow-lg border-0 p-3" role="alert" style="border-radius: 15px;">
                     <i class="bi bi-exclamation-diamond-fill me-2"></i> {{ $errors->first('stock_error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="top: 18px;"></button>
                 </div>
             @endif
         </div>
-
-        <div class="container mt-2 mb-5">
+        <div class="container mt-2 mb-5" style="padding-top: 100px;">
             <h2 class="text-center mb-4 text-dark fw-bold">Detalle del Producto</h2>
 
             <div class="row g-4">
@@ -89,11 +91,11 @@
                             <div class="carousel-inner d-flex align-items-center">
 
                                 <div class="carousel-item active">
-                                    <img src="{{ $producto->url_imagen }}" class="d-block img-fluid w-75 mx-auto rounded-3 shadow" alt="{{ $producto->nombre }}">
+                                    <img src="{{ asset($producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3 shadow" alt="{{ $producto->nombre }}">
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="{{ $producto->url_imagen }}" class="d-block img-fluid w-75 mx-auto rounded-3 shadow" alt="Vista alternativa">
+                                    <img src="{{ asset($producto->url_imagen) }}" class="d-block img-fluid w-75 mx-auto rounded-3 shadow" alt="Vista alternativa">
                                 </div>
 
                             </div>
@@ -159,7 +161,6 @@
                             <div class="mb-4">
                                 <div class="label-title">Talle Seleccionado</div>
                                 <div class="d-flex flex-wrap gap-2 mt-2">
-                                    {{-- Separamos los talles por coma dinámicamente si vienen varios, sino muestra el talle único --}}
                                     @php
                                         $tallesArray = !empty($producto->talle) ? explode(', ', $producto->talle) : ['Único'];
                                     @endphp
@@ -185,7 +186,7 @@
                                     <button type="submit" class="btn btn-dark btn-lg fw-bold py-3 shadow-sm">
                                         <i class="bi bi-cart-plus me-2"></i> Agregar al Carrito
                                     </button>
-                                From @else
+                                @else
                                     <button type="button" class="btn btn-secondary btn-lg py-3 disabled" disabled>
                                         🚫 Sin Stock Temporal
                                     </button>
@@ -213,6 +214,7 @@
                 }
             }
 
+            // Corregí la palabra extraña "label工作" que andaba colgada en tu talle general
             function decrease() {
                 let input = document.getElementById("cantidad");
                 if (parseInt(input.value) > 1) {

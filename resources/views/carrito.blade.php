@@ -39,7 +39,7 @@
         </div>
 
         @if(session('exito'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show shadow-sm mb-4" role="alert" style="border-radius: 8px;">
                 <strong>¡Hecho!</strong> {{ session('exito') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -47,77 +47,86 @@
 
         @if(count($carrito) > 0)
             <div class="p-4 contenedor-blanco">
-                <table class="table align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Imagen</th>
-                            <th>Prenda</th>
-                            <th>Precio</th>
-                            <th class="text-center">Cantidad</th>
-                            <th>Subtotal</th>
-                            <th class="text-center">Quitar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $totalGeneral = 0; @endphp
-                        @foreach($carrito as $id => $item)
-                            @php 
-                                $subtotal = $item['precio'] * $item['cantidad']; 
-                                $totalGeneral += $subtotal;
-                            @endphp
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead class="table-dark">
                             <tr>
-                                <td>
-                                    <img src="{{ asset('storage/' . $item['url_imagen']) }}" alt="{{ $item['nombre'] }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
-                                </td>
-                                <td><strong>{{ $item['nombre'] }}</strong></td>
-                                <td>${{ number_format($item['precio'], 2, ',', '.') }}</td>
-                                <td class="text-center">
-                                    <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <form action="{{ route('carrito.restar', $id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">-</button>
-                                        </form>
-                                        
-                                        <span class="fw-bold fs-5 px-2">{{ $item['cantidad'] }}</span>
-                                        
-                                        <form action="{{ route('carrito.agregar', $id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">+</button>
-                                        </form>
-                                    </div>
-                                </td>
-                                <td><strong>${{ number_format($subtotal, 2, ',', '.') }}</strong></td>
-                                <td class="text-center">
-                                    <form action="{{ route('carrito.eliminar', $id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                <th>Imagen</th>
+                                <th>Prenda</th>
+                                <th>Precio</th>
+                                <th class="text-center">Cantidad</th>
+                                <th>Subtotal</th>
+                                <th class="text-center">Quitar</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @php $totalGeneral = 0; @endphp
+                            @foreach($carrito as $id => $item)
+                                @php 
+                                    $subtotal = $item['precio'] * $item['cantidad']; 
+                                    $totalGeneral += $subtotal;
+                                @endphp
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset('storage/' . $item['url_imagen']) }}" alt="{{ $item['nombre'] }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                    </td>
+                                    <td><strong>{{ $item['nombre'] }}</strong></td>
+                                    <td>${{ number_format($item['precio'], 2, ',', '.') }}</td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center align-items-center gap-2">
+                                            <form action="{{ route('carrito.restar', $id) }}" method="POST" class="m-0">
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">-</button>
+                                            </form>
+                                            
+                                            <span class="fw-bold fs-5 px-2">{{ $item['cantidad'] }}</span>
+                                            
+                                            <form action="{{ route('carrito.agregar', $id) }}" method="POST" class="m-0">
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">+</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td><strong>${{ number_format($subtotal, 2, ',', '.') }}</strong></td>
+                                    <td class="text-center">
+                                        <form action="{{ route('carrito.eliminar', $id) }}" method="POST" class="m-0">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger rounded-3">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
                 <hr class="my-4">
 
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <a href="{{ route('carrito.vaciar') }}" class="btn btn-outline-danger fw-bold">
-                            <i class="bi bi-x-circle me-2"></i>Vaciar Carrito
-                        </a>
+                <!-- Fila de acciones y totales perfectamente balanceada -->
+                <div class="row align-items-center g-3">
+                    <div class="col-md-6 text-center text-md-start">
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('carrito.vaciar') }}" class="btn btn-outline-danger px-3" style="border-radius: 8px;">
+                                <i class="bi bi-x-circle me-1"></i> Vaciar Carrito
+                            </a>
+
+                            <a href="{{ route('catalogo.index') }}" class="btn btn-outline-dark fw-bold px-3" style="border-radius: 8px;">
+                                <i class="bi bi-arrow-left me-1"></i> Agregar más productos
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-md-6 text-end">
-                        <h3 class="mb-3">Total General: <span class="text-success fw-bold">${{ number_format($totalGeneral, 2, ',', '.') }}</span></h3>
+                    <div class="col-md-6 text-center text-md-end">
+                        <h3 class="mb-3">Total: <span class="text-success fw-bold">${{ number_format($totalGeneral, 2, ',', '.') }}</span></h3>
                         
                         @if(session()->has('user_id'))
-                            <a href="{{ url('/finalizar-compra') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm">
+                            <a href="{{ url('/finalizar-compra') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm" style="border-radius: 8px;">
                                 <i class="bi bi-credit-card-2-back me-2"></i>Iniciar Pago
                             </a>
                         @else
-                            <div class="alert alert-warning d-inline-block text-start mb-0">
+                            <div class="alert alert-warning d-inline-block text-start mb-0" style="border-radius: 8px;">
                                 <i class="bi bi-exclamation-triangle-fill me-2"></i> Debes <a href="{{ url('/login') }}" class="fw-bold">Iniciar Sesión</a> para poder comprar.
                             </div>
                         @endif
@@ -129,7 +138,7 @@
                 <i class="bi bi-cart-x text-muted" style="font-size: 4rem;"></i>
                 <h3 class="mt-3 text-dark">Tu carrito está vacío</h3>
                 <p class="text-muted">¡Date una vuelta por el catálogo para ver los ingresos de temporada!</p>
-                <a href="{{ url('/main') }}" class="btn btn-primary fw-bold px-4 mt-2">Ver Catálogo de Ropa</a>
+                <a href="{{ route('catalogo.index') }}" class="btn btn-primary fw-bold px-4 mt-2" style="border-radius: 8px;">Ver Catálogo de Ropa</a>
             </div>
         @endif
 

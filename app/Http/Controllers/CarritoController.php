@@ -8,56 +8,61 @@ use App\Models\Producto;
 class CarritoController extends Controller
 {
     // 1. Ver el contenido del carrito
+    // Cambiamos el nombre a index para que coincida con tu ruta vieja
     public function index()
     {
-        // Trae lo que haya en la sesión, si no hay nada inicializa un array vacío []
         $carrito = session()->get('carrito', []);
-
-        // Mandamos a la vista ÚNICAMENTE la variable 'carrito' de forma correcta
         return view('carrito', compact('carrito'));
     }
 
-    // 2. Agregar un producto o sumar cantidad
+    // 1. Método para agregar (soporta el catálogo y el botón + del carrito)
     public function agregar(Request $request, $id)
     {
-        // Buscamos el producto usando tu clave real: id
-        $producto = Producto::findOrFail($id);
         $carrito = session()->get('carrito', []);
 
-        if(isset($carrito[$id])) {
+        // Si el producto ya existe en el carrito, solo le sumamos 1 a la cantidad
+        if (isset($carrito[$id])) {
             $carrito[$id]['cantidad']++;
         } else {
-            // Mapeamos con 'url_imagen' que es tu columna real
+            // Si no existe, es porque viene desde el catálogo/detalle por primera vez
+            $producto = Producto::findOrFail($id);
+            
+            // Tomamos la cantidad que venga del formulario, si no viene ninguna (catálogo), por defecto es 1
+            $cantidadInicial = $request->input('cantidad', 1);
+
             $carrito[$id] = [
                 "nombre" => $producto->nombre,
-                "cantidad" => 1,
+                "cantidad" => $cantidadInicial,
                 "precio" => $producto->precio,
-                "url_imagen" => $producto->url_imagen 
+                "url_imagen" => $producto->url_imagen
             ];
         }
 
         session()->put('carrito', $carrito);
-        return redirect()->back()->with('exito', 'Producto añadido al carrito.');
+        return redirect()->back()->with('exito', 'Carrito actualizado correctamente.');
     }
 
-    // 3. Restar cantidad
+    // 2. Método para el botón "-"
     public function restar($id)
     {
         $carrito = session()->get('carrito', []);
 
-        if(isset($carrito[$id])) {
-            if($carrito[$id]['cantidad'] > 1) {
+        if (isset($carrito[$id])) {
+            // Si hay más de una unidad, restamos 1
+            if ($carrito[$id]['cantidad'] > 1) {
                 $carrito[$id]['cantidad']--;
             } else {
-                unset($carrito[$id]); 
+                // Si queda solo 1 unidad y resta, lo removemos por completo
+                unset($carrito[$id]);
             }
             session()->put('carrito', $carrito);
         }
 
-        return redirect()->back()->with('exito', 'Carrito actualizado.');
+        return redirect()->back()->with('exito', 'Cantidad actualizada.');
     }
 
     // 4. Eliminar un producto completo
+    // El método se tiene que llamar eliminar como dice tu web.php
     public function eliminar($id)
     {
         $carrito = session()->get('carrito', []);
@@ -67,13 +72,15 @@ class CarritoController extends Controller
             session()->put('carrito', $carrito);
         }
 
-        return redirect()->back()->with('exito', 'Producto removido del carrito.');
+        return redirect()->back()->with('exito', 'Producto eliminado del carrito.');
     }
 
     // 5. Vaciar todo el carrito
     public function vaciar()
     {
+        // Limpiamos todo el array del carrito de la sesión
         session()->forget('carrito');
-        return redirect()->route('carrito.index')->with('exito', 'El carrito se vació por completo.');
+
+        return redirect()->back()->with('exito', 'Se vació el carrito correctamente.');
     }
 }
