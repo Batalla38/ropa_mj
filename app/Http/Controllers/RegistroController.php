@@ -51,6 +51,6 @@ use Illuminate\Http\Request;
         }
 
         // 3. REDIRECCIÓN SI EL CARRITO ESTABA VACÍO
-        return redirect('/')->with('status', '¡Tu cuenta ha sido creada con éxito! Bienvenido a Ropa MJ.');
+        return redirect('/main')->with('status', '¡Tu cuenta ha sido creada con éxito! Bienvenido a Ropa MJ.');
     }
 }

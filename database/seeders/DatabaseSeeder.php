@@ -12,15 +12,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Limpiamos la tabla usuarios primero para evitar errores de correos duplicados
-        // Usamos el nombre real de tu tabla: 'usuarios'
+        // 1. Desactivamos las restricciones de claves foráneas para que MySQL nos deje limpiar sin protestar
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+
+        // Limpiamos la tabla usuarios para evitar errores de correos duplicados
         DB::table('usuarios')->truncate();
 
-        // 2. Ejecuta tus seeders ordenadamente
+        // 2. Reactivamos las restricciones de seguridad
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+
+        // 3. Ejecuta tus seeders ordenadamente
+        // CAMBIO: Corregimos el tipeo de 'Categoria' y 'Subcategoria' para que coincidan con tus archivos reales
         $this->call([
             CaegoriaSeeder::class,
             SubcaegoriaSeeder::class,
-            UsuarioSeeder::class, // 👈 Este seeder ahora sí va a correr sin romperse
+            UsuarioSeeder::class, 
         ]);
     }
 }

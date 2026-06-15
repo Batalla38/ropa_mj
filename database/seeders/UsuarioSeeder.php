@@ -12,13 +12,15 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
-        // Insertamos directamente en la tabla 'usuarios' con su estructura real
-        Usuario::create([
-            'nombre' => 'Juan',
-            'apellido' => 'Administrador',
-            'id_rol' => 1, // <-- Usamos el ID numérico de tu columna real
-            'correo' => 'solangemtl88@gmail.com',
-            'contraseña' => bcrypt('clave1234'), // Texto plano sin encriptar como pediste
-        ]);
+        // CAMBIO: Buscamos por correo primero para evitar que se duplique
+        Usuario::firstOrCreate(
+            ['correo' => 'solangemtl88@gmail.com'], // Condición de búsqueda
+            [
+                'nombre' => 'Juan',
+                'apellido' => 'Administrador',
+                'id_rol' => 1, 
+                'contraseña' => bcrypt('clave1234'), 
+            ]
+        );
     }
 }
