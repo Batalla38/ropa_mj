@@ -127,7 +127,7 @@
 
                         <a href="{{ route('catalogo.index') }}" class="btn btn-outline-secondary w-100 rounded-pill py-2">Limpiar Filtros</a>
                     </div>
-                </form> {{-- ✨ NUEVO: Cerramos el formulario de filtros acá, liberando la cuadrícula de productos --}}
+                </form>
             </div>
 
             <div class="col-md-9">
@@ -148,12 +148,19 @@
                                 </div>
 
                                 <div class="p-3 pt-0">
-                                    <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary w-100 fw-bold rounded-pill shadow-sm py-2">
-                                            <i class="bi bi-cart-plus-fill me-2"></i>Agregar al Carrito
+                                    {{-- ✨ CONTROL INTERACTIVO DE STOCK EN EL BOTÓN --}}
+                                    @if($producto->stock > 0)
+                                        <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary w-100 fw-bold rounded-pill shadow-sm py-2">
+                                                <i class="bi bi-cart-plus-fill me-2"></i>Agregar al Carrito
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button type="button" class="btn btn-secondary w-100 fw-bold rounded-pill shadow-sm py-2 opacity-75" disabled>
+                                            <i class="bi bi-dash-circle-fill me-2"></i>Sin Stock
                                         </button>
-                                    </form>
+                                    @endif
                                 </div>
 
                             </div>

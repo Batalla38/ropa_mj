@@ -40,7 +40,8 @@ class registroController extends Controller
         $nuevoUsuario = Usuario::create([
             'nombre'     => $request->input('nombre'),
             'apellido'   => $request->input('apellido'),
-            'id_rol'     => 2, // Se asigna el rol de cliente de forma obligatoria
+            'id_role'     => 2, // Se asigna el rol de cliente de forma obligatoria (Ojo si tu tabla usa id_rol o role_id)
+            'id_rol'     => 2, 
             'correo'     => $request->input('correo'),
             'contraseña' => bcrypt($request->input('password')), 
         ]);
@@ -50,8 +51,9 @@ class registroController extends Controller
         // 1. Respaldamos el carrito que armó como visitante
         $carritoRespaldo = $request->session()->get('carrito', []);
 
-        // 2. Le creamos la sesión manual usando los datos del usuario recién creado
-        $request->session()->put('user_id', $nuevoUsuario->id_usuario); 
+        // 2. Le creamos la sesión manual usando los datos reales del usuario recién creado
+        // ✨ CORRECCIÓN: Usamos ->id en lugar de ->id_usuario para que no quede null
+        $request->session()->put('user_id', $nuevoUsuario->id); 
         $request->session()->put('id_rol', $nuevoUsuario->id_rol);
         $request->session()->put('user_name', $nuevoUsuario->nombre);
 

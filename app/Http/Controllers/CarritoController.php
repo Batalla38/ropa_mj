@@ -22,12 +22,27 @@ class CarritoController extends Controller
     {
         $carrito = session()->get('carrito', []);
 
+        // ✨ NUEVO: Buscamos el producto primero para validar que le quede stock real en la BD
+        $producto = Producto::findOrFail($id);
+
+        // 🚫 VALIDACIÓN CRÍTICA: Si el stock actual es 0, rebota la acción de inmediato
+        if ($producto->stock <= 0) {
+            return redirect()->back()->with('error', 'Lo sentimos, este artículo se encuentra temporalmente sin stock disponible.');
+        }
+
+        // Si ya está en el carrito, controlamos que no pida más de lo que tenemos en góndola
         if (isset($carrito[$id])) {
+            if ($carrito[$id]['cantidad'] >= $producto->stock) {
+                return redirect()->back()->with('error', "No puedes agregar más unidades. El stock máximo disponible es de {$producto->stock} prendas.");
+            }
             $carrito[$id]['cantidad']++;
         } else {
-            $producto = Producto::findOrFail($id);
-
             $cantidadInicial = $request->input('cantidad', 1);
+
+            // Controlamos por seguridad que la cantidad inicial no sea mayor al stock
+            if ($cantidadInicial > $producto->stock) {
+                return redirect()->back()->with('error', "No puedes agregar esa cantidad. El stock disponible es de {$producto->stock} unidades.");
+            }
 
             $carrito[$id] = [
                 "nombre" => $producto->nombre,

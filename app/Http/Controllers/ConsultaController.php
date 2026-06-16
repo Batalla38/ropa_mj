@@ -7,11 +7,25 @@ use App\Models\Consulta;
 
 class ConsultaController extends Controller
 {
-    // 1. Muestra la lista de consultas en el panel (Vista del Administrador)
+    // 🏢 LADO ADMINISTRADOR: Muestra la lista de consultas en el panel de gestión
     public function index()
     {
         $consultas = Consulta::orderBy('created_at', 'desc')->get();
         return view('admin.gestionConsultas', compact('consultas'));
+    }
+
+    // 🌍 LADO CLIENTE (PÚBLICO): Muestra la vista de preguntas frecuentes dinámicas
+    // ✨ NUEVO MÉTODO CENTRAL: Filtra solo las que tienen respuesta para armar las FAQ
+    public function mostrarFaq()
+    {
+        // Traemos solo las consultas que ya tengan una respuesta cargada por el admin
+        $faqDinamicas = Consulta::whereNotNull('respuesta')
+            ->where('respuesta', '!=', '')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        // Mandamos los datos a tu vista pública 'consultas.blade.php'
+        return view('consultas', compact('faqDinamicas'));
     }
 
     // 2. Procesa la respuesta que escribe el administrador
@@ -24,9 +38,9 @@ class ConsultaController extends Controller
         $consulta = Consulta::findOrFail($id);
 
         $consulta->update([
-            'text_respuesta' => $request->respuesta, // O 'respuesta' según tu columna exacta
+            'text_respuesta' => $request->respuesta, 
             'respuesta' => $request->respuesta,
-            'estado' => 'Respondido'
+            'estado' => 'Respondido' // El estado cambia para tus filtros del panel
         ]);
 
         return redirect('/gestionConsultas')
@@ -49,7 +63,8 @@ class ConsultaController extends Controller
             'estado' => 'Pendiente'
         ]);
 
-        return redirect('/consultas')->with('exito', '¡Tu consulta fue enviada con éxito!');
+        // Cambiamos la redirección a la ruta pública de consultas
+        return redirect()->route('consultas.index')->with('exito', '¡Tu consulta fue enviada con éxito!');
     }
 
     /**
@@ -58,7 +73,7 @@ class ConsultaController extends Controller
      */
     public function misConsultas()
     {
-        // CAMBIO AQUÍ: Ponemos exactamente el correo que figura en tu phpMyAdmin
+        // Ponemos exactamente el correo que figura en tu phpMyAdmin
         $userCorreo = 'kiki@gmail.com';
 
         // Buscamos las consultas en la base de datos que coincidan con ese correo

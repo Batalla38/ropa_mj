@@ -46,15 +46,31 @@
     <div class="container" style="margin-top: 140px; margin-bottom: 1.5rem;">
         <div class="card p-4 shadow-sm">
             <p class="h1 text-dark border-bottom pb-2">Preguntas Frecuentes</p>
-            <div class="mt-3">
-                <p class="h4 text-primary">¿Cómo realizo un pedido por mayor?</p>
-                <p class="fs-5 text-muted">Solo debes registrarte en nuestro portal, añadir las prendas al carrito y finalizar el proceso.</p>
-            </div>
-            <hr>
-            <div>
-                <p class="h4 text-primary">¿Cuál es el monto mínimo de compra?</p>
-                <p class="fs-5 text-muted">Manejamos un monto mínimo competitivo de distribuidora inicial visible en tu panel principal.</p>
-            </div>
+            
+            {{-- ✨ BUCLE DINÁMICO: Recorre las consultas reales respondidas por el admin --}}
+            @forelse($faqDinamicas as $index => $faq)
+                <div class="mt-3">
+                    {{-- Usamos $faq->descripcion que es el nombre real en tu tabla --}}
+                    <p class="h4 text-primary"><i class="bi bi-question-circle me-1"></i> {{ $faq->descripcion }}</p>
+                    <p class="fs-5 text-muted ps-3"><i class="bi bi-arrow-return-right me-1"></i> {{ $faq->respuesta }}</p>
+                </div>
+                {{-- Ponemos una línea divisoria decorativa a menos que sea la última pregunta --}}
+                @if(!$loop->last)
+                    <hr>
+                @endif
+            @empty
+                {{-- 💡 RESPALDO: Si no hay respuestas en la BD todavía, muestra tus textos originales --}}
+                <div class="mt-3">
+                    <p class="h4 text-primary">¿Cómo realizo un pedido por mayor?</p>
+                    <p class="fs-5 text-muted">Solo debes registrarte en nuestro portal, añadir las prendas al carrito y finalizar el proceso.</p>
+                </div>
+                <hr>
+                <div>
+                    <p class="h4 text-primary">¿Cuál es el monto mínimo de compra?</p>
+                    <p class="fs-5 text-muted">Manejamos un monto mínimo competitivo de distribuidora inicial visible en tu panel principal.</p>
+                </div>
+            @endforelse
+
         </div>
     </div>
 

@@ -9,20 +9,17 @@ use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\CarritoController;
 use App\Models\Producto;
 
-// --- VISTAS PRINCIPALES (MODIFICADO: Ahora cargan los productos para la página principal) ---
+// --- VISTAS PRINCIPALES ---
 
 Route::get('/', function () {
-    // Tomamos 4 productos activos al azar o los últimos cargados para la sección destacados
     $destacados = Producto::where('activo', 1)->latest()->take(4)->get();
 
-    // Filtramos productos que contengan 'Hombre' o 'Masculino' en su atributo género
     $productosHombre = Producto::where('activo', 1)
         ->where(function($query) {
             $query->where('genero', 'LIKE', '%Hombre%')
                   ->orWhere('genero', 'LIKE', '%Masculino%');
         })->take(4)->get();
 
-    // Filtramos productos que contengan 'Mujer' o 'Femenino' en su atributo género
     $productosMujer = Producto::where('activo', 1)
         ->where(function($query) {
             $query->where('genero', 'LIKE', '%Mujer%')
@@ -66,8 +63,9 @@ Route::get('/terminosYCondiciones', function () {
     return view('terminosYCondiciones');
 });
 
-Route::get('/consultas', function () { return view('consultas'); });
-Route::post('/consultas', [ConsultaController::class, 'store']);
+// ✨ CONSULTAS PÚBLICAS REFORMULADAS: Ahora sí conectan con el controlador dinámico
+Route::get('/consultas', [ConsultaController::class, 'mostrarFaq'])->name('consultas.index');
+Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
 Route::get('/misConsultas', [ConsultaController::class, 'misConsultas'])->name('usuario.consultas.historial');
 
 
@@ -88,11 +86,12 @@ Route::get('/catalogoChaleco', function () {
 });
 
 
-// --- PRODUCTOS INDIVIDUALES (DETALLE DE INTERFAZ ÚNICA PARA CLIENTES) ---
+// --- PRODUCTOS INDIVIDUALES & HISTORIALES ---
 Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');
-
 Route::get('/historial', [CarritoController::class, 'historial'])->name('carrito.historial');
-// --- LADO ADMINISTRADOR (GESTIÓN DE INVENTARIO - SE MANTIENE INTACTO) ---
+
+
+// --- LADO ADMINISTRADOR (GESTIÓN DE INVENTARIO Y VENTAS) ---
 
 Route::get('/gestionVentas', [ProductoController::class, 'verCompras'])->name('admin.compras.index');
 
@@ -101,38 +100,28 @@ Route::get('/createProducto', function () {
 })->name('productos.create');
 
 Route::post('/guardar-producto', [ProductoController::class, 'guardar'])->name('productos.guardar');
-
 Route::get('/readProducto', [ProductoController::class, 'adminIndex'])->name('productos.index');
-
 Route::get('/updateProducto/{id}', [ProductoController::class, 'edit'])->name('productos.edit');
-
 Route::put('/updateProducto/{id}', [ProductoController::class, 'update'])->name('productos.update');
-
 Route::patch('/productos/{id}/estado', [ProductoController::class, 'cambiarEstado'])->name('productos.estado');
-
 Route::get('/admin/compras', [ProductoController::class, 'verCompras'])->name('admin.compras');
-
 Route::get('/verUsuarios', [ProductoController::class, 'verUsuarios'])->name('admin.usuarios');
 
 
-// --- PROCESAMIENTO DE FORMULARIOS (POST) ---
-
-Route::post('/contacto', [ContactoController::class, 'procesar']);
-Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
-Route::post('/enviar-consulta', [ConsultaController::class, 'store']);
-Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cuenta.procesar');
-
+// --- LADO ADMINISTRADOR (GESTIÓN DE CONSULTAS) ---
 Route::get('/gestionConsultas', [ConsultaController::class, 'index'])->name('admin.consultas.index');
 Route::post('/gestionConsultas/{id}/responder', [ConsultaController::class, 'responder'])->name('admin.consultas.responder');
 
-// Cambiamos la URL a /pago y el nombre de la ruta a 'carrito.pago'
+
+// --- PROCESAMIENTO DE FORMULARIOS CLIENTE (POST Y PROCESOS) ---
+
+Route::post('/contacto', [ContactoController::class, 'procesar']);
+Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cuenta.procesar');
+
 Route::get('/pago', [CarritoController::class, 'checkout'])->name('carrito.pago');
-
-// Ruta POST para recibir el formulario que llena el cliente
 Route::post('/procesar-pago', [CarritoController::class, 'procesarPago'])->name('carrito.procesarPago');
-
-// Ruta GET para mostrar la pantalla final de éxito
 Route::get('/compra-exitosa', [CarritoController::class, 'compraExitosa'])->name('carrito.exito');
+
 
 // --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
 
