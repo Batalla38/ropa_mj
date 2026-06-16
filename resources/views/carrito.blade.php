@@ -21,7 +21,7 @@
             background-color: rgba(255, 255, 255, 0.75);
             color: #4a3e3d !important;
             padding: 15px 25px;
-            border-radius: 8px; 
+            border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
         }
     </style>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="container" style="margin-top: 140px; margin-bottom: 4rem;">
-        
+
         <div class="mb-4">
             <h2 class="titulo-carrito text-center fw-bold mb-0">Mi Carrito de Compras</h2>
         </div>
@@ -62,8 +62,8 @@
                         <tbody>
                             @php $totalGeneral = 0; @endphp
                             @foreach($carrito as $id => $item)
-                                @php 
-                                    $subtotal = $item['precio'] * $item['cantidad']; 
+                                @php
+                                    $subtotal = $item['precio'] * $item['cantidad'];
                                     $totalGeneral += $subtotal;
                                 @endphp
                                 <tr>
@@ -78,9 +78,9 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">-</button>
                                             </form>
-                                            
+
                                             <span class="fw-bold fs-5 px-2">{{ $item['cantidad'] }}</span>
-                                            
+
                                             <form action="{{ route('carrito.agregar', $id) }}" method="POST" class="m-0">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-outline-secondary px-2 fw-bold">+</button>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <h3 class="mb-3">Total: <span class="text-success fw-bold">${{ number_format($totalGeneral, 2, ',', '.') }}</span></h3>
-                        
+
                         @if(auth()->check() || session()->has('user_id'))
                             <a href="{{ route('carrito.pago') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm" style="border-radius: 8px;">
                                 <i class="bi bi-credit-card-2-back me-2"></i>Iniciar Pago
@@ -129,8 +129,8 @@
                             <a href="{{ url('/login?redirigir=pago') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm" style="border-radius: 8px;">
                                 <i class="bi bi-credit-card-2-back me-2"></i>Iniciar Pago
                             </a>
-                            <div class="text-muted small mt-2">
-                                <i class="bi bi-info-circle me-1"></i> Te pedirá iniciar sesión o registrarte para completar el envío.
+                            <div class="text-dark fs-5 fw-bold mt-2">
+                                <i class="bi bi-info-circle me-1"></i> Debe iniciar sesión para finalizar su compra.
                             </div>
                         @endif
                     </div>
