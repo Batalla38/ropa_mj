@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Producto; 
+use App\Models\Producto;
 use App\Models\Venta;
-use App\Models\DetalleVenta; 
-use App\Models\Usuario; 
+use App\Models\DetalleVenta;
+use App\Models\Usuario;
 
 class CarritoController extends Controller
 {
@@ -26,7 +26,7 @@ class CarritoController extends Controller
             $carrito[$id]['cantidad']++;
         } else {
             $producto = Producto::findOrFail($id);
-            
+
             $cantidadInicial = $request->input('cantidad', 1);
 
             $carrito[$id] = [
@@ -103,7 +103,7 @@ class CarritoController extends Controller
         // 1. VALIDACIONES DE LOS DATOS DE ENVÍO Y PAGO
         $request->validate([
             'provincia' => 'required|string|max:100',
-            'localization' => 'required|string|max:100', 
+            'localization' => 'required|string|max:100',
             'direccion' => 'required|string|max:255',
             'medio_pago' => 'required|in:tarjeta,efectivo',
         ]);
@@ -112,13 +112,13 @@ class CarritoController extends Controller
             $request->validate([
                 'tarjeta_nombre' => 'required|string|max:150',
                 'tarjeta_numero' => 'required|digits:16',
-                'tarjeta_vence'  => 'required|string|min:5|max:5', 
+                'tarjeta_vence'  => 'required|string|min:5|max:5',
                 'tarjeta_cvv'    => 'required|digits_between:3,4',
             ]);
 
             $vencimiento = $request->input('tarjeta_vence');
             $partes = explode('/', $vencimiento);
-            
+
             if (count($partes) === 2) {
                 $mesTarjeta = (int)$partes[0];
                 $anioTarjeta = (int)$partes[1] + 2000;
@@ -137,13 +137,13 @@ class CarritoController extends Controller
         }
 
         // 2. Guardar/Actualizar los datos directamente en el perfil del Usuario
-        $userId = session('user_id') ?? auth()->id(); 
+        $userId = session('user_id') ?? auth()->id();
         if ($userId) {
             $usuario = Usuario::find($userId);
             if ($usuario) {
                 $usuario->update([
                     'provincia' => $request->input('provincia'),
-                    'localidad' => $request->input('localization'), 
+                    'localidad' => $request->input('localization'),
                     'direccion' => $request->input('direccion'),
                 ]);
             }
@@ -185,7 +185,7 @@ class CarritoController extends Controller
                 'venta_id'        => $nuevaVenta->id,
                 'id_usuario'      => $userId,                    // ID único (ej: 2) obligatorio y NO nulo
                 'correo'          => $correoUsuario,             // Correo (ej: julian@gmail.com) obligatorio y NO nulo
-                'id_producto'     => $item['id'] ?? $idDelArray, 
+                'id_producto'     => $item['id'] ?? $idDelArray,
                 'nombre_producto' => $item['nombre'],
                 'precio_unitario' => $item['precio'],
                 'cantidad'        => $item['cantidad']
@@ -211,4 +211,26 @@ class CarritoController extends Controller
 
         return view('compra-exitosa');
     }
+    /**
+     * Muestra el historial de compras del usuario autenticado.
+     */
+    public function historial()
+    {
+        // 1. Obtener el ID del usuario en sesión
+        $userId = session('user_id') ?? auth()->id();
+
+        if (!$userId) {
+            return redirect()->route('login')->withErrors(['login_error' => 'Debe iniciar sesión para ver su historial.']);
+        }
+
+        // 2. Consultar las ventas de este usuario de la más reciente a la más vieja
+        $compras = Venta::where('user_id', $userId)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        // 3. Retornar la vista verHistorial
+        return view('verHistorial', compact('compras'));
+    }
+
+
 }

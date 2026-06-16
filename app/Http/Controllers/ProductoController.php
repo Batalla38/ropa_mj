@@ -203,24 +203,19 @@ class ProductoController extends Controller
         return redirect()->back()->with('success', '¡Producto guardado exitosamente en la base de datos!');
     }
 
-    /**
+   /**
      * Muestra la tabla de compras/ventas registradas para el Administrador.
      */
     public function verCompras()
     {
-        $compras = DB::table('compras')->orderBy('id', 'desc')->get();
-        return view('admin.verCompras', compact('compras'));
-    }
+        // Adaptado temporalmente a la tabla 'ventas' que se ve en tu phpMyAdmin
+        $compras = DB::table('ventas')
+            ->join('usuarios', 'ventas.user_id', '=', 'usuarios.id')
+            ->select('ventas.*', 'usuarios.nombre', 'usuarios.apellido', 'usuarios.correo')
+            ->orderBy('ventas.id', 'desc')
+            ->get();
 
-    /**
-     * Muestra la tabla de usuarios registrados para el Administrador.
-     */
-    public function verUsuarios()
-    {
-        // Consultamos la tabla 'usuarios'
-        $usuarios = DB::table('usuarios')->orderBy('id', 'desc')->get();
-
-        // CORREGIDO: Llama a admin.readUsuarios mapeando correctamente tu archivo
-        return view('admin.readUsuarios', compact('usuarios'));
+        // Enviamos los datos a la vista del administrador
+        return view('admin.gestionVentas', compact('compras'));
     }
 }

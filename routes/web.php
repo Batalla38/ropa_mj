@@ -90,8 +90,10 @@ Route::get('/catalogoChaleco', function () {
 // --- PRODUCTOS INDIVIDUALES (DETALLE DE INTERFAZ ÚNICA PARA CLIENTES) ---
 Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');
 
-
+Route::get('/historial', [CarritoController::class, 'historial'])->name('carrito.historial');
 // --- LADO ADMINISTRADOR (GESTIÓN DE INVENTARIO - SE MANTIENE INTACTO) ---
+
+Route::get('/gestionVentas', [ProductoController::class, 'verCompras'])->name('admin.compras.index');
 
 Route::get('/createProducto', function () {
     return view('admin.createProducto');
