@@ -12,13 +12,16 @@ class Usuario extends Model
     // 2. Si tu clave primaria se llama 'id_usuario' (según tu captura anterior), agrégalo:
     protected $primaryKey = 'id_usuario';
 
-    // 3. ¡ESTO ES LO MÁS IMPORTANTE! Agrega 'id_rol' aquí dentro:
+    // 3. ¡MODIFICADO! Agregamos los campos de envío al final para permitir el guardado
     protected $fillable = [
         'nombre', 
         'apellido', 
         'id_rol', 
         'correo', 
-        'contraseña'
+        'contraseña',
+        'provincia',  // <-- Permitir guardar la provincia
+        'localidad',  // <-- Permitir guardar la localidad
+        'direccion'   // <-- Permitir guardar la dirección
     ];
 
     // 4. NUEVO: Oculta la contraseña encriptada por seguridad

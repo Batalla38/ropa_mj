@@ -127,7 +127,7 @@
                             </a>
                         @else
                             <a href="{{ url('/login?redirigir=pago') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm" style="border-radius: 8px;">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Pago como Invitado
+                                <i class="bi bi-credit-card-2-back me-2"></i>Iniciar Pago
                             </a>
                             <div class="text-muted small mt-2">
                                 <i class="bi bi-info-circle me-1"></i> Te pedirá iniciar sesión o registrarte para completar el envío.

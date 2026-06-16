@@ -17,13 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 100);
             $table->string('apellido', 100);
-            $table->integer('id_rol')->nullable(); // Si quieres relacionar con una tabla de roles
+            $table->integer('id_rol')->default(2);
             $table->string('correo')->unique();
-            $table->string('contraseña');
+            $table->string('contraseña', 500);
+            $table->string('provincia')->nullable();
+            $table->string('localidad')->nullable();
+            $table->string('direccion')->nullable();
+           
+            
             $table->timestamps();
         });
-        // Si estabas queriendo usar un entero para el rol (ej: 1 para admin, 2 para cliente):
-        //$table->tinyInteger('rol')->default(2);
     }
 
     /**
