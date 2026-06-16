@@ -106,7 +106,7 @@
             <div class="row g-4 p-4 rounded-4 shadow-sm" style="background-color: rgba(193, 163, 145, 0.95);">
                 <div class="col-12">
                     <h2 class="display-5 text-dark text-center mb-4 fw-bold text-uppercase border-bottom pb-3">
-                        ⭐ ARTÍCULOS DESTACADOS ⭐
+                        ⭐ ULTIMOS ARTÍCULOS  ⭐
                     </h2>
                 </div>
 
