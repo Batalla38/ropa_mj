@@ -29,6 +29,7 @@
 
                 <h3 class="card-title text-center mb-4 fw-bold text-dark">Iniciar Sesion</h3>
 
+                {{-- Alertas para el Login y Bloqueo de Carrito --}}
                 @if ($errors->any())
                     <div class="alert alert-danger p-2 mb-3">
                         <ul class="mb-0" style="font-size: 0.85rem; list-style-type: none; padding-left: 0;">
@@ -36,18 +37,6 @@
                                 <li> {{ $error }}</li>
                             @endforeach
                         </ul>
-                    </div>
-                @endif
-
-                {{-- Alertas para el Login y Bloqueo de Carrito --}}
-                @if($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert">
-                        <ul class="mb-0 ps-3 fw-bold">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
@@ -73,7 +62,7 @@
                 <div class="text-center mt-3">
                     <small class="text-muted">¿No tienes cuenta? <a href="{{ url('registro') }}" class="text-decoration-none text-dark fw-semibold">Registrarse</a></small>
                 </div>
-                
+
             </div>
         </div>
     </main>

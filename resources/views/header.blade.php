@@ -132,14 +132,14 @@
                         <button class="btn btn-outline-dark dropdown-toggle fw-semibold" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             👤 Hola, {{ session('user_name') }}
 
-                            @if(session('id_rol') == 1 || session('user_id') == 1)
+                            @if(session('id_rol') == 1 )
                                 <span class="badge bg-danger ms-1" style="font-size: 0.7rem;">Admin</span>
                             @endif
                         </button>
 
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
 
-    @if(session('id_rol') == 1 || session('user_id') == 1)
+    @if(session('id_rol') == 1 )
         <!-- ========================================== -->
         <!-- LO QUE VE ÚNICAMENTE EL ADMINISTRADOR      -->
         <!-- ========================================== -->
