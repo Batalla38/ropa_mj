@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto; 
 use App\Models\Venta;
 use App\Models\DetalleVenta; 
-use App\Models\Usuario; // ✨ NUEVO: Agregamos la importación del modelo Usuario que faltaba
+use App\Models\Usuario; 
 
 class CarritoController extends Controller
 {
@@ -175,11 +175,17 @@ class CarritoController extends Controller
             'estado'           => $estadoInicial
         ]);
 
-        // ✨ NUEVO PASO B: Recorrer el carrito y guardar el detalle de cada producto vendido
+        // ✨ OBLIGATORIO: Buscamos el usuario completo para garantizar que el ID y Correo existan y nunca sean nulos
+        $usuarioCompleto = Usuario::findOrFail($userId);
+        $correoUsuario = $usuarioCompleto->correo;
+
+        // ✨ NUEVO PASO B: Recorrer el carrito y guardar el detalle con los datos obligatorios del usuario
         foreach ($carrito as $idDelArray => $item) {
             DetalleVenta::create([
-                'venta_id'        => $nuevaVenta->id, // Vincula al ID de la venta recién creada
-                'id_producto'     => $item['id'] ?? $idDelArray, // Usa el id del producto
+                'venta_id'        => $nuevaVenta->id,
+                'id_usuario'      => $userId,                    // ID único (ej: 2) obligatorio y NO nulo
+                'correo'          => $correoUsuario,             // Correo (ej: julian@gmail.com) obligatorio y NO nulo
+                'id_producto'     => $item['id'] ?? $idDelArray, 
                 'nombre_producto' => $item['nombre'],
                 'precio_unitario' => $item['precio'],
                 'cantidad'        => $item['cantidad']

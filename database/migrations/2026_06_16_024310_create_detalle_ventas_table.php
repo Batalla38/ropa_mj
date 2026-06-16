@@ -16,6 +16,8 @@ return new class extends Migration
     Schema::create('detalle_ventas', function (Blueprint $table) {
         $table->id();
         $table->unsignedBigInteger('venta_id'); 
+        $table->unsignedBigInteger('id_usuario'); 
+        $table->string('correo');
         $table->unsignedBigInteger('id_producto'); 
         $table->string('nombre_producto');
         $table->decimal('precio_unitario', 10, 2);
