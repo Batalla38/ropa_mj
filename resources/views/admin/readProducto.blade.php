@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración - Ropa MJ</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <style>
@@ -51,16 +53,21 @@
                 <tbody>
                     @forelse($productos as $item)
                         <tr>
-                            <td class="text-secondary fw-bold">{{ $item->id }}</td>
+                            <td class="text-secondary fw-bold">#{{ $item->id }}</td>
                             <td>
                                 @if(!empty($item->url_imagen))
-                                    @if(str_starts_with($item->url_imagen, 'images/'))
-                                        <img src="{{ asset($item->url_imagen) }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Prenda">
+                                    @if(str_starts_with($item->url_imagen, 'http'))
+                                        <!-- Por si usas URLs externas -->
+                                        <img src="{{ $item->url_imagen }}" width="55" height="55" class="rounded object-fit-cover shadow-sm border" alt="Prenda">
+                                    @elseif(str_starts_with($item->url_imagen, 'images/') || str_starts_with($item->url_imagen, '/images/'))
+                                        <!-- Si la cadena ya incluye la palabra 'images/' de base -->
+                                        <img src="{{ asset(ltrim($item->url_imagen, '/')) }}" width="55" height="55" class="rounded object-fit-cover shadow-sm border" alt="Prenda">
                                     @else
-                                        <img src="{{ asset('images/' . $item->url_imagen) }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Prenda">
+                                        <!-- Comprobación automática: Busca en storage o en public/images/ directamente -->
+                                        <img src="{{ file_exists(public_path('storage/images/' . $item->url_imagen)) ? asset('storage/images/' . $item->url_imagen) : asset('images/' . $item->url_imagen) }}" width="55" height="55" class="rounded object-fit-cover shadow-sm border" alt="Prenda">
                                     @endif
                                 @else
-                                    <img src="{{ asset('images/default.png') }}" width="50" height="50" class="rounded object-fit-cover shadow-sm" alt="Por defecto">
+                                    <img src="{{ asset('images/default.png') }}" width="55" height="55" class="rounded object-fit-cover shadow-sm border" alt="Por defecto">
                                 @endif
                             </td>
                             <td class="fw-bold text-dark">{{ $item->nombre }}</td>
