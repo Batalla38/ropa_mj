@@ -138,23 +138,27 @@
                         </button>
 
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
-    <!-- Panel Exclusivo para el Administrador -->
+
     @if(session('id_rol') == 1 || session('user_id') == 1)
+        <!-- ========================================== -->
+        <!-- LO QUE VE ÚNICAMENTE EL ADMINISTRADOR      -->
+        <!-- ========================================== -->
         <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
         <li><a class="dropdown-item" href="{{ route('productos.index') }}">📦 Productos</a></li>
         <li><a class="dropdown-item" href="{{ url('/gestionVentas') }}">💰 Gestionar Ventas</a></li>
         <li><a class="dropdown-item" href="{{ url('/gestionConsultas') }}">💬 Gestionar Consultas</a></li>
-        <li><hr class="dropdown-divider"></li>
+    @else
+        <!-- ========================================== -->
+        <!-- LO QUE VE ÚNICAMENTE EL CLIENTE / USUARIO  -->
+        <!-- ========================================== -->
+        <li><h6 class="dropdown-header text-dark fw-bold">Mi Cuenta</h6></li>
+        <li><a class="dropdown-item" href="{{ url('/historial') }}">📜 Historial de Compras</a></li>
+        <li><a class="dropdown-item" href="{{ url('/misConsultas') }}">🙋 Mis Consultas</a></li>
     @endif
-
-    <!-- Panel de Opciones para el Cliente (Mis Consultas e Historial) -->
-    <li><h6 class="dropdown-header text-dark fw-bold">Mi Cuenta</h6></li>
-    <li><a class="dropdown-item" href="{{ url('/historial') }}">📜 Historial de Compras</a></li>
-    <li><a class="dropdown-item" href="{{ url('/misConsultas') }}">🙋 Mis Consultas</a></li>
 
     <li><hr class="dropdown-divider"></li>
 
-    <!-- Botón de Cerrar Sesión -->
+    <!-- Botón de Cerrar Sesión (Visible para Ambos) -->
     <li>
         <form action="{{ route('logout') }}" method="POST" class="px-3 py-1">
             @csrf
