@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto; 
+use App\Models\Venta;
+use App\Models\DetalleVenta; 
+use App\Models\Usuario; // ✨ NUEVO: Agregamos la importación del modelo Usuario que faltaba
 
 class CarritoController extends Controller
 {
     // 1. Ver el contenido del carrito
-    // Cambiamos el nombre a index para que coincida con tu ruta vieja
     public function index()
     {
         $carrito = session()->get('carrito', []);
@@ -20,14 +22,11 @@ class CarritoController extends Controller
     {
         $carrito = session()->get('carrito', []);
 
-        // Si el producto ya existe en el carrito, solo le sumamos 1 a la cantidad
         if (isset($carrito[$id])) {
             $carrito[$id]['cantidad']++;
         } else {
-            // Si no existe, es porque viene desde el catálogo/detalle por primera vez
             $producto = Producto::findOrFail($id);
             
-            // Tomamos la cantidad que venga del formulario, si no viene ninguna (catálogo), por defecto es 1
             $cantidadInicial = $request->input('cantidad', 1);
 
             $carrito[$id] = [
@@ -48,11 +47,9 @@ class CarritoController extends Controller
         $carrito = session()->get('carrito', []);
 
         if (isset($carrito[$id])) {
-            // Si hay más de una unidad, restamos 1
             if ($carrito[$id]['cantidad'] > 1) {
                 $carrito[$id]['cantidad']--;
             } else {
-                // Si queda solo 1 unidad y resta, lo removemos por completo
                 unset($carrito[$id]);
             }
             session()->put('carrito', $carrito);
@@ -62,7 +59,6 @@ class CarritoController extends Controller
     }
 
     // 4. Eliminar un producto completo
-    // El método se tiene que llamar eliminar como dice tu web.php
     public function eliminar($id)
     {
         $carrito = session()->get('carrito', []);
@@ -78,9 +74,7 @@ class CarritoController extends Controller
     // 5. Vaciar todo el carrito
     public function vaciar()
     {
-        // Limpiamos todo el array del carrito de la sesión
         session()->forget('carrito');
-
         return redirect()->back()->with('exito', 'Se vació el carrito correctamente.');
     }
 
@@ -92,9 +86,13 @@ class CarritoController extends Controller
             return redirect()->route('catalogo.index')->with('stock_error', 'Tu carrito está vacío.');
         }
 
-        // === CAMBIO ACÁ: Ahora busca 'pago' en vez de 'checkout' ===
-        return view('pago', compact('carrito'));
+        // Buscamos los datos del usuario logueado para pasárselos a la vista de pago
+        $userId = session('user_id') ?? auth()->id();
+        $usuario = Usuario::find($userId);
+
+        return view('pago', compact('carrito', 'usuario'));
     }
+
     public function procesarPago(Request $request)
     {
         $carrito = session()->get('carrito', []);
@@ -105,21 +103,19 @@ class CarritoController extends Controller
         // 1. VALIDACIONES DE LOS DATOS DE ENVÍO Y PAGO
         $request->validate([
             'provincia' => 'required|string|max:100',
-            'localization' => 'required|string|max:100', // Tu input en la vista se llama localization
+            'localization' => 'required|string|max:100', 
             'direccion' => 'required|string|max:255',
             'medio_pago' => 'required|in:tarjeta,efectivo',
         ]);
 
-        // Si elige tarjeta, validamos los datos que habías definido con el vencimiento temporal
         if ($request->input('medio_pago') === 'tarjeta') {
             $request->validate([
                 'tarjeta_nombre' => 'required|string|max:150',
                 'tarjeta_numero' => 'required|digits:16',
-                'tarjeta_vence'  => 'required|string|min:5|max:5', // Formato MM/AA
+                'tarjeta_vence'  => 'required|string|min:5|max:5', 
                 'tarjeta_cvv'    => 'required|digits_between:3,4',
             ]);
 
-            // Validación lógica del vencimiento (Año actual: 2026)
             $vencimiento = $request->input('tarjeta_vence');
             $partes = explode('/', $vencimiento);
             
@@ -140,26 +136,57 @@ class CarritoController extends Controller
             }
         }
 
-        // 2. ✨ EL PASO CLAVE: Guardar/Actualizar los datos directamente en el perfil del Usuario
-        $userId = session('user_id') ?? auth()->id(); // Rescata el ID del usuario logueado
+        // 2. Guardar/Actualizar los datos directamente en el perfil del Usuario
+        $userId = session('user_id') ?? auth()->id(); 
         if ($userId) {
             $usuario = Usuario::find($userId);
             if ($usuario) {
                 $usuario->update([
                     'provincia' => $request->input('provincia'),
-                    'localidad' => $request->input('localization'), // Guarda tu input localization en el campo localidad
+                    'localidad' => $request->input('localization'), 
                     'direccion' => $request->input('direccion'),
                 ]);
             }
         }
 
-        // 3. GENERAR REFERENCIA SI ES EFECTIVO (Para mostrar en la pantalla de éxito)
+        // 3. GENERAR REFERENCIA Y ESTADO SEGÚN EL MEDIO DE PAGO
         $referencia = null;
+        $estadoInicial = 'pagado';
         if ($request->input('medio_pago') === 'efectivo') {
             $referencia = 'MJ-' . rand(10000, 99999);
+            $estadoInicial = 'pendiente';
         }
 
-        // 4. LIMPIAMOS EL CARRITO DE LA SESIÓN (La compra ya se procesó)
+        // ✨ CALCULAR EL TOTAL GENERAL DEL CARRITO PARA GUARDAR LA VENTA
+        $totalGeneral = 0;
+        foreach ($carrito as $item) {
+            $totalGeneral += $item['precio'] * $item['cantidad'];
+        }
+
+        // ✨ NUEVO PASO A: Crear la venta general (madre)
+        $nuevaVenta = Venta::create([
+            'user_id'         => $userId,
+            'provincia'        => $request->input('provincia'),
+            'localidad'        => $request->input('localization'),
+            'direccion'        => $request->input('direccion'),
+            'medio_pago'       => $request->input('medio_pago'),
+            'referencia_pago'  => $referencia,
+            'total'            => $totalGeneral,
+            'estado'           => $estadoInicial
+        ]);
+
+        // ✨ NUEVO PASO B: Recorrer el carrito y guardar el detalle de cada producto vendido
+        foreach ($carrito as $idDelArray => $item) {
+            DetalleVenta::create([
+                'venta_id'        => $nuevaVenta->id, // Vincula al ID de la venta recién creada
+                'id_producto'     => $item['id'] ?? $idDelArray, // Usa el id del producto
+                'nombre_producto' => $item['nombre'],
+                'precio_unitario' => $item['precio'],
+                'cantidad'        => $item['cantidad']
+            ]);
+        }
+
+        // 4. LIMPIAMOS EL CARRITO DE LA SESIÓN (Ya quedó guardado en la base de datos)
         session()->forget('carrito');
 
         // 5. REDIRECCIÓN A LA PANTALLA DE ÉXITO
@@ -172,7 +199,6 @@ class CarritoController extends Controller
 
     public function compraExitosa()
     {
-        // Si no viene de procesar un pago real, lo sacamos volando al catálogo
         if (!session()->has('compra_completada')) {
             return redirect()->route('catalogo.index');
         }
