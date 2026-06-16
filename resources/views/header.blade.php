@@ -141,7 +141,7 @@
                             @if(session('id_rol') == 1 || session('user_id') == 1)
                                 <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
                                 <li><a class="dropdown-item" href="{{ route('productos.index') }}">📦 Productos</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.usuarios') }}">💰 Gestionar Ventas</a></li>
+                                <li><a class="dropdown-item" href="{{ url('/gestionVentas') }}">💰 Gestionar Ventas</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/gestionConsultas') }}">💬 Gestionar Consultas</a></li>
                                 <li><hr class="dropdown-divider"></li>
                             @endif
