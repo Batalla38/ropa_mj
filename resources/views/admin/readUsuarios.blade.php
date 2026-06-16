@@ -25,10 +25,8 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded shadow-sm">
             <h2 class="fw-bold text-dark mb-0">Control de Usuarios Registrados</h2>
-            <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill">Total de Clientes</span>
+            <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill">Total: {{ count($usuarios) }}</span>
         </div>
-
-
 
         <div class="card shadow border-0 rounded-3 overflow-hidden">
             <table class="table table-hover align-middle mb-0 bg-white">
@@ -47,8 +45,8 @@
                             <td class="text-dark">{{ $user->nombre }} {{ $user->apellido }}</td>
                             <td class="fw-bold text-dark">{{ $user->correo }}</td>
                             <td class="text-center">
-                                <span class="badge bg-success px-3 py-2 rounded-pill">
-                                    {{ $user->id_rol == 2 ? 'Administrador' : 'Cliente' }}
+                                <span class="badge {{ $user->id_rol == 1 ? 'bg-danger' : 'bg-success' }} px-3 py-2 rounded-pill">
+                                    {{ $user->id_rol == 1 ? 'Administrador' : 'Cliente' }}
                                 </span>
                             </td>
                         </tr>
