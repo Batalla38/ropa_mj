@@ -68,6 +68,7 @@ Route::get('/terminosYCondiciones', function () {
 
 Route::get('/consultas', function () { return view('consultas'); });
 Route::post('/consultas', [ConsultaController::class, 'store']);
+Route::get('/misConsultas', [ConsultaController::class, 'misConsultas'])->name('usuario.consultas.historial');
 
 
 // --- CATÁLOGOS PÚBLICOS ---

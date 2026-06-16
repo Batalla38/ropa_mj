@@ -138,22 +138,35 @@
                         </button>
 
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
-                            @if(session('id_rol') == 1 || session('user_id') == 1)
-                                <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
-                                <li><a class="dropdown-item" href="{{ route('productos.index') }}">📦 Productos</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/gestionVentas') }}">💰 Gestionar Ventas</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/gestionConsultas') }}">💬 Gestionar Consultas</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                            @endif
 
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST" class="px-3 py-1">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-dark w-100">Cerrar Sesión</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
+    @if(session('id_rol') == 1 || session('user_id') == 1)
+        <!-- ========================================== -->
+        <!-- LO QUE VE ÚNICAMENTE EL ADMINISTRADOR      -->
+        <!-- ========================================== -->
+        <li><h6 class="dropdown-header text-dark fw-bold">Panel de Gestión</h6></li>
+        <li><a class="dropdown-item" href="{{ route('productos.index') }}">📦 Productos</a></li>
+        <li><a class="dropdown-item" href="{{ url('/gestionVentas') }}">💰 Gestionar Ventas</a></li>
+        <li><a class="dropdown-item" href="{{ url('/gestionConsultas') }}">💬 Gestionar Consultas</a></li>
+    @else
+        <!-- ========================================== -->
+        <!-- LO QUE VE ÚNICAMENTE EL CLIENTE / USUARIO  -->
+        <!-- ========================================== -->
+        <li><h6 class="dropdown-header text-dark fw-bold">Mi Cuenta</h6></li>
+        <li><a class="dropdown-item" href="{{ url('/historial') }}">📜 Historial de Compras</a></li>
+        <li><a class="dropdown-item" href="{{ url('/misConsultas') }}">🙋 Mis Consultas</a></li>
+    @endif
+
+    <li><hr class="dropdown-divider"></li>
+
+    <!-- Botón de Cerrar Sesión (Visible para Ambos) -->
+    <li>
+        <form action="{{ route('logout') }}" method="POST" class="px-3 py-1">
+            @csrf
+            <button type="submit" class="btn btn-sm btn-dark w-100">Cerrar Sesión</button>
+        </form>
+    </li>
+</ul>
+</div>
                 @else
                     <a href="{{ url('/login') }}" class="btn btn-outline-dark me-2 fw-semibold">Iniciar Sesión</a>
                 @endif
