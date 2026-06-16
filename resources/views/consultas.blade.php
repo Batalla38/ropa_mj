@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         body {
-            background-color: #c1a391; 
-            color: #333333;           
+            background-color: #c1a391;
+            color: #333333;
             background-image: url("{{ asset('bg1.png') }}");
             background-repeat: repeat;
-            background-size: 700px; 
+            background-size: 700px;
         }
         .card { background-color: rgba(255, 255, 255, 0.95); }
     </style>
@@ -46,7 +46,7 @@
     <div class="container" style="margin-top: 140px; margin-bottom: 1.5rem;">
         <div class="card p-4 shadow-sm">
             <p class="h1 text-dark border-bottom pb-2">Preguntas Frecuentes</p>
-            
+
             {{-- ✨ BUCLE DINÁMICO: Recorre las consultas reales respondidas por el admin --}}
             @forelse($faqDinamicas as $index => $faq)
                 <div class="mt-3">
@@ -77,10 +77,10 @@
     <div class="container mb-5">
         <div class="card p-4 shadow-sm">
             <h2 class="mb-4 text-dark"><i class="bi bi-chat-left-text-fill me-2 text-primary"></i> Dejanos tu Consulta</h2>
-            
+
             <form action="{{ url('/consultas') }}" method="POST" autocomplete="off">
                 @csrf
-                
+
                 <div class="mb-3">
                     <label class="form-label fw-bold">Tu Correo Electrónico:</label>
                     <input type="email" name="correo" class="form-control form-control-lg" placeholder="ejemplo@correo.com" required>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Consulta;
+use Illuminate\Support\Facades\DB; // Importamos la fachada DB para consultar la tabla usuarios
 
 class ConsultaController extends Controller
 {
@@ -38,7 +39,7 @@ class ConsultaController extends Controller
         $consulta = Consulta::findOrFail($id);
 
         $consulta->update([
-            'text_respuesta' => $request->respuesta, 
+            'text_respuesta' => $request->respuesta,
             'respuesta' => $request->respuesta,
             'estado' => 'Respondido' // El estado cambia para tus filtros del panel
         ]);
@@ -68,20 +69,35 @@ class ConsultaController extends Controller
     }
 
     /**
-     * 3. NUEVO MÉTODO: Muestra el historial de consultas privado del cliente logueado.
-     * Muestra el historial de consultas saltándose la verificación de login.
+     * 3. MÉTODO CORREGIDO: Muestra el historial de consultas privado del cliente logueado.
+     * Busca el correo usando el 'user_id' guardado en la sesión de Ropa MJ.
      */
     public function misConsultas()
     {
-        // Ponemos exactamente el correo que figura en tu phpMyAdmin
-        $userCorreo = 'kiki@gmail.com';
+        // 1. Obtenemos el ID del usuario que guardó tu LoginController en la sesión
+        $userId = session('user_id');
 
-        // Buscamos las consultas en la base de datos que coincidan con ese correo
-        $consultas = Consulta::where('correo', $userCorreo)
+        // 2. Control de Seguridad: Si no hay ID en la sesión, significa que no inició sesión
+        if (!$userId) {
+            return redirect('/login')
+                ->with('error', 'Por favor, inicia sesión para acceder a tu historial de consultas privado.');
+        }
+
+        // 3. Vamos a buscar a la base de datos el correo de este usuario usando su ID
+        $usuario = DB::table('usuarios')->where('id', $userId)->first();
+
+        // Por seguridad, si el usuario no existe en la base de datos o no tiene correo, lo mandamos al login
+        if (!$usuario || empty($usuario->correo)) {
+            return redirect('/login')
+                ->with('error', 'No se pudo verificar tu cuenta de usuario.');
+        }
+
+        // 4. Buscamos ÚNICAMENTE las consultas que pertenezcan al correo de este usuario logueado
+        $consultas = Consulta::where('correo', $usuario->correo)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // Retorna tu archivo Blade
+        // 5. Retornamos la vista pasándole los registros filtrados de forma segura
         return view('misConsultas', compact('consultas'));
     }
 }
