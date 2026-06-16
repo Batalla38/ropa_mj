@@ -45,12 +45,13 @@
                 <table class="table table-hover align-middle mb-0 bg-white">
                     <thead class="table-dark">
                         <tr>
-                            <th style="width: 12%;">ID Venta</th>
-                            <th style="width: 25%;">Cliente Comprador</th>
-                            <th style="width: 18%;">Fecha y Hora</th>
+                            <th style="width: 10%;">ID Venta</th>
+                            <th style="width: 22%;">Cliente Comprador</th>
+                            <th style="width: 15%;">Fecha y Hora</th>
                             <th style="width: 15%;">Total Abonado</th>
-                            <th style="width: 12%;" class="text-center">Estado</th>
-                            <th>Dirección de Entrega / Pago</th>
+                            <th style="width: 10%;" class="text-center">Estado</th>
+                            <th style="width: 18%;">Dirección de Entrega / Pago</th>
+                            <th style="width: 10%;" class="text-center">Artículos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,8 +59,11 @@
                             <tr>
                                 <td class="text-secondary fw-bold">#MJ-{{ $compra->id }}</td>
                                 <td>
-                                    <div class="fw-bold text-dark">{{ $compra->nombre }} {{ $compra->apellido }}</div>
-                                    <small class="text-muted" style="font-size: 0.85rem;">{{ $compra->correo }}</small>
+                                    {{-- Como usamos el user_id de la venta, extraemos el correo seguro del primer detalle --}}
+                                    <div class="fw-bold text-dark">Usuario ID: {{ $compra->user_id }}</div>
+                                    <small class="text-muted" style="font-size: 0.85rem;">
+                                        {{ $compra->detalles->first()->correo ?? 'Sin correo registrado' }}
+                                    </small>
                                 </td>
                                 <td class="text-muted">
                                     {{ date('d/m/Y H:i', strtotime($compra->created_at)) }} hs
@@ -84,10 +88,53 @@
                                         @endif
                                     </div>
                                 </td>
+                                <td class="text-center">
+                                    {{-- ✨ Botón dinámico para desplegar el colapsable --}}
+                                    <button class="btn btn-sm btn-outline-secondary fw-bold rounded-pill shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#productos-{{ $compra->id }}" aria-expanded="false">
+                                        👁️ Ver
+                                    </button>
+                                </td>
+                            </tr>
+
+                            {{-- ✨ NUEVO FILA COLAPSABLE: Desglose de productos de cada pedido --}}
+                            <tr class="collapse bg-light" id="productos-{{ $compra->id }}">
+                                <td colspan="7" class="p-3">
+                                    <div class="card border-0 shadow-sm rounded-3">
+                                        <div class="card-header bg-secondary text-white py-2 fw-bold small rounded-top-3">
+                                            📦 Detalle de Artículos - Pedido #MJ-{{ $compra->id }}
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-bordered mb-0 align-middle text-center">
+                                                <thead class="table-light small">
+                                                    <tr>
+                                                        <th style="width: 15%;">Código Prenda</th>
+                                                        <th class="text-start">Descripción del Producto</th>
+                                                        <th>Precio Unitario</th>
+                                                        <th>Cantidad</th>
+                                                        <th class="text-end pe-3">Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="small">
+                                                    @foreach($compra->detalles as $detalle)
+                                                        <tr>
+                                                            <td class="font-monospace text-secondary">#PROD-{{ $detalle->id_producto }}</td>
+                                                            <td class="text-start fw-bold text-dark">{{ $detalle->nombre_producto }}</td>
+                                                            <td>${{ number_format($detalle->precio_unitario, 2, ',', '.') }}</td>
+                                                            <td class="fw-bold">{{ $detalle->cantidad }}</td>
+                                                            <td class="text-end font-monospace text-success pe-3">
+                                                                ${{ number_format($detalle->precio_unitario * $detalle->cantidad, 2, ',', '.') }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center py-5 text-muted fw-bold bg-white">
+                                <td colspan="7" class="text-center py-5 text-muted fw-bold bg-white">
                                     No se registran ventas realizadas en el sistema todavía.
                                 </td>
                             </tr>

@@ -179,17 +179,25 @@ class CarritoController extends Controller
         $usuarioCompleto = Usuario::findOrFail($userId);
         $correoUsuario = $usuarioCompleto->correo;
 
-        // ✨ NUEVO PASO B: Recorrer el carrito y guardar el detalle con los datos obligatorios del usuario
+        // ✨ NUEVO PASO B: Recorrer el carrito, guardar el detalle y reducir el stock
         foreach ($carrito as $idDelArray => $item) {
+            $idProductoReal = $item['id'] ?? $idDelArray;
+
             DetalleVenta::create([
                 'venta_id'        => $nuevaVenta->id,
-                'id_usuario'      => $userId,                    // ID único (ej: 2) obligatorio y NO nulo
-                'correo'          => $correoUsuario,             // Correo (ej: julian@gmail.com) obligatorio y NO nulo
-                'id_producto'     => $item['id'] ?? $idDelArray,
+                'id_usuario'      => $userId,
+                'correo'          => $correoUsuario,
+                'id_producto'     => $idProductoReal,
                 'nombre_producto' => $item['nombre'],
                 'precio_unitario' => $item['precio'],
                 'cantidad'        => $item['cantidad']
             ]);
+
+            // 🎯 LOGICA DE STOCK: Buscamos la prenda en la base de datos y descontamos la cantidad vendida
+            $producto = Producto::find($idProductoReal);
+            if ($producto) {
+                $producto->decrement('stock', $item['cantidad']);
+            }
         }
 
         // 4. LIMPIAMOS EL CARRITO DE LA SESIÓN (Ya quedó guardado en la base de datos)
@@ -211,6 +219,7 @@ class CarritoController extends Controller
 
         return view('compra-exitosa');
     }
+
     /**
      * Muestra el historial de compras del usuario autenticado.
      */
@@ -231,6 +240,4 @@ class CarritoController extends Controller
         // 3. Retornar la vista verHistorial
         return view('verHistorial', compact('compras'));
     }
-
-
 }

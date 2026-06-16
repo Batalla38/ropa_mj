@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
+use App\Models\Venta; // ✨ Importación añadida para que Eloquent encuentre el modelo Venta
 
 class ProductoController extends Controller
 {
@@ -203,17 +204,13 @@ class ProductoController extends Controller
         return redirect()->back()->with('success', '¡Producto guardado exitosamente en la base de datos!');
     }
 
-   /**
-     * Muestra la tabla de compras/ventas registradas para el Administrador.
+    /**
+     * Muestra la vista de compras/ventas registradas para el Administrador.
      */
     public function verCompras()
     {
-        // Adaptado temporalmente a la tabla 'ventas' que se ve en tu phpMyAdmin
-        $compras = DB::table('ventas')
-            ->join('usuarios', 'ventas.user_id', '=', 'usuarios.id')
-            ->select('ventas.*', 'usuarios.nombre', 'usuarios.apellido', 'usuarios.correo')
-            ->orderBy('ventas.id', 'desc')
-            ->get();
+        // ✨ Usa la relación Eloquent para traer el historial de ventas vinculando los desgloses de artículos
+        $compras = Venta::with('detalles')->orderBy('id', 'desc')->get();
 
         // Enviamos los datos a la vista del administrador
         return view('admin.gestionVentas', compact('compras'));

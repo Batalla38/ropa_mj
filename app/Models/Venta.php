@@ -23,4 +23,10 @@ class Venta extends Model
         'total',
         'estado'
     ];
+
+    // ✨ NUEVO: Relación para conectar la venta con sus productos comprados
+    public function detalles()
+    {
+        return $this->hasMany(DetalleVenta::class, 'venta_id', 'id');
+    }
 }
