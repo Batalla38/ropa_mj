@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">git commit -m "Merge y resolución de conflicto en vista registro"git commit -m "Merge y resolución de conflicto en vista registro"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Ropa MJ</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         /* Estilos globales aplicados al cuerpo del documento */
         body {
             background-color: #c1a391; /* Color de fondo definido por el usuario */
             color: #9f9393;           /* Color de fuente definido por el usuario */
-            background-image: url(bg1.png);
+            background-image: url("{{ asset('bg1.png') }}");
             background-repeat: repeat;
             background-size: 700px; /* Aquí controlas el tamaño */
         }
@@ -26,35 +27,17 @@
         <div class="card shadow-sm" style="max-width: 450px; width: 100%;">
             <div class="card-body p-4">
 
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
                 <h3 class="card-title text-center mb-4 fw-bold text-dark">Crear Cuenta</h3>
 
                 @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-
-
-                @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert" style="border-radius: 8px;">
                         <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
                 @if($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert" style="border-radius: 8px;">
                         <strong class="d-block mb-1"><i class="bi bi-exclamation-triangle-fill me-2"></i> No se pudo crear la cuenta:</strong>
                         <ul class="mb-0 ps-3">
                             @foreach ($errors->all() as $error)
@@ -69,12 +52,12 @@
                     @csrf
                     <div class="mb-3">
                         <label for="nombre" class="form-label fw-semibold">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre">
+                        <input type="text" name="nombre" class="form-control" id="nombre" value="{{ old('nombre') }}" placeholder="Nombre">
                     </div>
 
                     <div class="mb-3">
                         <label for="apellido" class="form-label fw-semibold">Apellido</label>
-                        <input type="text" name="apellido" class="form-control" id="apellido" placeholder="Apellido" >
+                        <input type="text" name="apellido" class="form-control" id="apellido" value="{{ old('apellido') }}" placeholder="Apellido" >
                     </div>
 
                     <div class="mb-3">

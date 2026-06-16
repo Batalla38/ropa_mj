@@ -1,28 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Usuario;
 
+use App\Models\Usuario;
 use Illuminate\Http\Request;
-// Usamos la ruta absoluta con la barra invertida para que VS Code no te marque error
- class registroController extends Controller
+
+class registroController extends Controller
 {
     public function procesar(Request $request)
     {
-        // 1. VALIDACIÓN DEL FORMULARIO
+        // 1. VALIDACIÓN DEL FORMULARIO CON MENSAJES 100% EN ESPAÑOL
         $request->validate([
             'nombre'   => 'required|string|max:50',
             'apellido' => 'required|string|max:50',
             'correo'   => 'required|email|unique:usuarios,correo', 
             'password' => 'required|string|min:8|max:20|confirmed', 
         ], [
+            // Mensajes para el Nombre
+            'nombre.required'   => 'El campo nombre es obligatorio.',
+            'nombre.max'        => 'El nombre no puede tener más de 50 caracteres.',
+            
+            // Mensajes para el Apellido
+            'apellido.required' => 'El campo apellido es obligatorio.',
+            'apellido.max'      => 'El apellido no puede tener más de 50 caracteres.',
+            
+            // Mensajes para el Correo
+            'correo.required'   => 'El correo electrónico es obligatorio.',
+            'correo.email'      => 'Por favor, ingresa un correo electrónico válido.',
             'correo.unique'     => 'Este correo electrónico ya está registrado.',
+            
+            // Mensajes para la Contraseña
             'password.required' => 'La contraseña es obligatoria.',
+            'password.min'      => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.max'      => 'La contraseña no puede tener más de 20 caracteres.',
             'password.confirmed'=> 'Las contraseñas no coinciden. Por favor, verifícalas.',
         ]);
 
         // 2. GUARDADO EN LA BASE DE DATOS
-        // Guardamos el resultado en la variable $nuevoUsuario
         $nuevoUsuario = Usuario::create([
             'nombre'     => $request->input('nombre'),
             'apellido'   => $request->input('apellido'),
@@ -31,13 +45,12 @@ use Illuminate\Http\Request;
             'contraseña' => bcrypt($request->input('password')), 
         ]);
 
-        // --- NUEVO: LOGIN AUTOMÁTICO RESPALDANDO EL CARRITO ---
+        // --- LOGIN AUTOMÁTICO RESPALDANDO EL CARRITO ---
         
         // 1. Respaldamos el carrito que armó como visitante
         $carritoRespaldo = $request->session()->get('carrito', []);
 
         // 2. Le creamos la sesión manual usando los datos del usuario recién creado
-        // Nota: usamos 'id_usuario' que configuramos como tu clave primaria en el modelo
         $request->session()->put('user_id', $nuevoUsuario->id_usuario); 
         $request->session()->put('id_rol', $nuevoUsuario->id_rol);
         $request->session()->put('user_name', $nuevoUsuario->nombre);

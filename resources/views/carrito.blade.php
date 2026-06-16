@@ -121,13 +121,16 @@
                     <div class="col-md-6 text-center text-md-end">
                         <h3 class="mb-3">Total: <span class="text-success fw-bold">${{ number_format($totalGeneral, 2, ',', '.') }}</span></h3>
                         
-                        @if(session()->has('user_id'))
-                            <a href="{{ url('/finalizar-compra') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm" style="border-radius: 8px;">
+                        @if(auth()->check() || session()->has('user_id'))
+                            <a href="{{ route('carrito.pago') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm" style="border-radius: 8px;">
                                 <i class="bi bi-credit-card-2-back me-2"></i>Iniciar Pago
                             </a>
                         @else
-                            <div class="alert alert-warning d-inline-block text-start mb-0" style="border-radius: 8px;">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i> Debes <a href="{{ url('/login') }}" class="fw-bold">Iniciar Sesión</a> para poder comprar.
+                            <a href="{{ url('/login?redirigir=pago') }}" class="btn btn-success btn-lg fw-bold px-5 shadow-sm" style="border-radius: 8px;">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Pago como Invitado
+                            </a>
+                            <div class="text-muted small mt-2">
+                                <i class="bi bi-info-circle me-1"></i> Te pedirá iniciar sesión o registrarte para completar el envío.
                             </div>
                         @endif
                     </div>

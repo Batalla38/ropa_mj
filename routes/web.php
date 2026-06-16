@@ -122,6 +122,14 @@ Route::post('/crear-cuenta', [RegistroController::class, 'procesar'])->name('cue
 Route::get('/gestionConsultas', [ConsultaController::class, 'index'])->name('admin.consultas.index');
 Route::post('/gestionConsultas/{id}/responder', [ConsultaController::class, 'responder'])->name('admin.consultas.responder');
 
+// Cambiamos la URL a /pago y el nombre de la ruta a 'carrito.pago'
+Route::get('/pago', [CarritoController::class, 'checkout'])->name('carrito.pago');
+
+// Ruta POST para recibir el formulario que llena el cliente
+Route::post('/procesar-pago', [CarritoController::class, 'procesarPago'])->name('carrito.procesarPago');
+
+// Ruta GET para mostrar la pantalla final de éxito
+Route::get('/compra-exitosa', [CarritoController::class, 'compraExitosa'])->name('carrito.exito');
 
 // --- AUTENTICACIÓN (LOGIN Y LOGOUT) ---
 
