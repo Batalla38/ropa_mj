@@ -72,7 +72,8 @@
                         @empty
                             <tr>
                                 <td colspan="5" class="text-center py-5 text-muted fw-bold bg-white">
-                                    No se encontraron consultas para el correo configurado.
+                                    <i class="bi bi-chat-left-x fs-4 d-block mb-2"></i>
+                                    Aún no has realizado ninguna consulta en nuestra tienda.
                                 </td>
                             </tr>
                         @endforelse

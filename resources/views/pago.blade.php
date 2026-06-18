@@ -31,30 +31,30 @@
         <form action="{{ route('carrito.procesarPago') }}" method="POST" class="needs-validation" novalidate>
             @csrf
             <div class="row g-4">
-                
+
                 <div class="col-md-7">
-                    
+
                     <div class="p-4 contenedor-checkout mb-4">
                         <h4 class="fw-bold text-dark mb-3"><i class="bi bi-truck me-2"></i>Datos de Envío</h4>
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label class="form-label fw-bold">Provincia</label>
-                                <input type="text" name="provincia" class="form-control" placeholder="Ej: Corrientes" required>
+                                <input type="text" name="provincia" class="form-control" placeholder="Ej: Corrientes" required pattern=".*\S+.*" minlength="3">
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-label fw-bold">Localidad</label>
-                                <input type="text" name="localization" class="form-control" placeholder="Ej: Bella Vista" required>
+                                <input type="text" name="localization" class="form-control" placeholder="Ej: Bella Vista" required pattern=".*\S+.*" minlength="3">
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-bold">Dirección Completa (Calle, Número, Piso/Depto)</label>
-                                <input type="text" name="direccion" class="form-control" placeholder="Calle Falsa 123" required>
+                                <input type="text" name="direccion" class="form-control" placeholder="Calle Falsa 123" required pattern=".*\S+.*" minlength="5">
                             </div>
                         </div>
                     </div>
 
                     <div class="p-4 contenedor-checkout">
                         <h4 class="fw-bold text-dark mb-3"><i class="bi bi-credit-card me-2"></i>Medio de Pago</h4>
-                        
+
                         <div class="mb-4">
                             <label class="form-label fw-bold d-block">Seleccioná cómo querés abonar:</label>
                             <div class="form-check form-check-inline">
@@ -70,7 +70,7 @@
                         <div id="seccion_tarjeta" class="row g-3">
                             <div class="col-12">
                                 <label class="form-label fw-bold">Nombre impreso en la tarjeta</label>
-                                <input type="text" id="tarjeta_nombre" name="tarjeta_nombre" class="form-control" placeholder="JUAN PEREZ" required>
+                                <input type="text" id="tarjeta_nombre" name="tarjeta_nombre" class="form-control" placeholder="JUAN PEREZ" required pattern=".*\S+.*" minlength="3">
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-bold">Número de Tarjeta</label>
@@ -79,8 +79,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-label fw-bold">Vencimiento (MM/AA)</label>
-                                <input type="text" id="tarjeta_vence" name="tarjeta_vence" class="form-control @error('tarjeta_vence') is-invalid @enderror" placeholder="12/28" value="{{ old('tarjeta_vence') }}" required>
-                                
+                                <input type="text" id="tarjeta_vence" name="tarjeta_vence" class="form-control @error('tarjeta_vence') is-invalid @enderror" placeholder="12/28" value="{{ old('tarjeta_vence') }}" required pattern="\d{2}/\d{2}">
+
                                 @error('tarjeta_vence')
                                     <div class="invalid-feedback fw-bold d-block">
                                         <i class="bi bi-exclamation-triangle-fill me-1"></i> {{ $message }}
@@ -94,7 +94,7 @@
                         </div>
 
                         <div id="seccion_efectivo" class="alert alert-info d-none mb-0 mt-2" role="alert">
-                            <i class="bi bi-info-circle-fill me-2"></i> 
+                            <i class="bi bi-info-circle-fill me-2"></i>
                             Al confirmar, el sistema generará un <strong>Código de Referencia de Pago</strong> para que puedas abonar por Rapipago, Pago Fácil o transferencia bancaria.
                         </div>
 
@@ -105,7 +105,7 @@
                     <div class="p-4 contenedor-checkout text-dark">
                         <h4 class="fw-bold mb-3">Resumen del Pedido</h4>
                         <hr>
-                        
+
                         @php $totalGeneral = 0; @endphp
                         @foreach($carrito as $item)
                             @php $subtotal = $item['precio'] * $item['cantidad']; $totalGeneral += $subtotal; @endphp
@@ -116,7 +116,7 @@
                                 <span class="fw-semibold">${{ number_format($subtotal, 0, ',', '.') }}</span>
                             </div>
                         @endforeach
-                        
+
                         <hr class="my-3">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h5 class="fw-bold m-0">Total a Pagar:</h5>
@@ -136,13 +136,11 @@
     @include('footer')
 
     <script>
-        // Función para ocultar/mostrar campos según el medio de pago
         function alternarPago() {
             let pagoTarjeta = document.getElementById('pago_tarjeta').checked;
             let seccionTarjeta = document.getElementById('seccion_tarjeta');
             let seccionEfectivo = document.getElementById('seccion_efectivo');
 
-            // Inputs de tarjeta para prender/apagar el atributo 'required' dinámicamente
             let inputsTarjeta = [
                 document.getElementById('tarjeta_nombre'),
                 document.getElementById('tarjeta_numero'),
@@ -161,7 +159,6 @@
             }
         }
 
-        // Validación nativa de Bootstrap 5 para que no mande el formulario vacío
         (function () {
             'use strict'
             var forms = document.querySelectorAll('.needs-validation')

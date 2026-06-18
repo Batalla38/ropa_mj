@@ -1,120 +1,125 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Crear Producto - Ropa MJ</title>
-        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-        <style>
-            body {
-                background-color: #c1a391;
-                color: #9f9393;
-                background-image: url("{{ asset('bg1.png') }}");
-                background-repeat: repeat;
-                background-size: 700px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid bg-light py-4 border-bottom">
-            <div class="container">
-                @include('header')
-            </div>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Producto - Ropa MJ</title>
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #c1a391;
+            color: #9f9393;
+            background-image: url("{{ asset('bg1.png') }}");
+            background-repeat: repeat;
+            background-size: 700px;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <div class="mt-4">
+        <div class="container">
+            @include('header')
         </div>
+    </div>
 
-        <div class="container mt-5 pt-2 mb-5">
+    <main class="container flex-grow-1 d-flex align-items-center justify-content-center py-5">
+        <div class="card shadow-sm" style="max-width: 600px; width: 100%;">
+            <div class="card-body p-4">
+                <h3 class="card-title text-center mb-4 fw-bold text-dark">Cargar Nuevo Producto</h3>
 
-            <form action="{{ route('productos.guardar') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-
+                {{-- Mostrar Errores --}}
                 @if ($errors->any())
-                    <div class="alert alert-danger my-3 shadow-sm rounded-3">
-                        <ul class="mb-0 text-start">
+                    <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert" style="border-radius: 8px;">
+                        <strong class="d-block mb-1"><i class="bi bi-exclamation-triangle-fill me-2"></i> No se pudo cargar el producto:</strong>
+                        <ul class="mb-0 ps-3">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
+                {{-- Mostrar Éxito --}}
                 @if(session('success'))
-                    <div class="alert alert-success my-3 text-center fw-bold shadow-sm">
-                        {{ session('success') }}
+                    <div class="alert alert-success alert-dismissible fade show fw-bold shadow-sm mb-4" role="alert" style="border-radius: 8px;">
+                        <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
-                    <div class="w-100">
-                        <label for="nombre" class="form-label fw-bold mb-1">Nombre del Producto</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Campera de Jean" value="{{ old('nombre') }}" required>
-                    </div>
-                </div>
+                <form action="{{ route('productos.guardar') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
-                    <div class="w-100">
-                        <label for="descripcion" class="form-label fw-bold mb-1">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Detalles del producto..." required>{{ old('descripcion') }}</textarea>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label fw-semibold">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
                     </div>
-                </div>
 
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
-                    <div class="w-100">
-                        <label for="precio" class="form-label fw-bold mb-1">Precio</label>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label fw-semibold">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required>{{ old('descripcion') }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="precio" class="form-label fw-semibold">Precio</label>
                         <div class="input-group">
                             <span class="input-group-text">$</span>
-                            <input type="number" step="any" id="precio" class="form-control" name="precio" placeholder="0.00" value="{{ old('precio') }}" required>
+                            <input type="number" step="any" id="precio" class="form-control" name="precio" value="{{ old('precio') }}" required>
                         </div>
                     </div>
-                </div>
 
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 50px;">
-                    <span class="me-3 text-secondary fw-bold">Género:</span>
-                    <input type="checkbox" class="btn-check" id="masculino" name="genero[]" value="Masculino" autocomplete="off">
-                    <label class="btn btn-outline-primary me-2" for="masculino">Masculino</label>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold d-block">Género:</label>
+                        <input type="checkbox" class="btn-check" id="masculino" name="genero[]" value="Masculino" autocomplete="off">
+                        <label class="btn btn-outline-primary btn-sm me-1" for="masculino">Masculino</label>
 
-                    <input type="checkbox" class="btn-check" id="femenino" name="genero[]" value="Femenino" autocomplete="off">
-                    <label class="btn btn-outline-primary me-2" for="femenino">Femenino</label>
+                        <input type="checkbox" class="btn-check" id="femenino" name="genero[]" value="Femenino" autocomplete="off">
+                        <label class="btn btn-outline-primary btn-sm me-1" for="femenino">Femenino</label>
 
-                    <input type="checkbox" class="btn-check" id="unisex" name="genero[]" value="Unisex" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="unisex">Unisex</label>
-                </div>
-
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2" style="min-height: 50px;">
-                    <span class="me-3 text-secondary fw-bold">Talles:</span>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="talleX" name="talle[]" value="X">
-                        <label class="form-check-label" for="talleX">X</label>
+                        <input type="checkbox" class="btn-check" id="unisex" name="genero[]" value="Unisex" autocomplete="off">
+                        <label class="btn btn-outline-primary btn-sm" for="unisex">Unisex</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="talleXL" name="talle[]" value="XL">
-                        <label class="form-check-label" for="talleXL">XL</label>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold d-block">Talles:</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="talleX" name="talle[]" value="X">
+                            <label class="form-check-label" for="talleX">X</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="talleXL" name="talle[]" value="XL">
+                            <label class="form-check-label" for="talleXL">XL</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
-                    <div class="w-100">
-                        <label for="stock" class="form-label fw-bold mb-1">Stock</label>
-                        <input type="number" class="form-control" id="stock" name="stock" min="0" placeholder="Ej: 15" value="{{ old('stock') }}" required>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label fw-semibold">Stock</label>
+                        <input type="number" class="form-control" id="stock" name="stock" min="0" value="{{ old('stock') }}" required>
                     </div>
-                </div>
 
-                <div class="container mt-2 bg-light rounded shadow-sm d-flex align-items-center p-2">
-                    <div class="w-100">
-                        <label for="url_imagen" class="form-label fw-bold mb-1">Imagen</label>
-                        <input type="file" class="form-control" id="url_imagen" name="url_imagen" accept="image/*">
+                    <div class="mb-4">
+                        <label for="url_imagen" class="form-label fw-semibold">Imagen</label>
+                        {{-- Se agregó el atributo 'required' --}}
+                        <input type="file" class="form-control" id="url_imagen" name="url_imagen" accept="image/*" required>
                     </div>
-                </div>
 
-                <input type="hidden" name="activo" value="1">
+                    <input type="hidden" name="activo" value="1">
 
-                <div class="container mt-4 text-center">
-                    <button type="submit" class="btn btn-success btn-lg px-5 shadow">Cargar Producto</button>
-                </div>
-            </form>
-
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg shadow-sm">Cargar Producto</button>
+                    </div>
+                </form>
+            </div>
         </div>
+    </main>
 
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <div class="mt-3">
-            @include('footer')
-        </div>
-    </body>
+    <div class="mt-auto">
+        @include('footer')
+    </div>
+
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
 </html>

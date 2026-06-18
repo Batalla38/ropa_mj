@@ -148,7 +148,7 @@ class ProductoController extends Controller
         return view('producto', compact('producto'));
     }
 
-    /**
+   /**
      * Guarda un producto nuevo desde el panel de administración.
      */
     public function guardar(Request $request)
@@ -164,6 +164,8 @@ class ProductoController extends Controller
             'stock.required'       => 'El stock inicial es obligatorio.',
             'stock.integer'        => 'El stock debe ser un número entero.',
             'stock.min'            => 'El stock no puede ser menor a 0.',
+            // Mensaje para cuando la imagen es obligatoria
+            'url_imagen.required'  => 'Debes seleccionar una imagen para el producto.',
             'url_imagen.image'     => 'El archivo seleccionado debe ser una imagen.',
             'url_imagen.mimes'     => 'La imagen debe tener formato: jpeg, png, jpg, webp.',
             'url_imagen.max'       => 'La imagen no puede pesar más de 2MB.',
@@ -176,7 +178,8 @@ class ProductoController extends Controller
             'genero'      => 'required|array|min:1',
             'talle'       => 'required|array|min:1',
             'stock'       => 'required|integer|min:0',
-            'url_imagen'  => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            // Cambiado de nullable a required
+            'url_imagen'  => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'activo'      => 'required',
         ], $mensajes);
 
@@ -190,13 +193,12 @@ class ProductoController extends Controller
         $producto->genero = implode(', ', $request->input('genero'));
         $producto->talle  = implode(', ', $request->input('talle'));
 
+        // Como ahora es 'required', el archivo SIEMPRE existirá si pasa la validación
         if ($request->hasFile('url_imagen')) {
             $imagen = $request->file('url_imagen');
             $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
             $imagen->move(public_path('images'), $nombreImagen);
             $producto->url_imagen = $nombreImagen;
-        } else {
-            $producto->url_imagen = 'default.png';
         }
 
         $producto->save();
